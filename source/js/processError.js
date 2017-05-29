@@ -6,5 +6,8 @@ export default function processError(err) {
         case 500:
             alert("Can't connect to server, please try later");
             break;
+        case 403:
+            alert("We can't validate your account, please try again");
+            break;
     }
 }

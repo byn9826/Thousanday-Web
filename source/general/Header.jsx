@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import reqwest from "reqwest";
 import Googlelogin from '../component/Googlelogin';
 import Facebooklogin from '../component/Facebooklogin';
+import processError from "../js/processError.js";
 class Header extends Component {
 	constructor(props) {
         super(props);
@@ -27,37 +28,15 @@ class Header extends Component {
 			reqwest({
 				url: "account/google",
 				type: "json",
-				method: "POST",
 				contentType: "application/json",
-				body: {"token": user.token, "avatar": user.imageUrl},
+				method: "POST",
+				data: JSON.stringify({"token": user.token, "platform": "website"}),
+				//{"avatar": user.imageUrl},
 				success: function(result) {
 					console.log(result);
-					/*
-					switch (result) {
-						case "0":
-							console.log("DB error");
-							break;
-						case "1":
-							console.log("Account not exist");
-							window.location.replace("/signup/" + user.firstname);
-							break;
-						case "2":
-							console.log("Can't validate Google account");
-							break;
-						case "3":
-							console.log("Please logout first");
-							break;
-						default:
-							if (this.state.loginName == "Login") {
-								//get username, close dropdown box
-								this.setState({loginName: result[1], loginId:result[0], newNum: result[2], showDrop: false});
-								//pass user id back to parent
-								this.props.loginSuccess(result[0]);
-							}
-					}*/
-				}.bind(this),
+				},
 				error: function (err) {
-					console.log("Can't connect to the server");
+					processError(err);
 				}
 			});
 		}
@@ -74,37 +53,13 @@ class Header extends Component {
 				type: "json",
 				contentType: "application/json",
 				method: "POST",
-				data: JSON.stringify({"token": token}),
+				data: JSON.stringify({"token": token, "platform": "website"}),
 				success: function(result) {
-					console.log(result);
-					/*
-					switch (result) {
-						case "0":
-							console.log("DB error");
-							break;
-						case "1":
-							console.log("Account not exist");
-							//redirect to account create page
-							window.location.replace("/signup/" + response.name);
-							break;
-						case "2":
-							console.log("Can't validate Facebook account");
-							break;
-						case "3":
-							console.log("Please logout first");
-							break;
-						default:
-							if (this.state.loginName == "Login") {
-								//get username, close dropdown box
-								this.setState({loginName: result[1], loginId: result[0], newNum: result[2], showDrop: false});
-								//pass user id back to parent
-								this.props.loginSuccess(result[0]);
-							}
-					}
-					*/
-				}.bind(this),
+					//login success, go to homepage
+					window.location.replace("user/" + result[0]);
+				},
 				error: function (err) {
-					console.log(err);
+					processError(err);
 				}
 			});
 		}
@@ -173,7 +128,7 @@ class Header extends Component {
 		}
 		return (
 			<header id="header">
-				<a href="/">
+				<a href="./">
 					<img id="header-logo" src="img/logo.png" alt="logo" />
 				</a>
 				<h5 id="header-desc">Homepage for pets</h5>

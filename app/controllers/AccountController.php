@@ -3,20 +3,16 @@
 class AccountController extends ControllerBase
 {
 
-    public function googleAction()
-    {
-        $token = $request->getPost("token");
-        echo $token;
-    }
-
     //response to user's facebook login action
     //return 403 for users not valid
     //return 500 for db error
+    //return 404 if it is not post request
     public function facebookAction()
     {
         if ($this->request->isPost()) {
             $data = $this->request->getJsonRawBody(true);
             $fbToken = $data['token'];
+            $platform = $data['platform'];
             //validate facebook login
             $Secret = new Secret();
             $fbSecret = $Secret->getFacebook();
@@ -27,21 +23,40 @@ class AccountController extends ControllerBase
             $verifyData = json_decode($verify);
             $fbId = $verifyData->data->user_id;
             if (!$fbId) {
-                 $this->response->setStatusCode(403, "Forbidden");
+                 $this->response->setStatusCode(403, 'Forbidden');
             }
             //check if user already registered or not
             $db = DbConnection::getConnection();
             $User = new User($db);
             $check = $User->checkFacebookId($fbId);
             if ($check === 0) {
-                $this->response->setStatusCode(500, "Internal Server Error");
+                $this->response->setStatusCode(500, 'Internal Server Error');
             } else if (count($check) === 0) {
                 //account not exist
+                //code later
+                //attention
             } else {
-                echo json_encode($check);
+                //account exist, get user id
+                $userId = $check['user_id'];
+                $userName = $check['user_name'];
+                if ($platform === 'website') {
+                    //create token for website
+                    $newToken = $Secret->getToken($userId);
+                    $Token = new Token($db);
+                    $create = $Token->createUserToken($userId, $newToken, 0);
+                    if ($create === 0) {
+                        $this->response->setStatusCode(500, 'Internal Server Error');
+                    } else {
+                        echo json_encode([$userId, $userName, $newToken]);
+                    }
+                } else {
+                    //create token for mobile
+                    //code later
+                    //attention
+                }
             }
         } else {
-            $this->response->setStatusCode(404, "Not Found");
+            $this->response->setStatusCode(404, 'Not Found');
         }
     }
 
