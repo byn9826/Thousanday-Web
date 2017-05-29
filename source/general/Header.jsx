@@ -11,10 +11,6 @@ class Header extends Component {
 			restrict: this.props.restrict || false,
 			//indicate show loginbox or not
 			showDrop: false,
-			//store username or login
-            loginName: this.props.visitorName || "Login",
-			//store user id
-			loginId: this.props.visitorId || null,
 		};
 	}
 	//user click google login button
@@ -23,7 +19,7 @@ class Header extends Component {
 		let auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
 		//works only when user not login
-		if (this.state.loginName === "Login") {
+		if (!this.props.userId) {
 			//check google user token
 			reqwest({
 				url: "account/google",
@@ -33,6 +29,9 @@ class Header extends Component {
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
 				//{"avatar": user.imageUrl},
 				success: function(result) {
+					sessionStorage.setItem("id", result[0]);
+                    sessionStorage.setItem("name", result[1]);
+                    sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("user/" + result[0]);
 				},
@@ -42,12 +41,13 @@ class Header extends Component {
 			});
 		}
     }
+	//user click facebook login button
 	fLogin(response, token) {
 		FB.logout();
 		let auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
 		//works only when user not login
-		if (this.state.loginName === "Login") {
+		if (!this.props.userId) {
 			//check google user token
 			reqwest({
 				url: "account/facebook",
@@ -56,6 +56,9 @@ class Header extends Component {
 				method: "POST",
 				data: JSON.stringify({"token": token, "platform": "website"}),
 				success: function(result) {
+					sessionStorage.setItem("id", result[0]);
+                    sessionStorage.setItem("name", result[1]);
+                    sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("user/" + result[0]);
 				},
@@ -66,14 +69,24 @@ class Header extends Component {
 		}
 	}
 	logOut() {
-		FB.logout();
-		let auth2 = gapi.auth2.getAuthInstance();
-		let self = this;
-		auth2.signOut();
+		sessionStorage.clear();
+		if (FB) {
+			FB.logout();
+		}
+		if (gapi) {
+			let auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut();
+		}
+		window.location.replace("./");
+		/*
+		remove token in db
+		write later
+		attention
 		reqwest({
-			url: "/account/logOut",
+			url: "account/logout",
 			method: "POST",
 			success: function(result) {
+				
 				switch (result) {
 					case "0":
 						self.setState({loginName: "Login", showDrop: false});
@@ -88,6 +101,7 @@ class Header extends Component {
 				console.log("Can't connect to the server");
 			}
 		});
+		*/
 	}
 	//show and close drop box
 	showDrop() {
@@ -100,11 +114,11 @@ class Header extends Component {
 		if (!this.state.restrict) {
 			user = (
 				<div id="header-login" onClick={this.showDrop.bind(this)}>
-					<h5>{this.state.loginName}</h5>
+					<h5>{this.props.userName}</h5>
 					<img src="img/icon/glyphicons-dropdown.png" />
 				</div>
 			)
-			if (this.state.showDrop && this.state.loginName === "Login" ) {
+			if (this.state.showDrop && !this.props.userId) {
 				//show login dropdown for not logined user after click login button
 				loginStyle = "header-drop";
 			} else {
@@ -112,18 +126,18 @@ class Header extends Component {
 				loginStyle = "header-drop-hide";
 			}
 			login = (
-				<div className={loginStyle}>
+				<section className={loginStyle}>
 					<h5 id="header-drop-notice">Click to sign in or sign up</h5>
 					<Googlelogin gLogin={this.googleLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
-					<Facebooklogin clientId="1894566737467263" fLogin={this.fLogin.bind(this)} width="194px" />
-				</div>
+					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="1894566737467263" width="194px" />
+				</section>
 			)
-			if (this.state.showDrop && this.state.loginName !== "Login") {
+			if (this.state.showDrop && this.props.userId) {
 				logout = (
-					<div className="header-drop">
-						<a href={"/user/" + this.state.loginId}><h5>Home</h5></a>
+					<section className="header-drop">
+						<a href={"/user/" + this.props.userId}><h5>Home</h5></a>
 						<input type="button" value="Log Out" onClick={this.logOut.bind(this)} />
-					</div>
+					</section>
 				)
 			}
 		}

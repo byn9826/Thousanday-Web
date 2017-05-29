@@ -12,6 +12,7 @@
 		<link rel="shortcut icon" href="img/logo.png" type="image/x-icon"/>
 		<link rel="stylesheet" type="text/css" href="css/globe.css" >
 		<link rel="stylesheet" type="text/css" href="css/general.css" >
+		<link rel="stylesheet" type="text/css" href="css/public.css" >
 	</head>
 	<body>
 		<div id="root"></div>
