@@ -33,7 +33,8 @@ class Header extends Component {
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
 				//{"avatar": user.imageUrl},
 				success: function(result) {
-					console.log(result);
+					//login success, go to homepage
+					window.location.replace("user/" + result[0]);
 				},
 				error: function (err) {
 					processError(err);

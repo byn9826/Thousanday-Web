@@ -19,3 +19,5 @@ $loader->registerClasses(
 );
 
 $loader->register();
+
+require_once(__DIR__ . '/../../vendor/google-api/vendor/autoload.php');

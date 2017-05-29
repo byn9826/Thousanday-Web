@@ -22,4 +22,18 @@ class User {
         }
     }
 
+    //check if google id have registered
+    public function checkGoogleId($id) {
+        $googleQuery = 'SELECT user_id, user_name FROM user WHERE google_id = :id';
+        try {
+            $googleStmt = $this->db->prepare($googleQuery);
+            $googleStmt->bindValue(':id', $id);
+            $googleStmt->execute();
+            return $googleStmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
 }
