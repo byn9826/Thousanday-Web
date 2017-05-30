@@ -4,6 +4,8 @@ import reqwest from "reqwest";
 import Header from "../general/Header";
 import Footer from "../general/Footer";
 import Like from "../component/Like";
+import Commentlist from "../component/Commentlist";
+import Inputarea from "../component/Inputarea";
 import processError from "../js/processError.js";
 class Moment extends Component {
     constructor(props) {
@@ -22,7 +24,13 @@ class Moment extends Component {
             //indicate show confirm delete or not
             showConfirm: false,
             //store user id list who like this moment
-            likeData: []
+            likeData: [],
+            //store comment list data
+            commentData: [],
+            //indicate could load more comment or not
+            commentLocker: "off",
+            //indicate error in leave a comment
+            commentError: null
 		};
 	}
     //get user data if user logged in
@@ -46,7 +54,17 @@ class Moment extends Component {
                 for (i = 0; i < result[2].length; i++) {
                     lists[i] = parseInt(result[2][i].user_id);
                 }
-                this.setState({momentData: result[0], familyData: family, likeData: lists});
+                let comments = [];
+                if (result[3].length !== 0) {
+                    comments = processComment(result[3]);
+                }
+                let locker;
+                if (result[3].length === 5) {
+                    locker = "off";
+                } else {
+                    locker = "on";
+                }
+                this.setState({momentData: result[0], familyData: family, likeData: lists, commentData: comments, commentLocker: locker});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -108,6 +126,53 @@ class Moment extends Component {
             }
         });
     }
+    //share to facebook
+    sharePage() {
+        FB.ui({
+            display: 'popup',
+            method: 'share_open_graph',
+            action_type: 'og.shares',
+            action_properties: JSON.stringify({
+                object : {
+                    "og:url": location.href,
+                    "og:title": '"' + this.state.momentData.moment_message + '"',
+                    "og:description": "Thousanday - Homepage for your pets",
+                    "og:image": "https://thousanday.com/img/pet/" + this.state.momentData.pet_id + "/moment/" + this.state.momentData.image_name
+                }
+            })
+        });
+    }
+    //load more comment
+    loadComment() {
+        
+    }
+    //send a comment
+    sendComment() {
+        //comment content can't be empty
+        let content = this.refs.newComment.state.content.trim();
+        if (content === "") {
+            this.setState({commentError: "Comment can't be empty"});
+        } else {
+            reqwest({
+                url: "/moment/comment",
+                type: "json",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    "content": content,
+                    "token": this.state.userToken,
+                    "user": this.state.userId,
+                    "moment": window.location.pathname.split("/").pop()
+                }),
+                success: function(result) {
+                    console.log(result);
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
+    }
     render() {
         //delete button
         let del;
@@ -122,7 +187,7 @@ class Moment extends Component {
             );
         }
         //like button
-        let like;
+        let like, actions;
         if (this.state.userId) {
             if (this.state.likeData.indexOf(this.state.userId) === -1) {
                 like = (
@@ -133,6 +198,13 @@ class Moment extends Component {
                     <Like key="true" interact="true" agree={this.state.likeData.length} liked="true" newTotal={this.changeAgree.bind(this)}/>
                 )
             }
+            actions = (
+                <div>
+                    <Inputarea ref="newComment" content="" max="150" />
+                    <h7>{this.state.commentError}</h7>
+                    <h6 id="aside-leave" onClick={this.sendComment.bind(this)}>Comment</h6>
+                </div>
+            )
         } else {
             like = (
                 <Like interact="false" agree={this.state.likeData.length} liked="false" />
@@ -156,7 +228,10 @@ class Moment extends Component {
                     </section>
                     <section id="aside-social">
                         {like}
+                        <img id="fb-share-button" onClick={this.sharePage.bind(this)} alt="share" src="/img/icon/fb-share.png" />
                     </section>
+                    <Commentlist data={this.state.commentData} locker={this.state.commentLocker} loadMore={this.loadComment.bind(this)} fontFamily="'Rubik', sans-serif" />
+                    {actions}
                 </aside>
                 <Footer />
 			</div>
@@ -165,3 +240,17 @@ class Moment extends Component {
 }
 
 ReactDOM.render(<Moment />, document.getElementById("root"));
+
+//process comment list to data could used by commentlist
+function processComment(comment) {
+    let process = [], i;
+    for (i = 0; i < comment.length; i++) {
+        process.push([
+            comment[i].comment_content,
+            "/img/user/" + comment[i].user_id + ".jpg",
+            "/user/" + comment[i].user_id,
+            new Date(comment[i].comment_time).toISOString().substring(0, 10)
+        ])
+    }
+    return process;
+}

@@ -15,6 +15,7 @@ $loader->registerClasses(
         'Like' => __DIR__ . '/../library/Like.php',
         'Pet' => __DIR__ . '/../library/Pet.php',
         'User' => __DIR__ . '/../library/User.php',
+        'Comment' => __DIR__ . '/../library/Comment.php',
         'Token' => __DIR__ . '/../library/Token.php',
         'Secret' => __DIR__ . '/../library/Secret.php'
     ]

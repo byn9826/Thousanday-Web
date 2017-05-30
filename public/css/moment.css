@@ -76,3 +76,26 @@
     display: block;
     padding-left: 3%;
 }
+#fb-share-button{
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 5%;
+    width: 60px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#aside-leave{
+    float: right;
+    display: block;
+    margin-right: 5%;
+    border: 1px solid #abaeb2;
+    padding: 5px 2%;
+    border-radius: 3px;
+    cursor: pointer;
+}
+#aside h7{
+    display: block;
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
