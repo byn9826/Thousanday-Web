@@ -30,7 +30,11 @@ class Moment extends Component {
             //indicate could load more comment or not
             commentLocker: "off",
             //indicate error in leave a comment
-            commentError: null
+            commentError: null,
+            //indicate add how many comment
+            commentAdd: 0,
+            //indicate load comment for how manytimes
+            commentLoad: 0
 		};
 	}
     //get user data if user logged in
@@ -142,9 +146,27 @@ class Moment extends Component {
             })
         });
     }
-    //load more comment
+    //load 10 more comments
     loadComment() {
-        
+        if (this.state.commentLocker === "off") {
+            reqwest({
+                url: "/moment/load?id=" + window.location.pathname.split("/").pop() + "&load=" + this.state.commentLoad + "&add=" + this.state.commentAdd,
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    let newComments = processComment(result);
+                    let lists = this.state.commentData.concat(newComments);
+                    if (result.length === 10) {
+                        this.setState({commentData: lists, commentLoad: this.state.commentLoad + 1});
+                    } else {
+                        this.setState({commentData: lists, commentLoad: this.state.commentLoad + 1, commentLocker: "on"});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
     }
     //send a comment
     sendComment() {
@@ -165,7 +187,17 @@ class Moment extends Component {
                     "moment": window.location.pathname.split("/").pop()
                 }),
                 success: function(result) {
-                    console.log(result);
+                    if (result === 1) {
+                        let newComment = [
+                            content,
+                            "/img/user/" + this.state.userId + ".jpg",
+                            "/user/" + this.state.userId,
+                            new Date().toISOString().substring(0, 10)
+                        ];
+                        this.state.commentData.unshift(newComment);
+                        this.setState({commentData: this.state.commentData, commentError: null, commentAdd: this.state.commentAdd + 1});
+                        this.refs.newComment.setState({content: ""});
+                    }
                 }.bind(this),
                 error: function (err) {
                     processError(err);

@@ -36,4 +36,33 @@ class User {
         }
     }
 
+    //get owner name and relative name for one pet
+    public function readPetFamily($owner, $relative) {
+        $userQuery = 'SELECT user_id, user_name FROM user WHERE user_id = :owner OR user_id = :relative';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':owner', $owner);
+            $userStmt->bindValue(':relative', $relative);
+            $userStmt->execute();
+            return $userStmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
+    //get user name from user id
+    public function readUserName($id) {
+        $userQuery = 'SELECT user_id, user_name FROM user WHERE user_id = :id';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':id', $id);
+            $userStmt->execute();
+            return $userStmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
 }

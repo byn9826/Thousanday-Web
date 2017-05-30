@@ -1,0 +1,104 @@
+/*pet page*/
+#main{
+    display: inline-block;
+    width: 20%;
+    margin-left: 10%;
+    margin-top: 100px;
+    vertical-align: top;
+}
+#main-profile{
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+#main-name{
+    display: block;
+    width: 90%;
+    margin: 10px 5%;
+}
+#main-name h1{
+    display: inline-block;
+    margin-right: 5%;
+    vertical-align: middle;
+}
+#main-name h4{
+    display: inline-block;
+    vertical-align: middle;
+}
+#main-watch{
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ef8513;
+    border-radius: 5px;
+    width: 70%;
+    padding: 5px 0;
+    margin-left: 5%;
+    border-bottom: 20px;
+    color: white;
+    cursor: pointer;
+}
+#main-nature{
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 15px;
+    margin-bottom: 8px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e5e5;
+    font-weight: bold;
+}
+.main-title{
+    display: block;
+    width: 90%;
+    margin: 8px 5%;
+}
+
+#main-family {
+    display: block;
+    width: 92%;
+    padding: 5px 4%;
+    margin-bottom: 15px;
+    border-left: 4px solid black;
+    border-bottom: 1px solid #e5e5e5;
+    margin-top: 30px;
+}
+#main-family img{
+    display: inline-block;
+    vertical-align: middle;
+    width: 15px;
+    margin: 0 5%;
+}
+#main-family h5{
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+.main-owner{
+    display: inline-block;
+    vertical-align: top;
+    width: 35%;
+    margin-right: 15%;
+    text-align: center;
+}
+.main-owner img{
+    display: block;
+    width: 100%;
+    border-radius: 50%;
+}
+.main-owner h5{
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+
+#aside{
+    display: inline-block;
+    width: 55%;
+    margin-left: 5%;
+    margin-top: 100px;
+    vertical-align: top;
+}

@@ -29,7 +29,7 @@ class MomentController extends ControllerBase
                     $this->response->setStatusCode(500, 'Internal Server Error');
                 } else {
                     $Comment = new Comment($db);
-                    $comments = $Comment->readMomentComments($id, 0);
+                    $comments = $Comment->readMomentComments($id, 0, 5);
                     if ($comments === 0) {
                         $this->response->setStatusCode(500, 'Internal Server Error');
                     } else {
@@ -151,6 +151,22 @@ class MomentController extends ControllerBase
             
         } else {
             $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
+    //load 10 more comment based on pin
+    public function loadAction() {
+        $id = (int) $this->request->get("id");
+        $load = (int) $this->request->get("load");
+        $add = (int) $this->request->get("add");
+        $pin = 5 + $add + $load * 10;
+        $db = DbConnection::getConnection();
+        $Comment = new Comment($db);
+        $comments = $Comment->readMomentComments($id, $pin, 10);
+        if ($comments === 0) {
+            $this->response->setStatusCode(500, 'Internal Server Error');
+        } else {
+            echo json_encode($comments);
         }
     }
 

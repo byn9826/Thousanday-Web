@@ -9,13 +9,15 @@ class Comment {
     }
 
     //get five comments for one moment from the pin point
-    public function readMomentComments($moment, $pin) {
-        $momentQuery = 'SELECT * FROM moment_comment WHERE moment_id = :moment
-                        ORDER BY comment_id DESC LIMIT :pin, 5';
+    public function readMomentComments($moment, $pin, $number) {
+        $momentQuery = 'SELECT comment_content, user_id, comment_time 
+                        FROM moment_comment WHERE moment_id = :moment
+                        ORDER BY comment_id DESC LIMIT :pin, :number';
         try {
             $momentStmt = $this->db->prepare($momentQuery);
             $momentStmt->bindValue(':moment', $moment, PDO::PARAM_INT);
             $momentStmt->bindValue(':pin', $pin, PDO::PARAM_INT);
+            $momentStmt->bindValue(':number', $number, PDO::PARAM_INT);
             $momentStmt->execute();
             return $momentStmt->fetchAll(PDO::FETCH_ASSOC);
         }  catch (PDOException $e) {
@@ -26,7 +28,7 @@ class Comment {
 
     //create new comment
     public function createUserComment($user, $moment, $content) {
-        $time = strftime("%Y-%m-%d", $date);
+        $time = date('Y-m-d H:i:s');
         $addQuery = 'INSERT INTO moment_comment (comment_content, moment_id, user_id, comment_time) 
                      VALUES (:content, :moment, :user, :time)';
         try {
