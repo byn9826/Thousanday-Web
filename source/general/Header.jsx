@@ -22,7 +22,7 @@ class Header extends Component {
 		if (!this.props.userId) {
 			//check google user token
 			reqwest({
-				url: "account/google",
+				url: "/account/google",
 				type: "json",
 				contentType: "application/json",
 				method: "POST",
@@ -33,7 +33,7 @@ class Header extends Component {
                     sessionStorage.setItem("name", result[1]);
                     sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
-					window.location.replace("user/" + result[0]);
+					window.location.replace("/user/" + result[0]);
 				},
 				error: function (err) {
 					processError(err);
@@ -50,7 +50,7 @@ class Header extends Component {
 		if (!this.props.userId) {
 			//check google user token
 			reqwest({
-				url: "account/facebook",
+				url: "/account/facebook",
 				type: "json",
 				contentType: "application/json",
 				method: "POST",
@@ -60,7 +60,7 @@ class Header extends Component {
                     sessionStorage.setItem("name", result[1]);
                     sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
-					window.location.replace("user/" + result[0]);
+					window.location.replace("/user/" + result[0]);
 				},
 				error: function (err) {
 					processError(err);
@@ -77,7 +77,7 @@ class Header extends Component {
 			let auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut();
 		}
-		window.location.replace("./");
+		window.location.replace("/");
 		/*
 		remove token in db
 		write later
@@ -115,7 +115,7 @@ class Header extends Component {
 			user = (
 				<div id="header-login" onClick={this.showDrop.bind(this)}>
 					<h5>{this.props.userName}</h5>
-					<img src="img/icon/glyphicons-dropdown.png" />
+					<img src="/img/icon/glyphicons-dropdown.png" />
 				</div>
 			)
 			if (this.state.showDrop && !this.props.userId) {
@@ -143,15 +143,15 @@ class Header extends Component {
 		}
 		return (
 			<header id="header">
-				<a href="./">
-					<img id="header-logo" src="img/logo.png" alt="logo" />
+				<a href="/">
+					<img id="header-logo" src="/img/logo.png" alt="logo" />
 				</a>
 				<h5 id="header-desc">Homepage for pets</h5>
 				{user}
-				<a className="header-navi" href="./explore">
+				<a className="header-navi" href="/explore">
 					<h5>Explore</h5>
 				</a>
-				<a className="header-navi" href="./">
+				<a className="header-navi" href="/">
 					<h5>Public</h5>
 				</a>
 				{login}

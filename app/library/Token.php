@@ -31,5 +31,26 @@ class Token {
         }
     }
 
+    //verify user token
+    //return 1 for valid
+    //return 0 for db error
+    //return 2 for not valid
+    public function checkUserToken($id, $token) {
+        $checkQuery = 'SELECT user_id FROM user_token WHERE user_token = :token';
+        try {
+            $checkStmt = $this->db->prepare($checkQuery);
+            $checkStmt->bindValue(':token', $token, PDO::PARAM_STR);
+            $checkStmt->execute();
+            $userId = $checkStmt->fetch(PDO::FETCH_ASSOC);
+            if ((int) $userId['user_id'] === $id) {
+                return 1;
+            } else {
+                return 2;
+            }
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
 
 }

@@ -7,7 +7,7 @@ export default function processError(err) {
             alert("Can't connect to server, please try later");
             break;
         case 403:
-            alert("We can't validate your account, please try again");
+            alert("Account not exist, please login again");
             break;
     }
 }

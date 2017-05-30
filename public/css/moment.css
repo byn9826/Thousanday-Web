@@ -1,0 +1,78 @@
+/*moment page*/
+#main{
+    display: inline-block;
+    width: 40%;
+    margin-left: 10%;
+    margin-top: 100px;
+    vertical-align: top;
+    min-height: 600px;
+    text-align: center;
+}
+#main img{
+    border-radius: 5px;
+    margin: 0 auto;
+    max-width: 320px;
+    display: block;
+}
+#main h5{
+    display: inline-block;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+#main h6{
+    display: inline-block;
+    color: red;
+    cursor: pointer;
+    margin-left: 3%;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+#main input{
+    display: inline-block;
+    margin-top: 10px;
+    vertical-align: middle;
+    border: 1px solid #ef8513;
+    outline: none;
+    background-color: #ef8513;
+    color: white;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 3%;
+}
+
+#aside{
+    display: inline-block;
+    margin-left: 5%;
+    margin-top: 100px;
+    vertical-align: top;
+    width: 35%;
+}
+
+#aside-talk{
+    display: block;
+    padding: 5px 0;
+}
+#aside-talk img{
+    display: inline-block;
+    width: 15%;
+    vertical-align: top;
+    border-radius: 3px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#aside-talk h4{
+    display: inline-block;
+    vertical-align: top;
+    background-color: black;
+    color: white;
+    width: 77%;
+    padding: 3px 2%;
+    border-radius: 5px;
+    min-height: 50px;
+}
+
+#aside-social{
+    margin-top: 10px;
+    display: block;
+    padding-left: 3%;
+}

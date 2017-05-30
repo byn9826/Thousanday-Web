@@ -18,8 +18,6 @@ class Public extends Component {
             userId: null,
             //store user name
             userName: null,
-            //store user token
-            userToken: null,
             //store load images for how many times
             loader: 1,
             //indicate lock load more button or not
@@ -31,14 +29,13 @@ class Public extends Component {
         if (sessionStorage.getItem("id")) {
             let id = sessionStorage.getItem("id");
             let name = sessionStorage.getItem("name");
-            let token = sessionStorage.getItem("token");
-            this.setState({userId: id, userName: name, userToken: token});
+            this.setState({userId: id, userName: name});
         }
     }
     //load 20 most recent images
     componentDidMount() {
         reqwest({
-            url: "index/public?load=0",
+            url: "/index/read?load=0",
             method: "GET",
             success: function(result) {
                 result = JSON.parse(result);
@@ -53,7 +50,7 @@ class Public extends Component {
     loadMore() {
         if (!this.state.locker) {
             reqwest({
-            url: "index/public?load=" + this.state.loader,
+            url: "/index/read?load=" + this.state.loader,
             method: "GET",
             success: function(result) {
                 result = JSON.parse(result);
@@ -77,7 +74,7 @@ class Public extends Component {
 		if (!this.state.userId) {
 			//check google user token
 			reqwest({
-				url: "account/google",
+				url: "/account/google",
 				type: "json",
 				contentType: "application/json",
 				method: "POST",
@@ -88,7 +85,7 @@ class Public extends Component {
                     sessionStorage.setItem("name", result[1]);
                     sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
-					window.location.replace("user/" + result[0]);
+					window.location.replace("/user/" + result[0]);
 				},
 				error: function (err) {
 					processError(err);
@@ -101,7 +98,7 @@ class Public extends Component {
 		if (!this.state.userId) {
 			//check google user token
 			reqwest({
-				url: "account/facebook",
+				url: "/account/facebook",
 				type: "json",
 				contentType: "application/json",
 				method: "POST",
@@ -111,7 +108,7 @@ class Public extends Component {
                     sessionStorage.setItem("name", result[1]);
                     sessionStorage.setItem("token", result[2]);
 					//login success, go to homepage
-					window.location.replace("user/" + result[0]);
+					window.location.replace("/user/" + result[0]);
 				},
 				error: function (err) {
 					processError(err);
@@ -134,7 +131,7 @@ class Public extends Component {
         } else {
             login = (
                 <section id="main-welcome">
-                    <img alt="User Avatar" src={"img/user/" + this.state.userId + ".jpg"} />
+                    <img alt="User Avatar" src={"/img/user/" + this.state.userId + ".jpg"} />
                     <h4>Welcome back! {this.state.userName}</h4>
                 </section>
             )
@@ -148,7 +145,7 @@ class Public extends Component {
                     {login}
                     <h4 id="main-app">Get the mobile app</h4>
                     <a href="https://play.google.com/store/apps/details?id=com.thousanday" target="_blank" >
-                        <img className="main-mobile" alt="Google Play" src="./img/icon/google-play.png" />
+                        <img className="main-mobile" alt="Google Play" src="/img/icon/google-play.png" />
                     </a>
                 </main>
                 <aside id="aside">

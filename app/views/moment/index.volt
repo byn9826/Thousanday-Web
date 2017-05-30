@@ -8,15 +8,15 @@
 		<meta name="keywords" content="pets, dogs, cats, animals, social, pet images, gallery, puppy, puppies, dog, cat, pet, bird, birds, fish, fishes, moment, story, pet image, pet photo, cute, beauty, smart, share, life, lovely, pet gallery, image sharing, pet social">
 		<meta name="robots" content="all">
 		<meta name="author" content="Baozier">
-		<title>Thousanday - Homepage for pets</title>
+		<title>Watch moments of a pet - Thousanday</title>
 		<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon"/>
 		<link rel="stylesheet" type="text/css" href="/css/globe.css" >
 		<link rel="stylesheet" type="text/css" href="/css/general.css" >
-		<link rel="stylesheet" type="text/css" href="/css/public.css" >
+		<link rel="stylesheet" type="text/css" href="/css/moment.css" >
 	</head>
 	<body>
 		<div id="root"></div>
-		<script type="text/javascript" src="/js/public.bundle.js"></script>
+		<script type="text/javascript" src="/js/moment.bundle.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

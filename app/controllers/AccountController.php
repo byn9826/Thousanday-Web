@@ -21,7 +21,7 @@ class AccountController extends ControllerBase
                 $check = $User->checkGoogleId($googleId);
                 if ($check === 0) {
                     $this->response->setStatusCode(500, 'Internal Server Error');
-                } else if (count($check) === 0) {
+                } else if (!$check) {
                     //account not exist
                     //code later
                     //attention
@@ -81,7 +81,7 @@ class AccountController extends ControllerBase
                 $check = $User->checkFacebookId($fbId);
                 if ($check === 0) {
                     $this->response->setStatusCode(500, 'Internal Server Error');
-                } else if (count($check) === 0) {
+                } else if (!$check) {
                     //account not exist
                     //code later
                     //attention

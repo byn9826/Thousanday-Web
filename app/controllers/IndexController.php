@@ -3,15 +3,13 @@
 class IndexController extends ControllerBase
 {
 
-    public function indexAction()
-    {
+    public function indexAction() {
 
     }
 
     //init public page, read 20 most recent public moments
     //if can't read db, return 500
-    public function publicAction()
-    {
+    public function readAction() {
         $load = (int) $this->request->get("load");
         $db = DbConnection::getConnection();
         $Moment = new Moment($db);
