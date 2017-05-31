@@ -198,7 +198,7 @@ class About extends Component {
         }
         return (
             <div id="react-root">
-                <Header loginSuccess={null} logOut={null} hideName={true}/>
+                <Header restrict={true}/>
                 <main id="main">
                     <img id="main-avatar" src="/img/about/paulbao.png" alt="Avatar" />
                     <h1>Paul Bao</h1>

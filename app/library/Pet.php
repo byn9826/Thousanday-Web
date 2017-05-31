@@ -69,6 +69,19 @@ class Pet {
         }
     }
 
-
+    //find pets list fit in certain type and nature
+    public function readFilterPets($type, $nature) {
+        $userQuery = 'SELECT pet_id FROM pet WHERE pet_type = :type AND pet_nature = :nature';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':type', $type, PDO::PARAM_INT);
+            $userStmt->bindValue(':nature', $nature, PDO::PARAM_INT);
+            $userStmt->execute();
+            return $userStmt->fetchAll(PDO::FETCH_NUM);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
 
 }

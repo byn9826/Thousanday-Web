@@ -136,8 +136,17 @@ class Public extends Component {
                 </section>
             )
         }
+        //load more button
+        let load;
+        if (!this.state.locker) {
+            load = (
+                <h6 id="load-button" onClick={this.loadMore.bind(this)}>
+                    Load more ...
+                </h6>
+            );
+        }
 		return (
-			<div  id="react-root">
+			<div id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
                 <main id="main">
                     <h1>Meet with pets</h1>
@@ -150,7 +159,7 @@ class Public extends Component {
                 </main>
                 <aside id="aside">
                     <Waterfall column="3" image={this.state.images} fontFamily="'Rubik', sans-serif" />
-                    <h6 style={!this.state.locker? {cursor: "pointer"}: null} onClick={this.loadMore.bind(this)}>{!this.state.locker? "Load more ...":"No more .."}</h6>
+                    {load}
                 </aside>
                 <Footer />
 			</div>

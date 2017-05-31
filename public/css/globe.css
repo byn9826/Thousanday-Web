@@ -77,3 +77,15 @@ input{
 	display: block;
 	width: 100%;
 }
+
+#load-button{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: 1px solid #ef8513;
+	cursor: pointer;
+}

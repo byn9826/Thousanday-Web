@@ -168,6 +168,15 @@ class Pet extends Component {
                 </div>
             );
         }
+        //load more button
+        let load;
+        if (!this.state.locker) {
+            load = (
+                <h6 id="load-button" onClick={this.loadMore.bind(this)}>
+                    Load more ...
+                </h6>
+            );
+        }
 		return (
 			<div  id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -198,13 +207,7 @@ class Pet extends Component {
                         <h4>Moments</h4>
                     </div>
                     <Waterfall column="3" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
-                    {
-                        (this.state.galleryData.length > 0)? (
-                            <h6 style={!this.state.locker? {cursor: "pointer"}: null} onClick={this.loadMore.bind(this)}>
-                                {!this.state.locker? "Load more ...":"No more .."}
-                            </h6>
-                        ): null
-                    }
+                    {load}
                 </aside>
                 <Footer />
 			</div>

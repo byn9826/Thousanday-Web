@@ -1,0 +1,57 @@
+/*explore page*/
+#main{
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+    padding-top: 100px;
+    min-height: 650px;
+}
+
+.main-filter{
+    display: inline-block;
+    vertical-align: top;
+    width: 48%;
+    text-align: center;
+    border-radius: 5px 5px 0 0;
+    margin: 0 1%;
+    padding-bottom: 5px;
+}
+.main-filter img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3%;
+    width: 15px;
+}
+.main-filter h4{
+    display: inline-block;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.main-filter-title{
+    display: block;
+    background-color: #f7d7b4;
+    padding: 7px 3%;
+    border-radius: 4px;
+    margin-bottom: 3px;
+}
+
+#main-title{
+    display: block;
+    font-weight: bold;
+    margin-top: 20px;
+    border-bottom: 1px solid #e5e5e5;
+    border-radius: 10px;
+    padding: 15px 5%;
+    box-shadow: 2px 2px 1px #e5e5e5;
+    margin-bottom: 30px;
+}
+#main-title img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 3%;
+}
+#main-title h3{
+    display: inline-block;
+    vertical-align: middle;
+}
