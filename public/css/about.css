@@ -1,0 +1,183 @@
+#main{
+    margin-left: 10%;
+    width: 20%;
+    padding-top: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#main-avatar{
+    width: 50%;
+    margin-left: 25%;
+    border-radius: 50%;
+    margin-top: 50px
+}
+
+#main h1{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#main h5{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#main-social{
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.main-social-icon{
+    display: inline-block;
+    margin: 0 2%;
+    vertical-align: middle;
+}
+
+.main-avatar-icon{
+    width: 30px;
+    margin-bottom: 15px;
+}
+
+#main h4{
+    text-align: center;
+    margin-top: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #052456;
+    margin-bottom: 20px;
+}
+
+.main-choice{
+    background-color: #ef8513;
+    color: white;
+    border-left: 4px solid #052456;
+    border-right: 4px solid #052456;
+}
+
+.main-deactive{
+    border-left: 4px solid #e5e5e5;
+    border-right: 4px solid #e5e5e5;
+}
+
+.main-nav{
+    display: block;
+    text-align: center;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.main-nav h6{
+    display: block;
+}
+
+.main-nav h5{
+    display: block;
+    margin-top: 5px !important;
+}
+
+#aside{
+    margin-left: 5%;
+    width: 55%;
+    padding-top: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#aside h4{
+    font-weight: bold;
+    background-color: #052456;
+    color: white;
+    padding: 10px 2%;
+    border-radius: 5px;
+    display: block;
+}
+
+.aside-image{
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.aside-image1{
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+}
+
+.aside-project{
+    margin-top: 15px;
+    display: block;
+}
+
+.aside-project-left{
+    display: inline-block;
+    vertical-align: middle;
+    width: 55%;
+    background-color: #f7f9fc;
+    padding: 10px 2%;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.aside-project-full{
+    display: block;
+    background-color: #f7f9fc;
+    padding: 10px 2%;
+    text-align: center;
+    border-radius: 3px;
+}
+
+.aside-project-left-link{
+    display: block;
+}
+
+.aside-project-left-link h6{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2%;
+    text-decoration: underline;
+}
+
+.aside-project img{
+    max-height: 50px;
+    max-width: 70px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 15px;
+}
+
+#aside-begin{
+    display: block;
+    background-color: #f7f9fc;
+    height: 500px;
+    border-radius: 8px;
+    padding-top: 200px;
+}
+
+#aside-begin h3{
+    text-align: center;
+    display: block;
+    font-style: italic;
+}
+
+#aside-skill{
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#aside-skill img{
+    display: inline-block;
+    max-height: 50px;
+    max-width: 80px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+
+#aside-mobile{
+    display: block;
+    margin-top: 20px;
+    margin-left: 15%;
+}
