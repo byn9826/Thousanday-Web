@@ -3,8 +3,8 @@ class Waterfall extends Component {
     constructor(props) {
         super(props);
 		this.state = {
-            height: this.props.height || "160px",
-            width: (parseInt(100 / this.props.column) -1) + "%",
+            height: this.props.height || "220px",
+            width: (parseInt(100 / this.props.column) -2) + "%",
             active: null,
             fontFamily: this.props.fontFamily || "Times New Roman"
 		};
@@ -33,7 +33,7 @@ class Waterfall extends Component {
             display: "inline-block",
             verticalAlign: "middle",
             width: this.state.width,
-            margin: "3px 0.5%",
+            margin: "6px 1%",
         };
         let imageStyle = {
             display: "block",

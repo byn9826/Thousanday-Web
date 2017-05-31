@@ -55,7 +55,7 @@
     margin: 8px 5%;
 }
 
-#main-family {
+.main-family {
     display: block;
     width: 92%;
     padding: 5px 4%;
@@ -64,13 +64,13 @@
     border-bottom: 1px solid #e5e5e5;
     margin-top: 30px;
 }
-#main-family img{
+.main-family img{
     display: inline-block;
     vertical-align: middle;
     width: 15px;
     margin: 0 5%;
 }
-#main-family h5{
+.main-family h5{
     display: inline-block;
     vertical-align: middle;
     font-weight: bold;
@@ -94,6 +94,29 @@
     font-style: italic;
 }
 
+.main-friend {
+    display: inline-block;
+    width: 31%;
+    margin-right: 2%;
+    vertical-align: top;
+    margin-bottom: 10px;
+}
+.main-friend img{
+    display: block;
+    width: 100%;
+    border-radius: 3px;
+}
+.main-friend h6{
+    display: block;
+    width: 80%;
+    border-bottom: 1px solid #f7d7b4;
+    border-right: 1px solid #f7d7b4;
+    box-shadow: 2px 2px 1px #e5e5e5;
+    padding: 5px 10%;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+
 
 #aside{
     display: inline-block;
@@ -101,4 +124,38 @@
     margin-left: 5%;
     margin-top: 100px;
     vertical-align: top;
+}
+
+#aside-title{
+    display: block;
+    width: 80%;
+    padding: 5px 10%;
+    border-bottom: 1px solid #f7d7b4;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    border-radius: 3px;
+    border-right: 1px solid #f7d7b4;
+    box-shadow: 2px 2px 1px #e5e5e5; 
+    border-bottom: 1px solid #f7d7b4;
+}
+#aside-title img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5%;
+    width: 35px;
+}
+#aside-title h4{
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+}
+#aside h6{
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: black;
+    padding: 5px 0;
+    border-radius: 5px;
+    margin-top: 20px;
+    border: 1px solid #ef8513;
 }

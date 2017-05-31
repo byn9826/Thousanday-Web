@@ -39,6 +39,22 @@ class Moment {
         }
     }
 
+    //read 20 moments for one pet
+    public function readPetMoments($id, $load) {
+        $momentQuery = 'SELECT moment_id, pet_id, image_name, moment_message 
+                        FROM moment WHERE pet_id = :id ORDER BY moment_id DESC LIMIT :pin, 20';
+        try {
+            $momentStmt = $this->db->prepare($momentQuery);
+            $momentStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $momentStmt->bindValue(':pin', $load * 20, PDO::PARAM_INT);
+            $momentStmt->execute();
+            return $momentStmt->fetchAll(PDO::FETCH_ASSOC);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
     //hide one moment as delete from public
     public function hideOneMoment($moment, $pet) {
         $momentQuery = 'UPDATE moment SET display = 0 WHERE moment_id = :moment AND pet_id = :pet';

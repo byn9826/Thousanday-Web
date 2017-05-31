@@ -22,7 +22,19 @@ class Pet extends Component {
             //store data for one pet
             petData: [],
             //store data for pet's family
-            familyData: []
+            familyData: [],
+            //store data for pets friend
+            friendData: [],
+            //store data for image gallery
+            galleryData: [],
+            //indicate load how many times
+            loader: 1,
+            //indicate could load more or not
+            locker: false,
+            //store all watcher of current pet
+            watchData: [],
+            //indicate notice user login or not
+            logRequire: false
 		};
 	}
     //get user data if user logged in
@@ -41,8 +53,24 @@ class Pet extends Component {
             method: "GET",
             success: function(result) {
                 result = JSON.parse(result);
-                console.log(result);
-                this.setState({petData: result[0], familyData: result[1]});
+                //get data for images
+                let images, locker;
+                if (result[3].length === 0) {
+                    images = [];
+                    locker = true;
+                } else if (result[3].length === 20) {
+                    images = processGallery(result[3]);
+                    locker = false;
+                } else {
+                    images = processGallery(result[3]);
+                    locker = true;
+                }
+                //get all watcher id
+                let watch = [], i;
+                for (i = 0; i < result[4].length; i++) {
+                    watch[i] = parseInt(result[4][i].user_id);
+                }
+                this.setState({petData: result[0], familyData: result[1], friendData: result[2], galleryData: images, locker: locker, watchData: watch});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -50,11 +78,76 @@ class Pet extends Component {
         });
     }
     watchPet() {
-
+        if (!this.state.userId) {
+            this.setState({logRequire: true});
+        } else {
+            let action;
+            if (this.state.watchData.indexOf(this.state.userId) !== -1) {
+                action = 0;
+            } else {
+                action = 1;
+            }
+            reqwest({
+                url: "/pet/watch",
+                type: "json",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    "token": this.state.userToken,
+                    "user": this.state.userId,
+                    "action": action,
+                    "pet": window.location.pathname.split("/").pop()
+                }),
+                success: function(result) {
+                    if (result === 1) {
+                        if (action === 1) {
+                            this.state.watchData.push(this.state.userId);
+                        } else {
+                            this.state.watchData.splice(this.state.watchData.indexOf(this.state.userId), 1);
+                        }
+                        this.setState({watchData: this.state.watchData});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
+    }
+    loadMore() {
+        if (!this.state.locker) {
+            reqwest({
+                url: "/pet/load?load=" + this.state.loader + "&pet=" + window.location.pathname.split("/").pop(),
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    let images = processGallery(result);
+                    let combine = this.state.galleryData.concat(images);
+                    if (result.length === 20) {
+                        this.setState({galleryData: combine, loader: this.state.loader + 1});
+                    } else {
+                        this.setState({galleryData: combine, loader: this.state.loader + 1, locker: true});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
     }
 	render() {
-        //watch pet button
+        //content show in watch pet button
         let watchPet;
+        if (this.state.userId && this.state.watchData.indexOf(this.state.userId) !== -1) {
+            watchPet = "Watched | by " + this.state.watchData.length;
+        } else {
+            if (this.state.logRequire) {
+                watchPet = "Please Login";
+            } else {
+                watchPet = "+ Watch | by " + this.state.watchData.length;
+            }
+        }
+        //show all family
         let families = this.state.familyData.map((family, index) =>
             <div key={"petfamily" + index} className="main-owner">
                 <a href={"/user/" + family.user_id}>
@@ -63,6 +156,18 @@ class Pet extends Component {
                 </a>
             </div>
         );
+        //show all friends
+        let friends;
+        if (this.state.friendData.length !== 0) {
+            friends = this.state.friendData.map((friend, index) =>
+                <div key={"petfriend" + index} className="main-friend">
+                    <a href={"/pet/" + friend.pet_id}>
+                        <img src = {"/img/pet/" + friend.pet_id + "/0.png"}  />
+                        <h6>{friend.pet_name}</h6>
+                    </a>
+                </div>
+            );
+        }
 		return (
 			<div  id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -76,13 +181,30 @@ class Pet extends Component {
                     <h5 id="main-nature">Nature: {noGetNature(this.state.petData.pet_nature)}</h5>
                     <h5 className="main-title">Type: {noGetType(this.state.petData.pet_type)}</h5>
                     <h5 className="main-title">Reg in hub: {this.state.petData.pet_reg?new Date(this.state.petData.pet_reg).toISOString().substring(0, 10):null}</h5>    
-                    <div id="main-family">
-                        <img alt="skill-icon" src="/img/icon/glyphicons-hub.png" />
+                    <div className="main-family">
+                        <img alt="Family" src="/img/icon/glyphicons-hub.png" />
                         <h5>Family</h5>
                     </div>
                     {families}
+                    <div className="main-family">
+                        <img alt="friend" src="/img/icon/glyphicons-team.png" />
+                        <h5>Friends</h5>
+                    </div>
+                    {friends}
                 </main>
                 <aside id="aside">
+                    <div id="aside-title">
+                        <img alt="moments" src="/img/icon/glyphicons-moment.png" / >
+                        <h4>Moments</h4>
+                    </div>
+                    <Waterfall column="3" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+                    {
+                        (this.state.galleryData.length > 0)? (
+                            <h6 style={!this.state.locker? {cursor: "pointer"}: null} onClick={this.loadMore.bind(this)}>
+                                {!this.state.locker? "Load more ...":"No more .."}
+                            </h6>
+                        ): null
+                    }
                 </aside>
                 <Footer />
 			</div>

@@ -36,17 +36,33 @@ class Pet {
         }
     }
 
-    //get all pets belong to owner and relative
-    public function readUsersPets($owner, $relative) {
-        $familyQuery = 'SELECT pet_id, pet_name, pet_gender FROM pet WHERE
-                        owner_id = :owner OR relative_id = :owner OR owner_id = :relative 
-                        OR relative_id = :owner';
+    //get all pets belong to owner and relative, except current pet
+    public function readPetFriends($owner, $relative, $pet) {
+        $familyQuery = 'SELECT pet_id, pet_name FROM pet WHERE
+                        (owner_id = :owner OR relative_id = :owner OR owner_id = :relative 
+                        OR relative_id = :owner) AND pet_id != :pet';
         try {
             $familyStmt = $this->db->prepare($familyQuery);
             $familyStmt->bindValue(':owner', $owner, PDO::PARAM_INT);
             $familyStmt->bindValue(':relative', $relative, PDO::PARAM_INT);
+            $familyStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
             $familyStmt->execute();
             return $familyStmt->fetchAll(PDO::FETCH_ASSOC);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
+    //get all pets belong to one user
+    public function readUserPets($owner, $pet) {
+        $userQuery = 'SELECT pet_id, pet_name FROM pet WHERE owner_id = :owner AND pet_id != :pet';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':owner', $owner, PDO::PARAM_INT);
+            $userStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
+            $userStmt->execute();
+            return $userStmt->fetchAll(PDO::FETCH_ASSOC);
         }  catch (PDOException $e) {
             print $e->getMessage();
             return 0;

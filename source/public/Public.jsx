@@ -50,22 +50,22 @@ class Public extends Component {
     loadMore() {
         if (!this.state.locker) {
             reqwest({
-            url: "/index/read?load=" + this.state.loader,
-            method: "GET",
-            success: function(result) {
-                result = JSON.parse(result);
-                let images = processGallery(result);
-                let combine = this.state.images.concat(images);
-                if (result.length === 20) {
-                    this.setState({images: combine, loader: this.state.loader + 1});
-                } else {
-                    this.setState({images: combine, loader: this.state.loader + 1, locker: true});
+                url: "/index/read?load=" + this.state.loader,
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    let images = processGallery(result);
+                    let combine = this.state.images.concat(images);
+                    if (result.length === 20) {
+                        this.setState({images: combine, loader: this.state.loader + 1});
+                    } else {
+                        this.setState({images: combine, loader: this.state.loader + 1, locker: true});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
                 }
-            }.bind(this),
-            error: function (err) {
-                processError(err);
-            }
-        });
+            });
         }
     }
     //user click google login button
@@ -149,7 +149,7 @@ class Public extends Component {
                     </a>
                 </main>
                 <aside id="aside">
-                    <Waterfall column="4" image={this.state.images} fontFamily="'Rubik', sans-serif" />
+                    <Waterfall column="3" image={this.state.images} fontFamily="'Rubik', sans-serif" />
                     <h6 style={!this.state.locker? {cursor: "pointer"}: null} onClick={this.loadMore.bind(this)}>{!this.state.locker? "Load more ...":"No more .."}</h6>
                 </aside>
                 <Footer />
