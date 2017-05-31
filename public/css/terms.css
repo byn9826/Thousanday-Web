@@ -1,0 +1,28 @@
+/*For terms and privacy policy page*/
+#main{
+    display: block;
+    width: 60%;
+    margin-left: 20%;
+    padding-top: 100px;
+}
+
+#main h2{
+    margin-top: 30px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+
+#main h4{
+    margin-top: 30px;
+    display: block;
+    font-weight: bold;
+    text-align: left;
+}
+
+#main h5{
+    margin-top: 20px;
+    line-height: 30px;
+    display: block;
+    text-align: left;
+}
