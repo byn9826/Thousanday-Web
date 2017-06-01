@@ -5,6 +5,7 @@ import Header from "../general/Header";
 import Footer from "../general/Footer";
 import noGetGender from "../js/noGetGender.js";
 import noGetType from "../js/noGetType.js";
+import Waterfall from "../component/Waterfall";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
 class User extends Component {
@@ -15,8 +16,6 @@ class User extends Component {
             userId: null,
             //store user name
             userName: null,
-            //store user token
-            userToken: null,
 			//indicate if it is user's homepage
 			userHome: false,
 			//store user data
@@ -24,7 +23,15 @@ class User extends Component {
 			//store relative data
 			relativeData: [],
 			//store pets list
-			petsData: []
+			petsData: [],
+			//store moment images
+			momentData: [],
+			//indicate load moment how many times
+			loader: 1,
+			//indicate could load more images or not
+			locker: false,
+			//store pet list
+			belong: []
 		};
 	}
 	 //get user data if user logged in
@@ -32,12 +39,11 @@ class User extends Component {
         if (sessionStorage.getItem("id")) {
             let id = sessionStorage.getItem("id");
             let name = sessionStorage.getItem("name");
-            let token = sessionStorage.getItem("token");
 			id = parseInt(id);
 			let user = window.location.pathname.split("/").pop();
 			user = parseInt(user);
 			let home = (id === user)?true:false;
-            this.setState({userId: id, userName: name, userToken: token, userHome: home});
+            this.setState({userId: id, userName: name, userHome: home});
         }
     }
 	//load user data
@@ -46,7 +52,6 @@ class User extends Component {
             url: "/user/read?id=" + window.location.pathname.split("/").pop(),
             method: "GET",
             success: function(result) {
-				console.log(result);
                 result = JSON.parse(result);
 				let user = window.location.pathname.split("/").pop();
 				let relatives = [], i;
@@ -62,13 +67,49 @@ class User extends Component {
 					}
 				}
 				relatives = [...new Set(relatives)];
-				this.setState({userData: result[0], relativeData: relatives, petsData: result[1]});
+				let moment;
+				if (result[2].length !== 0) {
+					moment = processGallery(result[2]);
+				} else {
+					moment = [];
+				}
+				let locker;
+				if (result[2].length === 20) {
+					locker = false;
+				} else {
+					locker = true;
+				}
+				this.setState({userData: result[0], relativeData: relatives, petsData: result[1], momentData: moment, locker: locker, belong: result[3]});
             }.bind(this),
             error: function (err) {
                 processError(err);
             }
         });
     }
+	//load more moment
+	loadMore() {
+		if (!this.state.locker) {
+            reqwest({
+				url: "/user/load",
+				type: "json",
+				contentType: "application/json",
+				method: "POST",
+				data: JSON.stringify({"load": this.state.loader, "belong": this.state.belong}),
+                success: function(result) {
+                    let images = processGallery(result);
+                    let combine = this.state.momentData.concat(images);
+                    if (result.length === 20) {
+                        this.setState({momentData: combine, loader: this.state.loader + 1});
+                    } else {
+                        this.setState({momentData: combine, loader: this.state.loader + 1, locker: true});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
+	}
 	render() {
 		//relative box
 		let relatives = this.state.relativeData.map((relative, index) =>
@@ -79,14 +120,30 @@ class User extends Component {
 		//pets list
 		let pets = this.state.petsData.map((pet, index) =>
 			<div key={"userPet" + index} className="aside-pet">
-				<img alt={pet.pet_name} src={"/img/pet/" + pet.pet_id + "/0.png"} />
+				<a href={"/pet/" + pet.pet_id}>
+					<img alt={pet.pet_name} src={"/img/pet/" + pet.pet_id + "/0.png"} />
+				</a>
 				<h5>{pet.pet_name}</h5>
 				<div className="aside-pet-info">
 					<h6>{noGetGender(pet.pet_gender)}</h6>
 					<h6>{noGetType(pet.pet_type)}</h6>
 				</div>
+				{
+					(this.state.userHome)? (
+						<a href={"/edit/" + pet.pet_id}><h6 className="aside-pet-edit">Edit</h6></a>
+					):null
+				}
 			</div>
 		);
+		//load more button
+        let load;
+        if (!this.state.locker) {
+            load = (
+                <h6 id="load-button" onClick={this.loadMore.bind(this)}>
+                    Load more ...
+                </h6>
+            );
+        }
 		return (
 			<div id="react-root">
 				<Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -109,6 +166,8 @@ class User extends Component {
 						<img alt="pets moment" src="/img/icon/glyphicons-moment.png" />
 						<h4>Moments</h4>
 					</div>
+					<Waterfall column="3" image={this.state.momentData} fontFamily="'Rubik', sans-serif" />
+					{load}
 				</aside>
                 <Footer />
 			</div>

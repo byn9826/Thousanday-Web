@@ -80,8 +80,8 @@
 .aside-pet{
     display: inline-block;
     vertical-align: middle;
-    width: 15%;
-    margin-right: 5%;
+    width: 17%;
+    margin-right: 3%;
     background-color: #e5e5e5;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -111,8 +111,19 @@
 .aside-pet-info>:nth-child(2){
     display: inline-block;
     vertical-align: middle;
-    background-color: #ef8513;
-    color: white;
+    border-bottom: 1px solid #ef8513;
     border-radius: 3px;
     padding: 2px 4px;
+}
+
+.aside-pet-edit{
+    display: block;
+    background-color: #ef8513;
+    color: white;
+    text-align: center;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    padding: 5px 0;
 }
