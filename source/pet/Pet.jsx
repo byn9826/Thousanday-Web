@@ -46,7 +46,7 @@ class Pet extends Component {
             this.setState({userId: parseInt(id), userName: name, userToken: token});
         }
     }
-    //load 20 most recent images
+    //load pet data
     componentDidMount() {
         reqwest({
             url: "/pet/read?id=" + window.location.pathname.split("/").pop(),

@@ -52,10 +52,10 @@
 #main-welcome {
     display: block;
     text-align: center;
-    background-color: #f7f9fc;
+    box-shadow: 2px 2px 1px #e5e5e5; 
     width: 90%;
     padding: 20px 0;
-    margin: 20px 5%;
+    margin: 50px 5%;
     border-radius: 5px;
 }
 #main-welcome img{

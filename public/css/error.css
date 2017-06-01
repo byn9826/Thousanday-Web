@@ -1,0 +1,64 @@
+#main{
+    display: block;
+    margin-left: 10%;
+    width: 80%;
+    padding-top: 150px;
+    min-height: 650px;
+}
+
+#main-section{
+    display: inline-block;
+    vertical-align: top;
+    padding: 30px 5%;
+    width: 37%;
+    text-align: center;
+}
+
+#main-section h2{
+    display: block;
+    margin-bottom: 30px;
+}
+
+#main-section h4{
+    display: block;
+    border-left: 4px solid #ef8513;
+    border-right: 4px solid #ef8513;
+    line-height: 30px;
+}
+
+#main-section a{
+    font-style: italic;
+}
+
+#main img{
+    display: inline-block;
+    width: 50%;
+    margin-left: 3%;
+    border-radius: 5px;
+    vertical-align: top;
+}
+
+@media only screen and (max-width: 948px) {
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media only screen and (max-width: 651px) {
+
+    #main{
+        padding-top: 100px;
+    }
+
+
+    #main-section{
+        display: block;
+        width: 90%;
+    }
+
+    #main img{
+        width: 100%;
+        margin-left: 0;
+    }
+}

@@ -1,3 +1,4 @@
 logout remove db token
 login no account go to register
-processError handler
+show watch, comment, love list
+403 page

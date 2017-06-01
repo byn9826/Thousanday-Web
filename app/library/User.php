@@ -65,4 +65,18 @@ class User {
         }
     }
 
+    //get one users information
+    public function readOneUser($id) {
+        $userQuery = 'SELECT user_id, user_name, user_about FROM user WHERE user_id = :id';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $userStmt->execute();
+            return $userStmt->fetch(PDO::FETCH_ASSOC);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
 }

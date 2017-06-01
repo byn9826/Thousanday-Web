@@ -84,12 +84,21 @@
 .header-drop input{
     cursor: pointer;
     width: 80%;
-    border: 1px solid white;
     border-radius: 3px;
-    color: white;
     height: 26px;
     background-color: #ef8513;
     outline: none;
+    margin-top: 20px;
+}
+#header-drop-logout{
+    border-bottom: 2px solid #ef8513;
+    width: 80%;
+    margin-left: 10%;
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    line-height: 30px !important;
 }
 .header-drop-hide{
     position: fixed;

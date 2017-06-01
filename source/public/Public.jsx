@@ -152,7 +152,7 @@ class Public extends Component {
                     <h1>Meet with pets</h1>
                     <h2>around the world everyday!</h2>
                     {login}
-                    <h4 id="main-app">Get the mobile app</h4>
+                    <h6 id="main-app">Get the mobile app</h6>
                     <a href="https://play.google.com/store/apps/details?id=com.thousanday" target="_blank" >
                         <img className="main-mobile" alt="Google Play" src="/img/icon/google-play.png" />
                     </a>

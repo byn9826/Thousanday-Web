@@ -136,7 +136,8 @@ class Header extends Component {
 				logout = (
 					<section className="header-drop">
 						<a href={"/user/" + this.props.userId}><h5>Home</h5></a>
-						<input type="button" value="Log Out" onClick={this.logOut.bind(this)} />
+						<a href={"/user/setting"}><h5>Setting</h5></a>
+						<h6 id="header-drop-logout" onClick={this.logOut.bind(this)}>Log Out</h6>
 					</section>
 				)
 			}

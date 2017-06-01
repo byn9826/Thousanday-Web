@@ -7,7 +7,7 @@ class PetController extends ControllerBase
 
     }
 
-    //read information for one moment 
+    //read information for one pet
     public function readAction() {
         $id = $this->request->get("id");
         $db = DbConnection::getConnection();
