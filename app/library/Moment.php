@@ -40,13 +40,13 @@ class Moment {
     }
 
     //read 20 moments for one pet
-    public function readPetMoments($id, $load) {
+    public function readPetMoments($id, $load, $add = 0) {
         $momentQuery = 'SELECT moment_id, pet_id, image_name, moment_message 
                         FROM moment WHERE pet_id = :id ORDER BY moment_id DESC LIMIT :pin, 20';
         try {
             $momentStmt = $this->db->prepare($momentQuery);
             $momentStmt->bindValue(':id', $id, PDO::PARAM_INT);
-            $momentStmt->bindValue(':pin', $load * 20, PDO::PARAM_INT);
+            $momentStmt->bindValue(':pin', $load * 20 + $add, PDO::PARAM_INT);
             $momentStmt->execute();
             return $momentStmt->fetchAll(PDO::FETCH_ASSOC);
         }  catch (PDOException $e) {
@@ -69,6 +69,30 @@ class Moment {
             print $e->getMessage();
             return 0;
         }
+    }
+
+    //add one new moment
+    public function createNewMoment($image, $message, $pet) {
+        $time = date('Y-m-d H:i:s');
+        $momentQuery = 'INSERT INTO moment (image_name, moment_message, pet_id, moment_date, display) 
+                       VALUES (:image, :message, :pet, :time, 1)';
+        try {
+            $momentStmt = $this->db->prepare($momentQuery);
+            $momentStmt->bindValue(':image', $image, PDO::PARAM_STR);
+            $momentStmt->bindValue(':message', $message);
+            $momentStmt->bindValue(':pet', $pet);
+            $momentStmt->bindValue(':time', $time);
+            $this->db->beginTransaction();
+            $momentStmt->execute();
+            $id = $this->db->lastInsertId();
+            $this->db->commit();
+            return $id;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+
     }
 
     //hide one moment as delete from public

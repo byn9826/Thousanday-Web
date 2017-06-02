@@ -33,8 +33,25 @@ class Inputarea extends Component {
 		event.preventDefault();
 		let file = event.target.files[0];
         let reader = new FileReader();
+		let canvas = document.createElement("canvas");
+		let context = canvas.getContext("2d");
         reader.onload = () => {
-            this.setState({rawUrl: reader.result});
+			let img = new Image();
+			img.src = reader.result;
+			img.onload = () => {
+				if (img.width > 800 && img.width > img.height) {
+					img.height = (img.height / img.width) * 800;
+					img.width = 800;
+				} else if (img.height > 800 && img.height > img.width) {
+					img.width = (img.width / img.height) * 800;
+					img.height = 800;
+				}
+				canvas.width = img.width;
+        		canvas.height = img.height;  
+				context.drawImage(img, 0, 0, img.width, img.height);
+				let compressed = canvas.toDataURL();
+				this.setState({rawUrl: compressed});
+			}
 			if (this.state.error !== "") {
 				this.setState({error: ""});
 			}

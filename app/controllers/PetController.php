@@ -68,9 +68,10 @@ class PetController extends ControllerBase
     public function loadAction() {
         $pet = $this->request->get("pet");
         $load = (int) $this->request->get("load");
+        $add = (int) $this->request->get("add");
         $db = DbConnection::getConnection();
         $Moment = new Moment($db);
-        $moments = $Moment->readPetMoments($pet, $load);
+        $moments = $Moment->readPetMoments($pet, $load, $add);
         if ($moments === 0) {
             $this->response->setStatusCode(500, 'Internal Server Error');
         } else {

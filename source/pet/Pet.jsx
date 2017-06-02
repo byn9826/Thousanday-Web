@@ -4,6 +4,7 @@ import reqwest from "reqwest";
 import Header from "../general/Header";
 import Footer from "../general/Footer";
 import Waterfall from "../component/Waterfall";
+import Postimg from "../component/Postimg";
 import noGetGender from "../js/noGetGender.js";
 import noGetType from "../js/noGetType.js";
 import noGetNature from "../js/noGetNature.js";
@@ -19,6 +20,8 @@ class Pet extends Component {
             userName: null,
             //store user token
             userToken: null,
+            //indicate belong to current user or not
+            petOwner: false,
             //store data for one pet
             petData: [],
             //store data for pet's family
@@ -31,10 +34,14 @@ class Pet extends Component {
             loader: 1,
             //indicate could load more or not
             locker: false,
+            //indicate add how many images
+            add: 0,
             //store all watcher of current pet
             watchData: [],
             //indicate notice user login or not
-            logRequire: false
+            logRequire: false,
+            //trigger reset function for post image
+            reset: 0,
 		};
 	}
     //get user data if user logged in
@@ -70,13 +77,20 @@ class Pet extends Component {
                 for (i = 0; i < result[4].length; i++) {
                     watch[i] = parseInt(result[4][i].user_id);
                 }
-                this.setState({petData: result[0], familyData: result[1], friendData: result[2], galleryData: images, locker: locker, watchData: watch});
+                let home;
+                if (this.state.userId === parseInt(result[0]['owner_id']) || this.state.userId === parseInt(result[0]['relative_id'])) {
+                    home = true;
+                } else {
+                    home = false;
+                }
+                this.setState({petData: result[0], familyData: result[1], friendData: result[2], galleryData: images, locker: locker, watchData: watch, petOwner: home});
             }.bind(this),
             error: function (err) {
                 processError(err);
             }
         });
     }
+    //user watch a pet
     watchPet() {
         if (!this.state.userId) {
             this.setState({logRequire: true});
@@ -114,10 +128,11 @@ class Pet extends Component {
             });
         }
     }
+    //user load more images
     loadMore() {
         if (!this.state.locker) {
             reqwest({
-                url: "/pet/load?load=" + this.state.loader + "&pet=" + window.location.pathname.split("/").pop(),
+                url: "/pet/load?add=" + this.state.add + "&load=" + this.state.loader + "&pet=" + window.location.pathname.split("/").pop(),
                 method: "GET",
                 success: function(result) {
                     result = JSON.parse(result);
@@ -134,6 +149,40 @@ class Pet extends Component {
                 }
             });
         }
+    }
+    //user submit image
+    submitImg(message, img) {
+        //get image type
+        let type = img.type;
+        type = type.split("/")[1];
+        type = "." + type;
+        //store image file
+        let fileData = new FormData();
+    	fileData.append("file", img, type);
+        fileData.append("message", message);
+        fileData.append("pet", window.location.pathname.split("/").pop());
+        fileData.append("user", this.state.userId);
+        fileData.append("token", this.state.userToken);
+        reqwest({
+        	url: "/upload/moment",
+        	method: "POST",
+         	data: fileData,
+        	contentType: false,
+        	processData: false,
+			success: function(result) {
+                result = JSON.parse(result);
+                let add = [
+                    "/img/pet/" + window.location.pathname.split("/").pop() + "/moment/" + result[1],
+                    message,
+                    "/moment/" + result[0]
+                ];
+                this.state.galleryData.unshift(add);
+                this.setState({galleryData: this.state.galleryData, reset: this.state.reset + 1, add: this.state.add + 1});
+            }.bind(this),
+            error: function (err) {
+                processError(err);
+            }
+        });
     }
 	render() {
         //content show in watch pet button
@@ -202,6 +251,11 @@ class Pet extends Component {
                     {friends}
                 </main>
                 <aside id="aside">
+                    {
+                        this.state.petOwner? (
+                            <Postimg content="" max="120" title="Share new moment" submitImg={this.submitImg.bind(this)} fontFamily="'Rubik', sans-serif" reset={this.state.reset} />
+                        ): null
+                    }
                     <div id="aside-title">
                         <img alt="moments" src="/img/icon/glyphicons-moment.png" / >
                         <h4>Moments</h4>
