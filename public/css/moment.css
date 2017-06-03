@@ -4,9 +4,9 @@
     width: 40%;
     margin-left: 10%;
     margin-top: 100px;
-    vertical-align: top;
-    min-height: 600px;
+    vertical-align: middle;
     text-align: center;
+    margin-bottom: 200px;
 }
 #main img{
     border-radius: 5px;
@@ -44,8 +44,9 @@
     display: inline-block;
     margin-left: 5%;
     margin-top: 100px;
-    vertical-align: top;
+    vertical-align: middle;
     width: 35%;
+    margin-bottom: 200px;
 }
 
 #aside-talk{
