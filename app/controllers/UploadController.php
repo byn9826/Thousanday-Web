@@ -3,11 +3,12 @@
 class UploadController extends ControllerBase
 {
 
+    //upload new moment image
     public function momentAction() {
         if ($this->request->hasFiles() && $this->request->isPost()) {
             $files = $this->request->getUploadedFiles();
             $fileType = $files[0]->getRealType();
-            $whiteList = array("image/jpeg", "image/png", "image/jpg", "image/jpeg", "image/bmp");
+            $whiteList = ["image/png", "image/jpg", "image/jpeg", "image/bmp"];
             if (in_array($fileType, $whiteList)) {
                 $message = $this->request->getPost("message");
                 $pet = (int) $this->request->getPost("pet");
@@ -48,7 +49,39 @@ class UploadController extends ControllerBase
         } else {
             $this->response->setStatusCode(404, 'Not Found');
         }
+    }
 
+    //upload user's avatar
+    public function userAction() {
+        if ($this->request->hasFiles() && $this->request->isPost()) {
+            $files = $this->request->getUploadedFiles();
+            $fileType = $files[0]->getRealType();
+            $whiteList = ["image/png", "image/jpg"];
+            if (in_array($fileType, $whiteList)) {
+                $user = (int) $this->request->getPost("user");
+                $token = $this->request->getPost("token");
+                $db = DbConnection::getConnection();
+                $Token = new Token($db);
+                $validation = $Token->checkUserToken($user, $token);
+                if ($validation === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else if ($validation === 1) {
+                    $image = $user . ".jpg";
+                    $upload = __DIR__ . '/../../public/img/user/';
+                    if (!is_dir($upload)) {
+                        mkdir($upload, 0755);
+                    }
+                    $files[0]->moveTo($upload . $image);
+                    echo 1;
+                } else {
+                    $this->response->setStatusCode(403, 'Forbidden');
+                }
+            } else {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
     }
 
 }

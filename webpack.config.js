@@ -7,6 +7,7 @@ module.exports = {
         moment: "./source/moment/Moment.jsx",
         pet: "./source/pet/Pet.jsx",
         user: "./source/user/User.jsx",
+        setting: "./source/setting/Setting.jsx",
         about: "./source/about/About.jsx",
         terms: "./source/terms/Terms.jsx",
         404: "./source/error/404.jsx",

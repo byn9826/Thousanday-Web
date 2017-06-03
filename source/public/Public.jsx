@@ -131,7 +131,9 @@ class Public extends Component {
         } else {
             login = (
                 <section id="main-welcome">
-                    <img alt="User Avatar" src={"/img/user/" + this.state.userId + ".jpg"} />
+                    <a href={"/user/" + this.state.userId}>
+                        <img alt="User Avatar" src={"/img/user/" + this.state.userId + ".jpg"} />
+                    </a>
                     <h4>Welcome back! {this.state.userName}</h4>
                 </section>
             )

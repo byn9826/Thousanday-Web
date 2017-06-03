@@ -116,8 +116,8 @@ class Moment extends Component {
                 "moment": window.location.pathname.split("/").pop()
             }),
             success: function(result) {
-                if (result === 1) {
-                    if (action === 1) {
+                if (result == 1) {
+                    if (action == 1) {
                         this.state.likeData.push(this.state.userId);
                     } else {
                         this.state.likeData.splice(this.state.likeData.indexOf(this.state.userId), 1);

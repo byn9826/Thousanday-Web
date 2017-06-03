@@ -34,7 +34,7 @@ class User extends Component {
 			belong: []
 		};
 	}
-	 //get user data if user logged in
+	//get user data if user logged in
     componentWillMount() {
         if (sessionStorage.getItem("id")) {
             let id = sessionStorage.getItem("id");

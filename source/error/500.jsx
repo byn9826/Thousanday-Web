@@ -3,10 +3,27 @@ import ReactDOM from "react-dom";
 import Header from "../general/Header";
 import Footer from "../general/Footer";
 class InnerError extends Component {
+	constructor(props) {
+        super(props);
+		this.state = {
+            //store user id
+            userId: null,
+            //store user name
+            userName: null,
+		};
+	}
+	//get user data if user logged in
+    componentWillMount() {
+        if (sessionStorage.getItem("id")) {
+            let id = sessionStorage.getItem("id");
+            let name = sessionStorage.getItem("name");
+            this.setState({userId: id, userName: name});
+        }
+    }
 	render() {
 		return (
 			<div id="react-root">
-				<Header loginSuccess={null} logOut={null} hideName={true}/>
+				<Header  userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
 				<main id="main">
 					<section id="main-section">
 						<h2>Internal Server Error</h2>
