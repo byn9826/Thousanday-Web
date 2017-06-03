@@ -134,4 +134,23 @@ class Pet {
         }
     }
 
+    //transfer ownership for one pet
+    public function transferPetOwner($pet, $owner, $relative) {
+        $petQuery = 'UPDATE pet SET owner_id = :owner, relative_id = :relative WHERE pet_id = :pet';
+        try {
+            $petStmt = $this->db->prepare($petQuery);
+            $petStmt->bindValue(':owner', $relative, PDO::PARAM_INT);
+            $petStmt->bindValue(':relative', $owner, PDO::PARAM_INT);
+            $petStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
+            $this->db->beginTransaction();
+            $petStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

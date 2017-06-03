@@ -30,7 +30,11 @@ class Edit extends Component {
             //content in search bar
             search: "",
             //store search data
-            searchData: null
+            searchData: null,
+            //show remove relative box
+            showRemove: false,
+            //show transfer box
+            showTransfer: false
 		};
 	}
     //get user data if user logged in
@@ -74,7 +78,7 @@ class Edit extends Component {
             processData: false,
             success: function(result) {
                 if (result == 1) {
-                    this.setState({update: "Avatar Successfully updated !"});
+                    this.setState({update: "Avatar updated successfully !"});
                 }
             }.bind(this),
             error: function (err) {
@@ -177,6 +181,97 @@ class Edit extends Component {
             }, 500);
         }
     }
+    //confirm add relative
+    confirmAdd() {
+        reqwest({
+			url: "/edit/add",
+            type: "json",
+            contentType: "application/json",
+            method: "POST",
+            data: JSON.stringify({
+                "token": this.state.userToken,
+                "user": this.state.userId,
+                "pet": window.location.pathname.split("/").pop(),
+                "add": this.state.searchData.user_id
+            }),
+			success: function(result) {
+                if (result == 1) {
+                    this.setState({showAdd: false, search: "", searchData: null, update: "Request sent successfully !"});
+                }
+			}.bind(this),
+			error: function (err) {
+                processError(err);
+            }
+		});
+    }
+    //remove relative
+    removeRelative() {
+        this.setState({showRemove: true});
+    }
+    //confirm remove relative
+    confirmRemove() {
+        reqwest({
+			url: "/edit/remove",
+            type: "json",
+            contentType: "application/json",
+            method: "POST",
+            data: JSON.stringify({
+                "token": this.state.userToken,
+                "user": this.state.userId,
+                "pet": window.location.pathname.split("/").pop(),
+            }),
+			success: function(result) {
+                if (result == 1) {
+                    let data = this.state.petData;
+                    data.relative_id = null;
+                    this.setState({petData: data, showRemove: false, update: "Successfully removed relative !"});
+                }
+			}.bind(this),
+			error: function (err) {
+                processError(err);
+            }
+		});
+    }
+    //close remove relative box
+    closeRemove() {
+        this.setState({showRemove: false});
+    }
+    //transfer owner ship to relative
+    transferOwnership() {
+        this.setState({showTransfer: true});
+    }
+    //close transfer ownership box
+    closeTransfer() {
+        this.setState({showTransfer: false});
+    }
+    //confirm transfer ownership
+    confirmTransfer() {
+        reqwest({
+			url: "/edit/transfer",
+            type: "json",
+            contentType: "application/json",
+            method: "POST",
+            data: JSON.stringify({
+                "token": this.state.userToken,
+                "user": this.state.userId,
+                "pet": window.location.pathname.split("/").pop(),
+                "relative": this.state.petData.relative_id
+            }),
+			success: function(result) {
+                if (result == 1) {
+                    let data = this.state.petData;
+                    let ownerId = this.state.petData.owner_id;
+                    let relativeId = this.state.petData.relative_id;
+                    data.relative_id = ownerId;
+                    data.owner_id = relativeId;
+                    this.setState({petData: data, showTransfer: false, update: "Successfully transferred ownership !"});
+                }
+			}.bind(this),
+			error: function (err) {
+                processError(err);
+            }
+		});
+    }
     render() {
         //show profile image
         let profile, relation;
@@ -186,7 +281,8 @@ class Edit extends Component {
                     relation = (
                         <div id="main-contain-holder-relation">
                             <h6>You are the owner</h6>
-
+                            <h7 onClick={this.removeRelative.bind(this)}>Remove Relative</h7>
+                            <h7 onClick={this.transferOwnership.bind(this)}>Transfer Ownership</h7>
                         </div> 
                     )
                 } else {
@@ -240,10 +336,31 @@ class Edit extends Component {
                             <div id="pop-action-show">
                                 <img alt="user" src={"/img/user/" + this.state.searchData.user_id + ".jpg"} />
                                 <h5>{this.state.searchData.user_name}</h5>
+                                <h6 onClick={this.confirmAdd.bind(this)}>Send Request</h6>
                             </div>
                         ): null
                     }
                 </section>
+			);
+        } else if (this.state.showRemove) {
+            popContainer = (<div id="pop-back"></div>);
+			popAction = (
+				<section id="pop-action">
+					<h5 id="pop-action-close" onClick={this.closeRemove.bind(this)}>✗</h5>
+					<h4 id="pop-action-title">Are you sure you want to remove the relative?</h4>
+					<h5 id="pop-action-warn">Once you remove a relative, you won't be able to resume it yourself.</h5>
+					<Confirmdel message="Remove Relative" confirmDel={this.confirmRemove.bind(this)} fontFamily="'Rubik', sans-serif"/>
+				</section>
+			);
+        } else if (this.state.showTransfer) {
+            popContainer = (<div id="pop-back"></div>);
+			popAction = (
+				<section id="pop-action">
+					<h5 id="pop-action-close" onClick={this.closeTransfer.bind(this)}>✗</h5>
+					<h4 id="pop-action-title">Are you sure you want to transfer ownership?</h4>
+					<h5 id="pop-action-warn">Once you transfer ownership to relative, you won't be able to resume it yourself.</h5>
+					<Confirmdel message="Transfer Ownership" confirmDel={this.confirmTransfer.bind(this)} fontFamily="'Rubik', sans-serif"/>
+				</section>
 			);
         }
         return (

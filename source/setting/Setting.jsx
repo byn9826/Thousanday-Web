@@ -110,38 +110,40 @@ class Setting extends Component {
     saveAbout() {
         let userAbout = this.refs.userAbout.state.content.trim();
         if (userAbout != this.state.userAbout) {
-			if (userAbout.length > 0) {
-                reqwest({
-                    url: "/setting/about",
-                    type: "json",
-                    contentType: "application/json",
-                    method: "POST",
-                    data: JSON.stringify({
-                        "token": this.state.userToken,
-                        "user": this.state.userId,
-                        "about": userAbout
-                    }),
-					success: function(result) {
-						if (result == 1) {
-                            this.setState({userAbout: userAbout, update: "Mood Successfully updated !"});
+			reqwest({
+                url: "/setting/about",
+                type: "json",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    "token": this.state.userToken,
+                    "user": this.state.userId,
+                    "about": userAbout
+                }),
+                success: function(result) {
+                    if (result == 1) {
+                        if (!userAbout) {
+                            userAbout = "";
                         }
-					}.bind(this),
-					error: function (err) {
-                        processError(err);
+                        this.setState({userAbout: userAbout, update: "Mood Successfully updated !"});
                     }
-                });
-            } else {
-                //roll back name
-				this.refs.userAbout.setState({content: this.state.userAbout});
-				//show error
-				this.setState({update: "Mood can't be empty!"});
-            }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
         }
     }
     render() {
+        //avatar change box
         let profile;
         if (this.state.userData.user_id) {
             profile = <Updateprofile alt="User Profile" src={"/img/user/" + this.state.userData.user_id + ".jpg"} width="200" saveProfile={this.saveProfile.bind(this)} indicate="Update Avatar" fontFamily="'Rubik', sans-serif" />
+        }
+        //about input box
+        let about;
+        if (this.state.userAbout) {
+            about = <Inputbox ref="userAbout" content={this.state.userAbout} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
         }
         return (
             <div id="react-root">
@@ -154,7 +156,7 @@ class Setting extends Component {
                         <div className="main-contain-holder">
                             <Inputbox ref="userName" content={this.state.userName} max="10" width="250px" fontFamily="'Rubik', sans-serif" />
                             <input id="main-contain-holder-name" className="main-contain-holder-button" type="button" value="Update Name" onClick={this.saveName.bind(this)} />
-                            <Inputbox ref="userAbout" content={this.state.userAbout} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
+                            {about}
                             <input className="main-contain-holder-button" type="button" value="Update Mood" onClick={this.saveAbout.bind(this)} />
                         </div>
                     </section>

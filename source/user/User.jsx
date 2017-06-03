@@ -135,6 +135,11 @@ class User extends Component {
 				}
 			</div>
 		);
+		if (pets.length === 0) {
+			pets = (
+				<h7 className="aside-no">Not pets added yet ...</h7>
+			)
+		}
 		//load more button
         let load;
         if (!this.state.locker) {
@@ -144,6 +149,13 @@ class User extends Component {
                 </h6>
             );
         }
+		//show no moment button
+		let noMoment;
+		if (this.state.momentData.length === 0) {
+			noMoment = (
+                <h7 className="aside-no">Not moments yet ...</h7>
+            );
+		}
 		return (
 			<div id="react-root">
 				<Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -167,6 +179,7 @@ class User extends Component {
 						<img alt="pets moment" src="/img/icon/glyphicons-moment.png" />
 						<h4>Moments</h4>
 					</div>
+					{noMoment}
 					<Waterfall column="3" image={this.state.momentData} fontFamily="'Rubik', sans-serif" />
 					{load}
 				</aside>

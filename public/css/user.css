@@ -126,3 +126,11 @@
     cursor: pointer;
     padding: 5px 0;
 }
+
+.aside-no{
+    display: block;
+    margin-bottom: 30px;
+    background-color: #f7f9fc;
+    border-radius: 5px;
+    padding: 5px 50px;
+}

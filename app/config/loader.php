@@ -18,7 +18,8 @@ $loader->registerClasses(
         'User' => __DIR__ . '/../library/User.php',
         'Comment' => __DIR__ . '/../library/Comment.php',
         'Token' => __DIR__ . '/../library/Token.php',
-        'Secret' => __DIR__ . '/../library/Secret.php'
+        'Secret' => __DIR__ . '/../library/Secret.php',
+        'Request' => __DIR__ . '/../library/Request.php'
     ]
 );
 
