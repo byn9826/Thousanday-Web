@@ -1,4 +1,4 @@
-# Thousanday-Mobile
+# Thousanday-Web
 Photo sharing social web app for your pets and you. <br/>
 
 [Live Site](https://thousanday.com)<br/>
