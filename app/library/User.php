@@ -79,4 +79,40 @@ class User {
         }
     }
 
+    //update user's name
+    public function updateUserName($id, $name) {
+        $userQuery = 'UPDATE user SET user_name = :name WHERE user_id = :id';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $userStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $this->db->beginTransaction();
+            $userStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
+    //update user's about
+    public function updateUserAbout($id, $about) {
+        $userQuery = 'UPDATE user SET user_about = :about WHERE user_id = :id';
+        try {
+            $userStmt = $this->db->prepare($userQuery);
+            $userStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $userStmt->bindValue(':about', $about, PDO::PARAM_STR);
+            $this->db->beginTransaction();
+            $userStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

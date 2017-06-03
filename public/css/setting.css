@@ -11,6 +11,7 @@
     vertical-align: middle;
     margin-top: 30px;
     font-weight: bold;
+    margin-left: 20px;
 }
 
 #main h6{
@@ -23,9 +24,30 @@
 }
 
 #main-contain{
-    margin-top: 20px;
+    margin-top: 30px;
     display: block;
     background-color: #f7f9fc;
     padding: 20px 5%;
     border-radius: 5px;
+}
+
+.main-contain-holder{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    margin-left: 50px;
+}
+.main-contain-holder-button{
+    display: block;
+    width: 250px;
+    background-color: white;
+    border: 1px solid black;
+    outline: none;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+#main-contain-holder-name{
+    margin-bottom: 30px;
 }

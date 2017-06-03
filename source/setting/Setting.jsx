@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import Header from "../general/Header";
 import Footer from "../general/Footer";
 import processError from "../js/processError.js";
+import Inputbox from "../component/Inputbox";
 import Updateprofile from "../component/Updateprofile";
 import reqwest from "reqwest";
 class Setting extends Component {
@@ -12,13 +13,15 @@ class Setting extends Component {
             //store user id
             userId: null,
             //store user name
-            userName: null,
+            userName: "",
             //store user token
             userToken: null,
             //store user data
             userData: [],
             //indicate update result
-            update: null
+            update: null,
+            //store user about info
+            userAbout: ""
 		};
 	}
     //get user data if user logged in
@@ -39,7 +42,7 @@ class Setting extends Component {
             method: "GET",
             success: function(result) {
                 result = JSON.parse(result);
-                this.setState({userData: result});
+                this.setState({userData: result, userAbout: result.user_about});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -62,13 +65,79 @@ class Setting extends Component {
             processData: false,
             success: function(result) {
                 if (result == 1) {
-                    this.setState({update: "Update Success !"});
+                    this.setState({update: "Avatar Successfully updated !"});
                 }
             }.bind(this),
             error: function (err) {
                 processError(err);
             }
         });
+    }
+    //save new user name
+    saveName() {
+        let userName = this.refs.userName.state.content.trim();
+        if (userName != this.state.userName) {
+			//update only when name is not empty
+			if (userName.length > 0) {
+                reqwest({
+                    url: "/setting/name",
+                    type: "json",
+                    contentType: "application/json",
+                    method: "POST",
+                    data: JSON.stringify({
+                        "token": this.state.userToken,
+                        "user": this.state.userId,
+                        "name": userName
+                    }),
+					success: function(result) {
+						if (result == 1) {
+                            sessionStorage.setItem("name", userName);
+                            this.setState({userName: userName, update: "Name Successfully updated !"});
+                        }
+					}.bind(this),
+					error: function (err) {
+                        processError(err);
+                    }
+                });
+            } else {
+                //roll back name
+				this.refs.userName.setState({content: this.state.userName});
+				//show error
+				this.setState({update: "Name can't be empty!"});
+            }
+        }
+    }
+    //save user about
+    saveAbout() {
+        let userAbout = this.refs.userAbout.state.content.trim();
+        if (userAbout != this.state.userAbout) {
+			if (userAbout.length > 0) {
+                reqwest({
+                    url: "/setting/about",
+                    type: "json",
+                    contentType: "application/json",
+                    method: "POST",
+                    data: JSON.stringify({
+                        "token": this.state.userToken,
+                        "user": this.state.userId,
+                        "about": userAbout
+                    }),
+					success: function(result) {
+						if (result == 1) {
+                            this.setState({userAbout: userAbout, update: "Mood Successfully updated !"});
+                        }
+					}.bind(this),
+					error: function (err) {
+                        processError(err);
+                    }
+                });
+            } else {
+                //roll back name
+				this.refs.userAbout.setState({content: this.state.userAbout});
+				//show error
+				this.setState({update: "Mood can't be empty!"});
+            }
+        }
     }
     render() {
         let profile;
@@ -83,6 +152,12 @@ class Setting extends Component {
                     <h6>{this.state.update}</h6>
                     <section id="main-contain">
                         {profile}
+                        <div className="main-contain-holder">
+                            <Inputbox ref="userName" content={this.state.userName} max="10" width="250px" fontFamily="'Rubik', sans-serif" />
+                            <input id="main-contain-holder-name" className="main-contain-holder-button" type="button" value="Update Name" onClick={this.saveName.bind(this)} />
+                            <Inputbox ref="userAbout" content={this.state.userAbout} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
+                            <input className="main-contain-holder-button" type="button" value="Update Mood" onClick={this.saveAbout.bind(this)} />
+                        </div>
                     </section>
                 </main>
                 <Footer />

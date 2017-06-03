@@ -10,7 +10,8 @@ class UploadController extends ControllerBase
             $fileType = $files[0]->getRealType();
             $whiteList = ["image/png", "image/jpg", "image/jpeg", "image/bmp"];
             if (in_array($fileType, $whiteList)) {
-                $message = $this->request->getPost("message");
+                $content = $this->request->getPost("message");
+                $message = (strlen($content) > 120)?substr($content, 0, 120):$content;
                 $pet = (int) $this->request->getPost("pet");
                 $user = (int) $this->request->getPost("user");
                 $token = $this->request->getPost("token");
