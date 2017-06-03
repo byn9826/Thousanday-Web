@@ -36,9 +36,9 @@ class User extends Component {
 	}
 	//get user data if user logged in
     componentWillMount() {
-        if (sessionStorage.getItem("id")) {
-            let id = sessionStorage.getItem("id");
-            let name = sessionStorage.getItem("name");
+        if (localStorage.getItem("id")) {
+            let id = localStorage.getItem("id");
+            let name = localStorage.getItem("name");
 			id = parseInt(id);
 			let user = window.location.pathname.split("/").pop();
 			user = parseInt(user);

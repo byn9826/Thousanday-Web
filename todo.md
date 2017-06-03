@@ -3,7 +3,7 @@ login no account go to register
 show watch, comment, love list
 react page
 add pet page
-edit page
-message page
+request page
 watch list page
 403 page
+responsive

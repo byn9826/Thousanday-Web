@@ -39,10 +39,10 @@ class Moment extends Component {
 	}
     //get user data if user logged in
     componentWillMount() {
-        if (sessionStorage.getItem("id")) {
-            let id = sessionStorage.getItem("id");
-            let name = sessionStorage.getItem("name");
-            let token = sessionStorage.getItem("token");
+        if (localStorage.getItem("id")) {
+            let id = localStorage.getItem("id");
+            let name = localStorage.getItem("name");
+            let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
         }
     }

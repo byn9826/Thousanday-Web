@@ -29,9 +29,9 @@ class Header extends Component {
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
 				//{"avatar": user.imageUrl},
 				success: function(result) {
-					sessionStorage.setItem("id", result[0]);
-                    sessionStorage.setItem("name", result[1]);
-                    sessionStorage.setItem("token", result[2]);
+					localStorage.setItem("id", result[0]);
+                    localStorage.setItem("name", result[1]);
+                    localStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("/user/" + result[0]);
 				},
@@ -56,9 +56,9 @@ class Header extends Component {
 				method: "POST",
 				data: JSON.stringify({"token": token, "platform": "website"}),
 				success: function(result) {
-					sessionStorage.setItem("id", result[0]);
-                    sessionStorage.setItem("name", result[1]);
-                    sessionStorage.setItem("token", result[2]);
+					localStorage.setItem("id", result[0]);
+                    localStorage.setItem("name", result[1]);
+                    localStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("/user/" + result[0]);
 				},
@@ -69,7 +69,7 @@ class Header extends Component {
 		}
 	}
 	logOut() {
-		sessionStorage.clear();
+		localStorage.clear();
 		if (FB) {
 			FB.logout();
 		}

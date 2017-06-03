@@ -14,9 +14,9 @@ class NotFound extends Component {
 	}
 	//get user data if user logged in
     componentWillMount() {
-        if (sessionStorage.getItem("id")) {
-            let id = sessionStorage.getItem("id");
-            let name = sessionStorage.getItem("name");
+        if (localStorage.getItem("id")) {
+            let id = localStorage.getItem("id");
+            let name = localStorage.getItem("name");
             this.setState({userId: id, userName: name});
         }
     }

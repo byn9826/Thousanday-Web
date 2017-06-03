@@ -26,9 +26,9 @@ class Public extends Component {
 	}
     //get user data if user logged in
     componentWillMount() {
-        if (sessionStorage.getItem("id")) {
-            let id = sessionStorage.getItem("id");
-            let name = sessionStorage.getItem("name");
+        if (localStorage.getItem("id")) {
+            let id = localStorage.getItem("id");
+            let name = localStorage.getItem("name");
             this.setState({userId: id, userName: name});
         }
     }
@@ -81,9 +81,9 @@ class Public extends Component {
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
 				//{"avatar": user.imageUrl},
 				success: function(result) {
-                    sessionStorage.setItem("id", result[0]);
-                    sessionStorage.setItem("name", result[1]);
-                    sessionStorage.setItem("token", result[2]);
+                    localStorage.setItem("id", result[0]);
+                    localStorage.setItem("name", result[1]);
+                    localStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("/user/" + result[0]);
 				},
@@ -104,9 +104,9 @@ class Public extends Component {
 				method: "POST",
 				data: JSON.stringify({"token": token, "platform": "website"}),
 				success: function(result) {
-                    sessionStorage.setItem("id", result[0]);
-                    sessionStorage.setItem("name", result[1]);
-                    sessionStorage.setItem("token", result[2]);
+                    localStorage.setItem("id", result[0]);
+                    localStorage.setItem("name", result[1]);
+                    localStorage.setItem("token", result[2]);
 					//login success, go to homepage
 					window.location.replace("/user/" + result[0]);
 				},
