@@ -85,4 +85,47 @@ class UploadController extends ControllerBase
         }
     }
 
+    //upload pet's avatar
+    public function petAction() {
+        if ($this->request->hasFiles() && $this->request->isPost()) {
+            $files = $this->request->getUploadedFiles();
+            $fileType = $files[0]->getRealType();
+            if ($fileType === "image/png") {
+                $user = (int) $this->request->getPost("user");
+                $pet = (int) $this->request->getPost("pet");
+                $token = $this->request->getPost("token");
+                $db = DbConnection::getConnection();
+                $Token = new Token($db);
+                $validation = $Token->checkUserToken($user, $token);
+                if ($validation === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else if ($validation === 1) {
+                    $Pet = new Pet($db);
+                    $data = $Pet->readPetFamily($pet);
+                    if ($data === 0) {
+                        $this->response->setStatusCode(500, 'Internal Server Error');
+                    } else if (!$data) {
+                        $this->response->setStatusCode(404, 'Not Found');
+                    } else if ($user === (int) $data['owner_id'] || $user === (int) $data['relative_id']) {
+                        $image = "0.png";
+                        $upload = __DIR__ . '/../../public/img/pet/' . $pet . '/';
+                        if (!is_dir($upload)) {
+                            mkdir($upload, 0755);
+                        }
+                        $files[0]->moveTo($upload . $image);
+                        echo 1;
+                    } else {
+                        $this->response->setStatusCode(403, 'Forbidden');
+                    }
+                } else {
+                    $this->response->setStatusCode(404, 'Forbidden');
+                }
+            } else {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
 }

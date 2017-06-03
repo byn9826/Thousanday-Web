@@ -52,7 +52,6 @@ class Setting extends Component {
     //save new profile
     saveProfile(finalUrl) {
         //save user image
-        console.log(finalUrl);
         let formData = new FormData();
         formData.append('file', finalUrl, this.state.userData.user_id + ".jpg");
         formData.append("user", this.state.userId);

@@ -99,4 +99,39 @@ class Pet {
         }
     }
 
+    //update pet's name
+    public function updatePetName($id, $name) {
+        $petQuery = 'UPDATE pet SET pet_name = :name WHERE pet_id = :id';
+        try {
+            $petStmt = $this->db->prepare($petQuery);
+            $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $petStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $this->db->beginTransaction();
+            $petStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
+    //end relative of one pet
+    public function endPetRelation($id) {
+        $petQuery = 'UPDATE pet SET relative_id = NULL WHERE pet_id = :id';
+        try {
+            $petStmt = $this->db->prepare($petQuery);
+            $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $this->db->beginTransaction();
+            $petStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

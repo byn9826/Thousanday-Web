@@ -151,6 +151,7 @@ class User extends Component {
 					<img id="main-profile" alt={this.state.userData.user_name} src={"/img/user/" + this.state.userData.user_id + ".jpg"} />
 					<h1 className="main-name">{this.state.userData.user_name}</h1>
                 	<h5 className="main-name">{this.state.userData.user_about}</h5>
+					<h5 className="main-name">- User Id {this.state.userData.user_id}</h5>
 					<h5 id="main-relative">Relatives:</h5>
 					<div id="main-family">
 						{relatives}
