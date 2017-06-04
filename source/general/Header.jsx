@@ -14,7 +14,7 @@ class Header extends Component {
 		};
 	}
 	//user click google login button
-	googleLogin(user) {
+	gLogin(user) {
 		FB.logout();
 		let auth2 = gapi.auth2.getAuthInstance();
 		auth2.signOut();
@@ -78,30 +78,6 @@ class Header extends Component {
 			auth2.signOut();
 		}
 		window.location.replace("/");
-		/*
-		remove token in db
-		write later
-		attention
-		reqwest({
-			url: "account/logout",
-			method: "POST",
-			success: function(result) {
-				
-				switch (result) {
-					case "0":
-						self.setState({loginName: "Login", showDrop: false});
-						self.props.logOut();
-						break;
-					case "1":
-						console.log("Please try again");
-						break;
-				}
-			},
-			error: function (err) {
-				console.log("Can't connect to the server");
-			}
-		});
-		*/
 	}
 	//show and close drop box
 	showDrop() {
@@ -128,7 +104,7 @@ class Header extends Component {
 			login = (
 				<section className={loginStyle}>
 					<h5 id="header-drop-notice">Click to sign in or sign up</h5>
-					<Googlelogin gLogin={this.googleLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
+					<Googlelogin gLogin={this.gLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
 					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="1894566737467263" width="194px" />
 				</section>
 			)

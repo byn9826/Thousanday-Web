@@ -25,6 +25,13 @@ class NeedLogin extends Component {
     }
 	//user click google login button
 	gLogin(user) {
+		if (FB) {
+			FB.logout();
+		}
+		if (gapi) {
+			let auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut();
+		}
 		reqwest({
 			url: "/account/google",
 			type: "json",
@@ -45,6 +52,13 @@ class NeedLogin extends Component {
     }
 	//user click facebook login button
 	fLogin(response, token) {
+		if (FB) {
+			FB.logout();
+		}
+		if (gapi) {
+			let auth2 = gapi.auth2.getAuthInstance();
+			auth2.signOut();
+		}
 		reqwest({
 			url: "/account/facebook",
 			type: "json",
