@@ -69,7 +69,7 @@ class Header extends Component {
 		}
 	}
 	logOut() {
-		localStorage.clear();
+		let token = localStorage.getItem("token");
 		if (FB) {
 			FB.logout();
 		}
@@ -77,7 +77,20 @@ class Header extends Component {
 			let auth2 = gapi.auth2.getAuthInstance();
 			auth2.signOut();
 		}
-		window.location.replace("/");
+		localStorage.clear();
+		reqwest({
+			url: "/account/logout",
+			type: "json",
+			contentType: "application/json",
+			method: "POST",
+			data: JSON.stringify({"token": token, "id": this.props.userId}),
+			success: function(result) {
+				window.location.replace("/");
+			},
+			error: function (err) {
+				processError(err);
+			}
+		});
 	}
 	//show and close drop box
 	showDrop() {

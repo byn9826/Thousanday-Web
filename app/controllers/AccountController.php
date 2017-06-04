@@ -111,4 +111,23 @@ class AccountController extends ControllerBase
         }
     }
 
+    //logout remove token in database
+    public function logoutAction() {
+        if ($this->request->isPost()) {
+            $data = $this->request->getJsonRawBody(true);
+            $id = (int) $data['id'];
+            $token = $data['token'];
+            $db = DbConnection::getConnection();
+            $Token = new Token($db);
+            $delete = $Token->deleteUserToken($id, $token);
+            if ($delete === 0) {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            } else {
+                echo 1;
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
 }

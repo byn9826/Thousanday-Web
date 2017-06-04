@@ -53,4 +53,22 @@ class Token {
         }
     }
 
+    //remove user token
+    public function deleteUserToken($id, $token) {
+        $delQuery = 'DELETE FROM user_token WHERE user_id = :id AND user_token = :token';
+        try {
+            $delStmt = $this->db->prepare($delQuery);
+            $delStmt->bindValue(':id', $id, PDO::PARAM_INT);
+            $delStmt->bindValue(':token', $token, PDO::PARAM_STR);
+            $this->db->beginTransaction();
+            $delStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }
