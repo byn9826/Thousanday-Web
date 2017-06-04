@@ -8,6 +8,7 @@ module.exports = {
         add: "./source/add/Add.jsx",
         pet: "./source/pet/Pet.jsx",
         user: "./source/user/User.jsx",
+        watch: "./source/watch/Watch.jsx",
         setting: "./source/setting/Setting.jsx",
         edit: "./source/edit/Edit.jsx",
         react: "./source/react/React.jsx",

@@ -99,6 +99,20 @@ class Pet {
         }
     }
 
+    //from pet id list return pet name list
+    public function readPetsNames($list) {
+        $values = implode(',', $list);
+        $petQuery = 'SELECT pet_id, pet_name FROM pet WHERE pet_id IN (' . $values . ')';
+        try {
+            $petStmt = $this->db->prepare($petQuery);
+            $petStmt->execute();
+            return $petStmt->fetchAll(PDO::FETCH_ASSOC);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
     //update pet's name
     public function updatePetName($id, $name) {
         $petQuery = 'UPDATE pet SET pet_name = :name WHERE pet_id = :id';

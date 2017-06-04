@@ -22,6 +22,20 @@ class Watch {
         }
     }
 
+    //read one user's all pets watch
+    public function readUserWatchs($user) {
+        $watchQuery = 'SELECT pet_id FROM pet_watch WHERE user_id = :user';
+        try {
+            $watchStmt = $this->db->prepare($watchQuery);
+            $watchStmt->bindValue(':user', $user, PDO::PARAM_INT);
+            $watchStmt->execute();
+            return $watchStmt->fetchAll(PDO::FETCH_NUM);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
     //add new watch for pet
     //create like from one user to one moment
     public function createUserWatch($pet, $user) {
