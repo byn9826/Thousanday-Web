@@ -12,7 +12,8 @@ module.exports = {
         about: "./source/about/About.jsx",
         terms: "./source/terms/Terms.jsx",
         404: "./source/error/404.jsx",
-        500: "./source/error/500.jsx"
+        500: "./source/error/500.jsx",
+        react: "./source/react/React.jsx"
     },
     output: {
         path: __dirname + '/public/js/',
