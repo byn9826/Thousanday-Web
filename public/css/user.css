@@ -76,6 +76,13 @@
     font-weight: bold;
 }
 
+#aside-header-add{
+    float: right;
+    color: #ef8513;
+    font-weight: bold;
+    cursor: pointer;
+}
+
 .aside-pet{
     display: inline-block;
     vertical-align: middle;

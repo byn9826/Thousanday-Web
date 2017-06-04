@@ -118,7 +118,49 @@ class UploadController extends ControllerBase
                         $this->response->setStatusCode(403, 'Forbidden');
                     }
                 } else {
-                    $this->response->setStatusCode(404, 'Forbidden');
+                    $this->response->setStatusCode(403, 'Forbidden');
+                }
+            } else {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
+    //create new pet
+    public function addAction() {
+        if ($this->request->hasFiles() && $this->request->isPost()) {
+            $files = $this->request->getUploadedFiles();
+            $fileType = $files[0]->getRealType();
+            if ($fileType === "image/png") {
+                $user = (int) $this->request->getPost("user");
+                $token = $this->request->getPost("token");
+                $db = DbConnection::getConnection();
+                $Token = new Token($db);
+                $validation = $Token->checkUserToken($user, $token);
+                if ($validation === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else if ($validation === 1) {
+                    $content = $this->request->getPost("name");
+                    $name = (strlen($content) > 10)?substr($content, 0, 10):$content;
+                    $gender = (int) $this->request->getPost("gender");
+                    $type = (int) $this->request->getPost("type");
+                    $nature = (int) $this->request->getPost("nature");
+                    $Pet = new Pet($db);
+                    $create = $Pet->createNewPet($name, $gender, $type, $nature, $user);
+                    if ($create === 0) {
+                        $this->response->setStatusCode(500, 'Internal Server Error');
+                    } else {
+                        $upload = __DIR__ . '/../../public/img/pet/' . $create . '/';
+                        if (!is_dir($upload)) {
+                            mkdir($upload, 0755);
+                        }
+                        $files[0]->moveTo($upload . "0.png");
+                        echo 1;
+                    }
+                } else {
+                    $this->response->setStatusCode(403, 'Forbidden');
                 }
             } else {
                 $this->response->setStatusCode(500, 'Internal Server Error');

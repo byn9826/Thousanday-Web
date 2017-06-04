@@ -153,4 +153,29 @@ class Pet {
         }
     }
 
+    //create new pet
+    public function createNewPet($name, $gender, $type, $nature, $user) {
+        $time = date('Y-m-d H:i:s');
+        $addQuery = 'INSERT INTO pet (pet_name, pet_gender, pet_type, pet_nature, pet_reg, owner_id) 
+                     VALUES (:name, :gender, :type, :nature, :reg, :user)';
+        try {
+            $addStmt = $this->db->prepare($addQuery);
+            $addStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $addStmt->bindValue(':gender', $gender, PDO::PARAM_INT);
+            $addStmt->bindValue(':type', $type, PDO::PARAM_INT);
+            $addStmt->bindValue(':nature', $nature, PDO::PARAM_INT);
+            $addStmt->bindValue(':reg', $time);
+            $addStmt->bindValue(':user', $user, PDO::PARAM_INT);
+            $this->db->beginTransaction();
+            $addStmt->execute();
+            $id = $this->db->lastInsertId();
+            $this->db->commit();
+            return $id;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

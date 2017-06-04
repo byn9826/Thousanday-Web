@@ -5,6 +5,7 @@ module.exports = {
         public: "./source/public/Public.jsx",
         explore: "./source/explore/Explore.jsx",
         moment: "./source/moment/Moment.jsx",
+        add: "./source/add/Add.jsx",
         pet: "./source/pet/Pet.jsx",
         user: "./source/user/User.jsx",
         setting: "./source/setting/Setting.jsx",

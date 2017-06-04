@@ -172,7 +172,16 @@ class User extends Component {
 				<aside id="aside">
 					<div className="aside-header">
 						<img alt="pets hub" src="/img/icon/glyphicons-hub.png" />
-						<h4>Pets in hub</h4>   
+						<h4>Pets in hub</h4>
+						{
+							(this.state.userHome)? (
+								<a href="/add">
+									<h5 id="aside-header-add">
+										Add Pet
+									</h5>
+								</a>
+							):null
+						}
 					</div>
 					{pets}
 					<div className="aside-header">
