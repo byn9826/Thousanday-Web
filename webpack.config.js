@@ -10,11 +10,12 @@ module.exports = {
         user: "./source/user/User.jsx",
         setting: "./source/setting/Setting.jsx",
         edit: "./source/edit/Edit.jsx",
+        react: "./source/react/React.jsx",
         about: "./source/about/About.jsx",
         terms: "./source/terms/Terms.jsx",
+        403: "./source/error/403.jsx",
         404: "./source/error/404.jsx",
-        500: "./source/error/500.jsx",
-        react: "./source/react/React.jsx"
+        500: "./source/error/500.jsx"
     },
     output: {
         path: __dirname + '/public/js/',

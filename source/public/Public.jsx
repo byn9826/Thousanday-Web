@@ -4,8 +4,8 @@ import reqwest from "reqwest";
 import Header from "../general/Header";
 import Footer from "../general/Footer";
 import Waterfall from "../component/Waterfall";
-import Googlelogin from '../component/Googlelogin';
-import Facebooklogin from '../component/Facebooklogin';
+import Googlelogin from "../component/Googlelogin";
+import Facebooklogin from "../component/Facebooklogin";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
 class Public extends Component {
@@ -69,7 +69,7 @@ class Public extends Component {
         }
     }
     //user click google login button
-	googleLogin(user) {
+	gLogin(user) {
 		//works only when user not login
 		if (!this.state.userId) {
 			//check google user token
@@ -79,7 +79,6 @@ class Public extends Component {
 				contentType: "application/json",
 				method: "POST",
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
-				//{"avatar": user.imageUrl},
 				success: function(result) {
                     localStorage.setItem("id", result[0]);
                     localStorage.setItem("name", result[1]);
@@ -124,7 +123,7 @@ class Public extends Component {
                 <section id="main-login">
                     <h6>Sign in or sign up</h6>
                     <h6>by your Facebook or Google account:</h6>
-                    <Googlelogin gLogin={this.googleLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
+                    <Googlelogin gLogin={this.gLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
 					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="1894566737467263" width="194px" />
                 </section>
             )
