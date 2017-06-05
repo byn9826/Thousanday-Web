@@ -11,6 +11,7 @@ module.exports = {
         watch: "./source/watch/Watch.jsx",
         setting: "./source/setting/Setting.jsx",
         edit: "./source/edit/Edit.jsx",
+        request: "./source/request/Request.jsx",
         react: "./source/react/React.jsx",
         about: "./source/about/About.jsx",
         terms: "./source/terms/Terms.jsx",

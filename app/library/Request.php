@@ -8,6 +8,22 @@ class Request {
         $this->db = $db;
     }
 
+    //read one user's all request
+    public function readUserRequests($user, $load) {
+        $pin = $load * 10;
+        $readQuery = 'SELECT * FROM request WHERE receiver_id = :user ORDER BY request_time DESC LIMIT :pin, 20';
+        try {
+            $readStmt = $this->db->prepare($readQuery);
+            $readStmt->bindValue(':user', $user, PDO::PARAM_INT);
+            $readStmt->bindValue(':pin', $pin, PDO::PARAM_INT);
+            $readStmt->execute();
+            return $readStmt->fetchAll(PDO::FETCH_ASSOC);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
     //create relative request
     public function createPetRequest($sender, $receiver, $pet) {
         $time = date('Y-m-d H:i:s');
