@@ -45,10 +45,7 @@ class User extends Component {
 			let home = (id === user)?true:false;
             this.setState({userId: id, userName: name, userHome: home});
         }
-    }
-	//load user data
-    componentDidMount() {
-        reqwest({
+		reqwest({
             url: "/user/read?id=" + window.location.pathname.split("/").pop(),
             method: "GET",
             success: function(result) {

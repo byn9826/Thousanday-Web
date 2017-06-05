@@ -31,23 +31,20 @@ class Setting extends Component {
             let name = localStorage.getItem("name");
             let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
+            reqwest({
+                url: "/setting/read?id=" + id,
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    this.setState({userData: result, userAbout: result.user_about});
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
         } else {
             window.location.replace("/error/page403");
         }
-    }
-    //load user data
-    componentDidMount() {
-        reqwest({
-            url: "/setting/read?id=" + this.state.userId,
-            method: "GET",
-            success: function(result) {
-                result = JSON.parse(result);
-                this.setState({userData: result, userAbout: result.user_about});
-            }.bind(this),
-            error: function (err) {
-                processError(err);
-            }
-        });
     }
     //save new profile
     saveProfile(finalUrl) {

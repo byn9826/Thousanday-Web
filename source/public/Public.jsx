@@ -31,9 +31,6 @@ class Public extends Component {
             let name = localStorage.getItem("name");
             this.setState({userId: id, userName: name});
         }
-    }
-    //load 20 most recent images
-    componentDidMount() {
         reqwest({
             url: "/index/read?load=0",
             method: "GET",

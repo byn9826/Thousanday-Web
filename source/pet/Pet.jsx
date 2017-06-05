@@ -52,9 +52,6 @@ class Pet extends Component {
             let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
         }
-    }
-    //load pet data
-    componentDidMount() {
         reqwest({
             url: "/pet/read?id=" + window.location.pathname.split("/").pop(),
             method: "GET",

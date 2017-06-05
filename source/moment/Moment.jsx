@@ -45,9 +45,6 @@ class Moment extends Component {
             let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
         }
-    }
-    //read moment image
-    componentDidMount() {
         reqwest({
             url: "/moment/read?id=" + window.location.pathname.split("/").pop(),
             method: "GET",

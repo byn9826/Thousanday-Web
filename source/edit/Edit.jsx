@@ -44,23 +44,20 @@ class Edit extends Component {
             let name = localStorage.getItem("name");
             let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
+            reqwest({
+                url: "/edit/read?pet=" + window.location.pathname.split("/").pop() + "&user=" + id,
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    this.setState({petData: result, petName: result.pet_name});
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
         } else {
             window.location.replace("/error/page403");
         }
-    }
-    //load pets data
-    componentDidMount() {
-        reqwest({
-            url: "/edit/read?pet=" + window.location.pathname.split("/").pop() + "&user=" + this.state.userId,
-            method: "GET",
-            success: function(result) {
-                result = JSON.parse(result);
-                this.setState({petData: result, petName: result.pet_name});
-            }.bind(this),
-            error: function (err) {
-                processError(err);
-            }
-        });
     }
     //save user profile picture
     saveProfile(finalUrl) {

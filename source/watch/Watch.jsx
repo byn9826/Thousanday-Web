@@ -41,34 +41,32 @@ class Watch extends Component {
             let name = localStorage.getItem("name");
             let token = localStorage.getItem("token");
             this.setState({userId: parseInt(id), userName: name, userToken: token});
+            reqwest({
+                url: "/watch/read?id=" + id,
+                method: "GET",
+                success: function(result) {
+                    result = JSON.parse(result);
+                    //get data for images
+                    let images, locker;
+                    if (result[1].length === 0) {
+                        images = [];
+                        locker = true;
+                    } else if (result[1].length === 20) {
+                        images = processGallery(result[1]);
+                        locker = false;
+                    } else {
+                        images = processGallery(result[1]);
+                        locker = true;
+                    }
+                    this.setState({petsList: result[2], watchList: result[0], galleryData: images, locker: locker});
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
         } else {
             window.location.replace("/error/page403");
         }
-    }
-    componentDidMount() {
-        reqwest({
-            url: "/watch/read?id=" + this.state.userId,
-            method: "GET",
-            success: function(result) {
-                result = JSON.parse(result);
-                //get data for images
-                let images, locker;
-                if (result[1].length === 0) {
-                    images = [];
-                    locker = true;
-                } else if (result[1].length === 20) {
-                    images = processGallery(result[1]);
-                    locker = false;
-                } else {
-                    images = processGallery(result[1]);
-                    locker = true;
-                }
-                this.setState({petsList: result[2], watchList: result[0], galleryData: images, locker: locker});
-            }.bind(this),
-            error: function (err) {
-                processError(err);
-            }
-        });
     }
     //load mor pet on watch list
     loadPet() {
@@ -176,7 +174,6 @@ class Watch extends Component {
                     "user": this.state.userId
                 }),
                 success: function(result) {
-                    console.log(result);
                     let all = processGallery(result);
                     if (result.length === 20) {
                         this.setState({galleryData: all, loader: 1, loadList: value, locker: false});
