@@ -115,4 +115,45 @@ class User {
         }
     }
 
+    //create new user for google login
+    public function createGoogleUser($google, $name) {
+        $addQuery = 'INSERT INTO user (google_id, user_name, user_term) 
+                     VALUES (:google, :name, 1)';
+        try {
+            $addStmt = $this->db->prepare($addQuery);
+            $addStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $addStmt->bindValue(':google', $google);
+            $this->db->beginTransaction();
+            $addStmt->execute();
+            $id = $this->db->lastInsertId();
+            $this->db->commit();
+            return $id;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
+    //create user for fb login
+    //create new user
+    public function createFacebookUser($facebook, $name) {
+        $addQuery = 'INSERT INTO user (facebook_id, user_name, user_term) 
+                     VALUES (:facebook, :name, 1)';
+        try {
+            $addStmt = $this->db->prepare($addQuery);
+            $addStmt->bindValue(':name', $name, PDO::PARAM_STR);
+            $addStmt->bindValue(':facebook', $facebook);
+            $this->db->beginTransaction();
+            $addStmt->execute();
+            $id = $this->db->lastInsertId();
+            $this->db->commit();
+            return $id;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

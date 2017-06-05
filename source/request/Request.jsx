@@ -31,7 +31,6 @@ class Request extends Component {
                 url: "/request/read?id=" + id,
                 method: "GET",
                 success: function(result) {
-                    console.log(result);
                     result = JSON.parse(result);
                     this.setState({requestData: result});
                 }.bind(this),

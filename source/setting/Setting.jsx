@@ -140,7 +140,9 @@ class Setting extends Component {
         //about input box
         let about;
         if (this.state.userAbout) {
-            about = <Inputbox ref="userAbout" content={this.state.userAbout} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
+            about = <Inputbox ref="userAbout" key="about1" content={this.state.userAbout} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
+        } else {
+            about = <Inputbox ref="userAbout" key="about2" content={""} max="30" width="250px" fontFamily="'Rubik', sans-serif" />
         }
         return (
             <div id="react-root">

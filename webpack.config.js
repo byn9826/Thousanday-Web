@@ -15,6 +15,7 @@ module.exports = {
         react: "./source/react/React.jsx",
         about: "./source/about/About.jsx",
         terms: "./source/terms/Terms.jsx",
+        signup: "./source/signup/Signup.jsx",
         403: "./source/error/403.jsx",
         404: "./source/error/404.jsx",
         500: "./source/error/500.jsx"

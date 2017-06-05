@@ -22,9 +22,7 @@ class AccountController extends ControllerBase
                 if ($check === 0) {
                     $this->response->setStatusCode(500, 'Internal Server Error');
                 } else if (!$check) {
-                    //account not exist
-                    //code later
-                    //attention
+                    echo json_encode(["id"=> $googleId]);
                 } else {
                     //account exist, get user id
                     $userId = $check['user_id'];
@@ -37,14 +35,13 @@ class AccountController extends ControllerBase
                         $create = $Token->createUserToken($userId, $newToken, 0);
                         if ($create === 0) {
                             $this->response->setStatusCode(500, 'Internal Server Error');
-                        } else {
-                            echo json_encode([$userId, $userName, $newToken]);
                         }
                     } else {
                         //create token for mobile
                         //code later
                         //attention
                     }
+                    echo json_encode([$userId, $userName, $newToken]);
                 } 
             } else {
                 $this->response->setStatusCode(403, 'Forbidden');
@@ -82,9 +79,7 @@ class AccountController extends ControllerBase
                 if ($check === 0) {
                     $this->response->setStatusCode(500, 'Internal Server Error');
                 } else if (!$check) {
-                    //account not exist
-                    //code later
-                    //attention
+                    echo json_encode(["id"=> $fbId]);
                 } else {
                     //account exist, get user id
                     $userId = $check['user_id'];

@@ -27,13 +27,20 @@ class Header extends Component {
 				contentType: "application/json",
 				method: "POST",
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
-				//{"avatar": user.imageUrl},
 				success: function(result) {
-					localStorage.setItem("id", result[0]);
-                    localStorage.setItem("name", result[1]);
-                    localStorage.setItem("token", result[2]);
-					//login success, go to homepage
-					window.location.replace("/user/" + result[0]);
+					if (result.id) {
+						localStorage.setItem("newId", result.id);
+						localStorage.setItem("newName", user.name);
+						localStorage.setItem("newPlatform", "google");
+						localStorage.setItem("newAvatar", user.imageUrl);
+						window.location.replace("/signup");
+					} else {
+						localStorage.setItem("id", result[0]);
+						localStorage.setItem("name", result[1]);
+						localStorage.setItem("token", result[2]);
+						//login success, go to homepage
+						window.location.replace("/user/" + result[0]);
+					}
 				},
 				error: function (err) {
 					processError(err);
@@ -48,7 +55,7 @@ class Header extends Component {
 		auth2.signOut();
 		//works only when user not login
 		if (!this.props.userId) {
-			//check google user token
+			//check facebook user token
 			reqwest({
 				url: "/account/facebook",
 				type: "json",
@@ -56,11 +63,19 @@ class Header extends Component {
 				method: "POST",
 				data: JSON.stringify({"token": token, "platform": "website"}),
 				success: function(result) {
-					localStorage.setItem("id", result[0]);
-                    localStorage.setItem("name", result[1]);
-                    localStorage.setItem("token", result[2]);
-					//login success, go to homepage
-					window.location.replace("/user/" + result[0]);
+					if (result.id) {
+						localStorage.setItem("newId", result.id);
+						localStorage.setItem("newName", response.name);
+						localStorage.setItem("newPlatform", "facebook");
+						localStorage.setItem("newAvatar", null);
+						window.location.replace("/signup");
+					} else {
+						localStorage.setItem("id", result[0]);
+						localStorage.setItem("name", result[1]);
+						localStorage.setItem("token", result[2]);
+						//login success, go to homepage
+						window.location.replace("/user/" + result[0]);
+					}
 				},
 				error: function (err) {
 					processError(err);

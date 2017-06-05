@@ -170,4 +170,70 @@ class UploadController extends ControllerBase
         }
     }
 
+    //create new user
+    public function createAction() {
+        if ($this->request->hasFiles() && $this->request->isPost()) {
+            $files = $this->request->getUploadedFiles();
+            $fileType = $files[0]->getRealType();
+            $whiteList = ["image/png", "image/jpg", "image/jpeg", "image\/png"];
+            if (in_array($fileType, $whiteList)) {
+                $content = $this->request->getPost("name");
+                $name = (strlen($content) > 10)?substr($content, 0, 10):$content;
+                $id = $this->request->getPost("id");
+                $platform = $this->request->getPost("platform");
+                $method = $this->request->getPost("method");
+                $db = DbConnection::getConnection();
+                if ($platform === "google") {
+                    $User = new User($db);
+                    $create = $User->createGoogleUser($id, $name);
+                    if ($create === 0) {
+                        $this->response->setStatusCode(500, 'Internal Server Error');
+                    } else {
+                        if ($method === "website") {
+                            $Secret = new Secret();
+                            $newToken = $Secret->getToken($create);
+                            $Token = new Token($db);
+                            $login = $Token->createUserToken($create, $newToken, 0);
+                            if ($login === 0) {
+                                $this->response->setStatusCode(500, 'Internal Server Error');
+                            }
+                        }
+                        $upload = __DIR__ . '/../../public/img/user/';
+                        if (!is_dir($upload)) {
+                            mkdir($upload, 0755);
+                        }
+                        $files[0]->moveTo($upload . $create . '.jpg');
+                        echo json_encode([$create, $newToken]);
+                    }
+                } else {
+                    $User = new User($db);
+                    $create = $User->createFacebookUser($id, $name);
+                    if ($create === 0) {
+                        $this->response->setStatusCode(500, 'Internal Server Error');
+                    } else {
+                        if ($method === "website") {
+                            $Secret = new Secret();
+                            $newToken = $Secret->getToken($create);
+                            $Token = new Token($db);
+                            $login = $Token->createUserToken($create, $newToken, 0);
+                            if ($login === 0) {
+                                $this->response->setStatusCode(500, 'Internal Server Error');
+                            }
+                        }
+                        $upload = __DIR__ . '/../../public/img/user/';
+                        if (!is_dir($upload)) {
+                            mkdir($upload, 0755);
+                        }
+                        $files[0]->moveTo($upload . $create . '.jpg');
+                        echo json_encode([$create, $newToken]);
+                    }
+                }
+            } else {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
 }
