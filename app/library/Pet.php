@@ -192,4 +192,22 @@ class Pet {
         }
     }
 
+    //add relative for pet
+    public function addPetRelative($pet, $user) {
+        $petQuery = 'UPDATE pet SET relative_id = :relative WHERE pet_id = :pet AND relative_id is NULL';
+        try {
+            $petStmt = $this->db->prepare($petQuery);
+            $petStmt->bindValue(':relative', $user, PDO::PARAM_INT);
+            $petStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
+            $this->db->beginTransaction();
+            $petStmt->execute();
+            $this->db->commit();
+            return 1;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }

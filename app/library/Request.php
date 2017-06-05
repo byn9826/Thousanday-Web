@@ -46,4 +46,23 @@ class Request {
         }
     }
 
+    //delete all request based on one user
+    public function deleteUserRequest($receiver, $pet) {
+        $removeQuery = 'DELETE FROM request WHERE pet_id = :pet AND receiver_id = :receiver';
+        try {
+            $removeStmt = $this->db->prepare($removeQuery);
+            $removeStmt->bindValue(':receiver', $receiver, PDO::PARAM_INT);
+            $removeStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
+            $this->db->beginTransaction();
+            $removeStmt->execute();
+            $count = $removeStmt->rowCount();
+            $this->db->commit();
+            return $count;
+        } catch (PDOException $e) {
+            print $e->getMessage();
+            $this->db->rollback();
+            return 0;
+        }
+    }
+
 }
