@@ -181,3 +181,38 @@
     margin-top: 20px;
     margin-left: 15%;
 }
+
+@media only screen and (max-width: 840px) {
+    #main{
+        width: 80%;
+    }
+
+    #aside{
+        margin-left: 10%;
+        width: 80%;
+    }
+
+}
+
+@media only screen and (max-width: 360px) {
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    #aside{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .aside-project-left{
+        display: block;
+        width: 100%;
+    }
+
+    .aside-project img{
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
+
+}

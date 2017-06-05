@@ -222,6 +222,14 @@ class Watch extends Component {
                 </h6>
             );
         }
+        let gallery;
+		if (window.innerWidth > 900) {
+            gallery = <Waterfall column="3" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+        } else if (window.innerWidth > 450) {
+			gallery = <Waterfall column="2" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+		} else {
+            gallery = <Waterfall column="1" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+        }
         return (
             <div id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -245,7 +253,7 @@ class Watch extends Component {
 							<h7>Comments List</h7>
 						</div>
                     </header>
-                    <Waterfall column="3" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+                    {gallery}
                     {loader}
                 </main>
                 <Footer />

@@ -115,3 +115,47 @@
 .main-header-section h7{
     display: block;
 }
+
+
+@media only screen and (max-width: 900px) {
+    #aside{
+        width: 25%;
+        margin-left: 5%;
+    }
+
+    #main{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    #aside{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 0;
+        padding-top: 100px;
+        text-align: center;
+        min-height: 0;
+    }
+
+    #main{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+    }
+
+
+}
+
+@media only screen and (max-width: 400px) {
+    #aside{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+}

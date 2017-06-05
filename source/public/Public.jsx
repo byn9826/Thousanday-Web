@@ -143,6 +143,15 @@ class Public extends Component {
                 </h6>
             );
         }
+        //show gallery
+        let gallery;
+		if (window.innerWidth > 900) {
+            gallery = <Waterfall column="3" image={this.state.images} fontFamily="'Rubik', sans-serif" />
+        } else if (window.innerWidth > 450) {
+			gallery = <Waterfall column="2" image={this.state.images} fontFamily="'Rubik', sans-serif" />
+		} else {
+            gallery = <Waterfall column="1" image={this.state.images} fontFamily="'Rubik', sans-serif" />
+        }
 		return (
 			<div id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -156,7 +165,7 @@ class Public extends Component {
                     </a>
                 </main>
                 <aside id="aside">
-                    <Waterfall column="3" image={this.state.images} fontFamily="'Rubik', sans-serif" />
+                    {gallery}
                     {load}
                 </aside>
                 <Footer />

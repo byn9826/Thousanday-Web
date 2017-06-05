@@ -69,3 +69,10 @@
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 900px) {
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+}

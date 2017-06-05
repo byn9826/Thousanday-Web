@@ -68,3 +68,34 @@
     padding: 3px 0;
     cursor: pointer;
 }
+
+@media only screen and (max-width: 960px) {
+    #main{
+        width: 80%;
+        margin-left: 10%;
+    }
+}
+
+@media only screen and (max-width: 730px) {
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    #main{
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    .main-contain-holder{
+        display: block;
+        margin-left: 5%;
+        width: 90%;
+    }
+
+    .main-contain-holder h7{
+        text-align: left;
+    }
+}

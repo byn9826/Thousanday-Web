@@ -123,6 +123,17 @@ class Explore extends Component {
 			)
 			
 		}
+		//show gallery
+		let gallery;
+		if (window.innerWidth > 910) {
+            gallery = <Waterfall column="4" image={this.state.moment} fontFamily="'Rubik', sans-serif" />
+        } else if (window.innerWidth > 630) {
+            gallery = <Waterfall column="3" image={this.state.moment} fontFamily="'Rubik', sans-serif" />
+        } else if (window.innerWidth > 450) {
+			gallery = <Waterfall column="2" image={this.state.moment} fontFamily="'Rubik', sans-serif" />
+		} else {
+			gallery = <Waterfall column="1" image={this.state.moment} fontFamily="'Rubik', sans-serif" />
+		}
 		return (
 			<div id="react-root">
 				<Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -145,7 +156,7 @@ class Explore extends Component {
 						<img alt="Moment" src="/img/icon/glyphicons-moment.png" />
 						<h3>Explore cutes around the world</h3>
 					</div>
-					<Waterfall column="4" image={this.state.moment} fontFamily="'Rubik', sans-serif" />
+					{gallery}
 					{load}
 				</main>
 				<Footer />
