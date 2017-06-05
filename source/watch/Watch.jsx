@@ -5,6 +5,7 @@ import Footer from "../general/Footer";
 import reqwest from "reqwest";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
+import Waterfall from "../component/Waterfall";
 class Watch extends Component {
     constructor(props) {
         super(props);
@@ -22,9 +23,15 @@ class Watch extends Component {
             //indicate load pet list for how many times
             loadPets: 1,
             //store pets id on watch list
-            watchList: [],
-            //store moments on wathc list
-            watchMoment: []
+            watchList: null,
+            //store list moments to show
+            galleryData: [],
+            //indicate which list to show
+            loadList: "watch",
+            //indicate could load more images or not
+            locker: false,
+            //indicate click load for how many times
+            loader: 1
         }
     }
     //get user data if user logged in
@@ -44,8 +51,19 @@ class Watch extends Component {
             method: "GET",
             success: function(result) {
                 result = JSON.parse(result);
-                console.log(result);
-                this.setState({petsList: result[2], watchList: result[0], watchMoment: result[1]});
+                //get data for images
+                let images, locker;
+                if (result[1].length === 0) {
+                    images = [];
+                    locker = true;
+                } else if (result[1].length === 20) {
+                    images = processGallery(result[1]);
+                    locker = false;
+                } else {
+                    images = processGallery(result[1]);
+                    locker = true;
+                }
+                this.setState({petsList: result[2], watchList: result[0], galleryData: images, locker: locker});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -102,6 +120,76 @@ class Watch extends Component {
             }
         });
     }
+    //load more images
+    loadMore() {
+        if (!this.state.locker) {
+            let lists;
+            if (this.state.loadList === "watch") {
+                lists = this.state.watchList;
+            } else {
+                lists = null;
+            }
+            reqwest({
+                url: "/watch/load",
+                type: "json",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    "list": lists,
+                    "load": this.state.loader,
+                    "route": this.state.loadList,
+                    "user": this.state.userId
+                }),
+                success: function(result) {
+                    let add = processGallery(result);
+                    let combine = this.state.galleryData.concat(add);
+                    if (result.length === 20) {
+                        this.setState({galleryData: combine, loader: this.state.loader + 1});
+                    } else {
+                        this.setState({galleryData: combine, loader: this.state.loader + 1, locker: true});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
+    }
+    //change list to display
+    changeList(value) {
+        if (value !== this.state.loadList) {
+            let choice;
+            if (value === "watch") {
+                choice = this.state.watchList;
+            } else {
+                choice = null;
+            }
+            reqwest({
+                url: "/watch/load",
+                type: "json",
+                contentType: "application/json",
+                method: "POST",
+                data: JSON.stringify({
+                    "list": choice,
+                    "load": 0,
+                    "route": value,
+                    "user": this.state.userId
+                }),
+                success: function(result) {
+                    console.log(result);
+                    let all = processGallery(result);
+                    if (result.length === 20) {
+                        this.setState({galleryData: all, loader: 1, loadList: value, locker: false});
+                    } else {
+                        this.setState({galleryData: all, loader: 1, loadList: value, locker: true});
+                    }
+                }.bind(this),
+                error: function (err) {
+                    processError(err);
+                }
+            });
+        }
+    }
     render() {
         //load 5 watch per time
         let watchs = [], total, i, load;
@@ -128,6 +216,15 @@ class Watch extends Component {
                 </div>
             );
         }
+        //load more images button
+        let loader;
+        if (!this.state.locker) {
+            loader = (
+                <h6 id="load-button" onClick={this.loadMore.bind(this)}>
+                    Load more ...
+                </h6>
+            );
+        }
         return (
             <div id="react-root">
                 <Header userId={this.state.userId?this.state.userId:null} userName={this.state.userName?this.state.userName:"Login"} />
@@ -137,6 +234,22 @@ class Watch extends Component {
                     {load}
                 </aside>
                 <main id="main">
+                    <header id="main-header">
+                        <div onClick={this.changeList.bind(this, "watch")} className="main-header-section" style={this.state.loadList === "watch"? {backgroundColor: "#ef8513"}: {backgroundColor: "#e5e5e5"}}>
+							<img alt="Watch" src="/img/icon/glyphicons-watch.png" />
+							<h7>On Watch List</h7>
+                        </div>
+                        <div onClick={this.changeList.bind(this, "love")} className="main-header-section" style={this.state.loadList === "love"? {backgroundColor: "#ef8513"}: {backgroundColor: "#e5e5e5"}}>
+							<img alt="Love" src="/img/icon/glyphicons-love.png" />
+							<h7>Moments Liked</h7>
+						</div>
+						<div onClick={this.changeList.bind(this, "comment")} className="main-header-section" style={this.state.loadList === "comment"? {backgroundColor: "#ef8513"}: {backgroundColor: "#e5e5e5"}}>
+							<img alt="Comment" src="/img/icon/glyphicons-comment.png" />
+							<h7>Comments List</h7>
+						</div>
+                    </header>
+                    <Waterfall column="3" image={this.state.galleryData} fontFamily="'Rubik', sans-serif" />
+                    {loader}
                 </main>
                 <Footer />
             </div>

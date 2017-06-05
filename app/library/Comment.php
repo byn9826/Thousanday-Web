@@ -47,4 +47,22 @@ class Comment {
             return 0;
         }
     }
+
+    //get 20 moments id where user comments
+    public function readUserComments($user, $load) {
+        $pin = $load * 20;
+        $watchQuery = 'SELECT DISTINCT(moment_id) FROM moment_comment WHERE user_id = :user 
+                       ORDER BY moment_id DESC LIMIT :pin, 20';
+        try {
+            $watchStmt = $this->db->prepare($watchQuery);
+            $watchStmt->bindValue(':user', $user, PDO::PARAM_INT);
+            $watchStmt->bindValue(':pin', $pin, PDO::PARAM_INT);
+            $watchStmt->execute();
+            return $watchStmt->fetchAll(PDO::FETCH_NUM);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
 }

@@ -58,4 +58,21 @@ class Like {
         }
     }
 
+    //get 20 love id for one user
+    public function readUserLikes($user, $load) {
+        $pin = $load * 20;
+        $watchQuery = 'SELECT moment_id FROM moment_like WHERE user_id = :user 
+                       ORDER BY moment_id DESC LIMIT :pin, 20';
+        try {
+            $watchStmt = $this->db->prepare($watchQuery);
+            $watchStmt->bindValue(':user', $user, PDO::PARAM_INT);
+            $watchStmt->bindValue(':pin', $pin, PDO::PARAM_INT);
+            $watchStmt->execute();
+            return $watchStmt->fetchAll(PDO::FETCH_NUM);
+        }  catch (PDOException $e) {
+            print $e->getMessage();
+            return 0;
+        }
+    }
+
 }

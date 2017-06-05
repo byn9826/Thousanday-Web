@@ -85,12 +85,33 @@
     padding: 3px 0;
 }
 
-
-
 #main{
     display: inline-block;
     width: 55%;
     margin-left: 5%;
     margin-top: 100px;
     vertical-align: top;
+}
+#main-header{
+    display: block;
+    border-bottom: 5px solid #abaeb2;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+.main-header-section{
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 5px;
+    width: 29%;
+    padding: 10px 1%;
+    margin: 0 1%;
+    text-align: center;
+    cursor: pointer;
+}
+.main-header-section img{
+    height: 25px;
+    margin-bottom: 5px;
+}
+.main-header-section h7{
+    display: block;
 }

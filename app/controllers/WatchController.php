@@ -91,4 +91,55 @@ class WatchController extends ControllerBase
         }
     }
 
+    //load more moment
+    public function loadAction() {
+        if ($this->request->isPost()) {
+            $data = $this->request->getJsonRawBody(true);
+            $list = $data['list'];
+            $route = $data['route'];
+            $load = (int) $data['load'];
+            $user = (int) $data['user'];
+            if ($route === "watch") {
+                $db = DbConnection::getConnection();
+                $Moment = new Moment($db);
+                $moments = $Moment->readPetsList($list, $load);
+                if ($moments === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else {
+                    echo json_encode($moments);
+                }
+            } else if ($route === "love") {
+                $db = DbConnection::getConnection();
+                $Like = new Like($db);
+                $likes = $Like->readUserLikes($user, $load);
+                if ($likes === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else if (!$likes) {
+                    echo json_encode([]);
+                } else {
+                    $list = array_merge(...$likes);
+                    $Moment = new Moment($db);
+                    $moments = $Moment->readMomentsList($list);
+                    echo json_encode($moments);
+                }
+            } else if ($route === "comment") {
+                $db = DbConnection::getConnection();
+                $Comment = new Comment($db);
+                $comments = $Comment->readUserComments($user, $load);
+                if ($comments === 0) {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                } else if (!$comments) {
+                    echo json_encode([]);
+                } else {
+                    $list = array_merge(...$comments);
+                    $Moment = new Moment($db);
+                    $moments = $Moment->readMomentsList($list);
+                    echo json_encode($moments);
+                }
+            }
+        } else {
+            $this->response->setStatusCode(404, 'Not Found');
+        }
+    }
+
 }
