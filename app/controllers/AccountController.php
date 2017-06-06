@@ -11,7 +11,11 @@ class AccountController extends ControllerBase
             $data = $this->request->getJsonRawBody(true);
             $googleToken = $data['token'];
             $platform = $data['platform'];
-            $client = new Google_Client(['client_id' => '168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com']);
+            if ($platform === "website") {
+                $client = new Google_Client(['client_id' => '168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com']);
+            } else {
+                $client = new Google_Client(['client_id' => '835652983909-6if3h222alkttk9oas3hr3tl15sq1u7m.apps.googleusercontent.com']);
+            }
             $payload = $client->verifyIdToken($googleToken);
             if ($payload) {
                 $googleId = $payload['sub'];
@@ -37,9 +41,14 @@ class AccountController extends ControllerBase
                             $this->response->setStatusCode(500, 'Internal Server Error');
                         }
                     } else {
-                        //create token for mobile
-                        //code later
-                        //attention
+                        //create token for website
+                        $Secret = new Secret();
+                        $newToken = $Secret->getToken($userId);
+                        $Token = new Token($db);
+                        $create = $Token->createUserToken($userId, $newToken, 1);
+                        if ($create === 0) {
+                            $this->response->setStatusCode(500, 'Internal Server Error');
+                        }
                     }
                     echo json_encode([$userId, $userName, $newToken]);
                 } 
@@ -63,7 +72,7 @@ class AccountController extends ControllerBase
             //validate facebook login
             $Secret = new Secret();
             $fbSecret = $Secret->getFacebook();
-            $access = file_get_contents('https://graph.facebook.com/oauth/access_token?client_id=1894566737467263&client_secret=' . $fbSecret . '&grant_type=client_credentials');
+            $access = file_get_contents('https://graph.facebook.com/oauth/access_token?client_id=447688265576125&client_secret=' . $fbSecret . '&grant_type=client_credentials');
             $accessData = json_decode($access);
             $appToken = $accessData->access_token;
             $verify = file_get_contents('https://graph.facebook.com/debug_token?input_token=' . $fbToken . '&access_token=' . $appToken);
@@ -95,9 +104,15 @@ class AccountController extends ControllerBase
                             echo json_encode([$userId, $userName, $newToken]);
                         }
                     } else {
-                        //create token for mobile
-                        //code later
-                        //attention
+                        //create token for website
+                        $newToken = $Secret->getToken($userId);
+                        $Token = new Token($db);
+                        $create = $Token->createUserToken($userId, $newToken, 1);
+                        if ($create === 0) {
+                            $this->response->setStatusCode(500, 'Internal Server Error');
+                        } else {
+                            echo json_encode([$userId, $userName, $newToken]);
+                        }
                     }
                 }
             }

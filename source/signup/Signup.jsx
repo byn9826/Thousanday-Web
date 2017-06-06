@@ -17,6 +17,8 @@ class Signup extends Component {
             platform: null,
             //store user name
             name: null,
+            //store user token
+            token: null,
             //store user avatar
             avatar: null,
             //store uploaded avatar
@@ -32,9 +34,10 @@ class Signup extends Component {
         if (localStorage.getItem("newId")) {
             let id = localStorage.getItem("newId");
             let name = localStorage.getItem("newName");
+            let token = localStorage.getItem("newToken");
             let platform = localStorage.getItem("newPlatform");
             let avatar = localStorage.getItem("newAvatar");
-            this.setState({id: id, name: name, platform: platform, avatar: avatar});
+            this.setState({id: id, name: name, token: token, platform: platform, avatar: avatar});
         } else {
             window.location.replace("/error/page403");
         }
@@ -72,6 +75,7 @@ class Signup extends Component {
             fileData.append("file", avatar, "0.jpg");
             fileData.append("name", name);
             fileData.append("id", this.state.id);
+            fileData.append("token", this.state.token);
             fileData.append("platform", this.state.platform);
             fileData.append("method", "website");
             reqwest({

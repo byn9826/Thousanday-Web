@@ -30,6 +30,7 @@ class Header extends Component {
 				success: function(result) {
 					if (result.id) {
 						localStorage.setItem("newId", result.id);
+						localStorage.setItem("newToken", user.token);
 						localStorage.setItem("newName", user.name);
 						localStorage.setItem("newPlatform", "google");
 						localStorage.setItem("newAvatar", user.imageUrl);
@@ -66,6 +67,7 @@ class Header extends Component {
 					if (result.id) {
 						localStorage.setItem("newId", result.id);
 						localStorage.setItem("newName", response.name);
+						localStorage.setItem("newToken", token);
 						localStorage.setItem("newPlatform", "facebook");
 						localStorage.setItem("newAvatar", null);
 						window.location.replace("/signup");
@@ -133,7 +135,7 @@ class Header extends Component {
 				<section className={loginStyle}>
 					<h5 id="header-drop-notice">Click to sign in or sign up</h5>
 					<Googlelogin gLogin={this.gLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
-					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="1894566737467263" width="194px" />
+					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="447688265576125" width="194px" />
 				</section>
 			)
 			if (this.state.showDrop && this.props.userId) {

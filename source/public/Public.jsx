@@ -121,7 +121,7 @@ class Public extends Component {
                     <h6>Sign in or sign up</h6>
                     <h6>by your Facebook or Google account:</h6>
                     <Googlelogin gLogin={this.gLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
-					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="1894566737467263" width="194px" />
+					<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="447688265576125" width="194px" />
                 </section>
             )
         } else {
