@@ -52,7 +52,7 @@ class User extends Component {
                 result = JSON.parse(result);
 				let user = window.location.pathname.split("/").pop();
 				let relatives = [], i;
-				if (result[1] !== 0) {
+				if (result[1].length !== 0) {
 					for (i = 0; i < result[1].length; i++) {
 						if (result[1][i].relative_id) {
 							if (result[1][i].relative_id === user) {

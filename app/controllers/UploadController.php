@@ -208,6 +208,14 @@ class UploadController extends ControllerBase
                                 if ($login === 0) {
                                     $this->response->setStatusCode(500, 'Internal Server Error');
                                 }
+                            } else {
+                                $Secret = new Secret();
+                                $newToken = $Secret->getToken($create);
+                                $Token = new Token($db);
+                                $login = $Token->createUserToken($create, $newToken, 1);
+                                if ($login === 0) {
+                                    $this->response->setStatusCode(500, 'Internal Server Error');
+                                }
                             }
                             $upload = __DIR__ . '/../../public/img/user/';
                             if (!is_dir($upload)) {
