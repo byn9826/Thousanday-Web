@@ -13,8 +13,10 @@ class AccountController extends ControllerBase
             $platform = $data['platform'];
             if ($platform === "website") {
                 $client = new Google_Client(['client_id' => '168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com']);
-            } else {
+            } else if ($platform === "mobile") {
                 $client = new Google_Client(['client_id' => '835652983909-6if3h222alkttk9oas3hr3tl15sq1u7m.apps.googleusercontent.com']);
+            } else {
+                $client = new Google_Client(['client_id' => '835652983909-gf89tn5ttgcbkdacintdi0kiqem0968t.apps.googleusercontent.com']);
             }
             $payload = $client->verifyIdToken($googleToken);
             if ($payload) {
