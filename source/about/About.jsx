@@ -87,7 +87,28 @@ class About extends Component {
                             <img src="/img/about/mysql.png" alt="MySQL" />
                         </div>
                     </aside>
-                )
+                );
+                break;
+            case "notepress":
+                aside = (
+                    <aside id="aside">
+                        <h4>WordPress Theme - NotePress</h4>
+                        <img className="aside-image" src="/img/about/notepress.jpg" alt="Notepress" />
+                        <div className="aside-project">
+                            <div className="aside-project-left">
+                                <h5>
+                                    It's my Personal project which turn WordPress into your public online notebooks.
+                                </h5>
+                                <div className="aside-project-left-link">
+                                    <a href="http://notepress.epizy.com/" target="_blank"><h6>Live Site</h6></a>
+                                    <a href="https://github.com/byn9826/NotePress" target="_blank"><h6>Source Code</h6></a>
+                                </div>
+                            </div>
+                            <img src="/img/about/jquery.png" alt="jQuery" />
+                            <img src="/img/about/php.png" alt="Php" />
+                        </div>
+                    </aside>
+                );
                 break;
             case "tiny":
                 aside = (
@@ -195,6 +216,8 @@ class About extends Component {
                     </aside>
                 )
                 break;
+
+
         }
         return (
             <div id="react-root">
@@ -221,6 +244,10 @@ class About extends Component {
                     <div onClick={this.changeProject.bind(this, "thousanday")} className={this.state.label === "thousanday"?"main-choice main-nav":"main-deactive main-nav"}>
                         <h6>Personal Full Stack Projects</h6>
                         <h5>Home page for you pets</h5>
+                    </div>
+                    <div onClick={this.changeProject.bind(this, "notepress")} className={this.state.label === "notepress"?"main-choice main-nav":"main-deactive main-nav"}>
+                        <h6>WordPress Theme</h6>
+                        <h5>Serve WordPress as notebook</h5>
                     </div>
                     <div onClick={this.changeProject.bind(this, "marvel")} className={this.state.label === "marvel"?"main-choice main-nav":"main-deactive main-nav"}>
                         <h6>Course Php Web Project</h6>
