@@ -1,6 +1,8 @@
 # Thousanday-Web
 Photo sharing social web app for your pets and you. <br/>
 
+<b>Please test with real pets images, thanks!</b><br />
+
 [Live Site](https://thousanday.com)<br/>
 
 Mobile App by React Native:<br/>
