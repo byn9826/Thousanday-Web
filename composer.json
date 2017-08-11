@@ -1,0 +1,15 @@
+{
+    "name": "thousanday",
+    "authors": [
+        {
+            "name": "Baozier",
+            "email": "byn9826@gmail.com"
+        }
+    ],
+    "require": {
+        "google/apiclient": "^2.0"
+    },
+    "require-dev": {
+        "phalcon/devtools": "~3.2"
+    }
+}
