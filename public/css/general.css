@@ -37,6 +37,7 @@
 #header-login h5{
     display: inline-block;
     vertical-align: middle;
+    margin-bottom: 5px;
 }
 #header-login img{
     display: inline-block;

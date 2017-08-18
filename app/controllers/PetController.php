@@ -58,13 +58,11 @@ class PetController extends ControllerBase
                         }
                     }
                 }
-
-                    
             }
         }
     }
 
-    //load mor pets moments
+    //load more pets moments
     public function loadAction() {
         $pet = $this->request->get("pet");
         $load = (int) $this->request->get("load");
@@ -81,43 +79,39 @@ class PetController extends ControllerBase
 
     //user watch or unwatch a pet
     public function watchAction() {
-        if ($this->request->isPost()) {
-            $data = $this->request->getJsonRawBody(true);
-            $token = $data['token'];
-            $pet = (int) $data['pet'];
-            $user = (int) $data['user'];
-            $action = (int) $data['action'];
-            //verify token
-            $db = DbConnection::getConnection();
-            $Token = new Token($db);
-            $validation = $Token->checkUserToken($user, $token);
-            if ($validation === 0) {
-                $this->response->setStatusCode(500, 'Internal Server Error');
-            } else if ($validation === 1) {
-                if ($action === 1) {
-                    //add watch for current pet
-                    $Watch = new Watch($db);
-                    $add = $Watch->createUserWatch($pet, $user);
-                    if ($add === 1) {
-                        echo 1;
-                    } else {
-                        $this->response->setStatusCode(500, 'Internal Server Error');
-                    }
+        $data = $this->request->getJsonRawBody(true);
+        $token = $data['token'];
+        $pet = (int) $data['pet'];
+        $user = (int) $data['user'];
+        $action = (int) $data['action'];
+        //verify token
+        $db = DbConnection::getConnection();
+        $Token = new Token($db);
+        $validation = $Token->checkUserToken($user, $token);
+        if ($validation === 0) {
+            $this->response->setStatusCode(500, 'Internal Server Error');
+        } else if ($validation === 1) {
+            if ($action === 1) {
+                //add watch for current pet
+                $Watch = new Watch($db);
+                $add = $Watch->createUserWatch($pet, $user);
+                if ($add === 1) {
+                    echo 1;
                 } else {
-                    //remove watch
-                    $Watch = new Watch($db);
-                    $delete = $Watch->deleteUserWatch($pet, $user);
-                    if ($delete === 1) {
-                        echo 1;
-                    } else {
-                        $this->response->setStatusCode(500, 'Internal Server Error');
-                    }
+                    $this->response->setStatusCode(500, 'Internal Server Error');
                 }
             } else {
-                $this->response->setStatusCode(403, 'Forbidden');
+                //remove watch
+                $Watch = new Watch($db);
+                $delete = $Watch->deleteUserWatch($pet, $user);
+                if ($delete === 1) {
+                    echo 1;
+                } else {
+                    $this->response->setStatusCode(500, 'Internal Server Error');
+                }
             }
         } else {
-            $this->response->setStatusCode(404, 'Not Found');
+            $this->response->setStatusCode(403, 'Forbidden');
         }
     }
 

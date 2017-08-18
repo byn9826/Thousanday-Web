@@ -160,7 +160,7 @@ class Edit extends Component {
             this.setState({search: "", searchData: null});
         } else if (parseInt(event.target.value.trim()) > 0) {
             let id = parseInt(event.target.value.trim());
-            this.setState({search: id});
+            this.setState({ search: id });
             setTimeout(()=> {
                 if (id === this.state.search && id !== this.state.userId) {
                     reqwest({

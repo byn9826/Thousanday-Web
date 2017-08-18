@@ -6,6 +6,7 @@
     margin-left: 10%;
     width: 26%;
     text-align: center;
+    min-height: calc(100vh - 150px);
 }
 #main h1{
     font-style: italic;

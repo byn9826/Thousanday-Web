@@ -4,7 +4,7 @@ class IndexController extends ControllerBase
 {
 
     public function indexAction() {
-
+        
     }
 
     //init public page, read 20 most recent public moments
