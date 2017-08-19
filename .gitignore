@@ -1,4 +1,3 @@
-cache/*
 node_modules
 vendor
 php.ini
@@ -14,3 +13,4 @@ public/production/*
 public/img/pet/*
 public/img/user/*
 app/library/Secret.php
+app/library/DbConnection.php
