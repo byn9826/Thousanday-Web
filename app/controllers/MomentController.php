@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class MomentController extends ControllerBase
-{
+class MomentController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/moment.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/moment.css" )->addCss( "../public/css/moment.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //read information for one moment 

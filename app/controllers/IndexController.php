@@ -1,10 +1,14 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class IndexController extends ControllerBase
-{
+class IndexController extends ControllerBase {
 
+    //load dependencies for public page
     public function indexAction() {
-        
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/public.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/public.css" )->addCss( "../public/css/public.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //init public page, read 20 most recent public moments

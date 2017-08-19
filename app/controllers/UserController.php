@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class UserController extends ControllerBase
-{
+class UserController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/user.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/user.css" )->addCss( "../public/css/user.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //read information for one user

@@ -10,9 +10,7 @@
 		<meta name="author" content="Baozier">
 		<title>Signup - Thousanday</title>
 		<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon"/>
-		<link rel="stylesheet" type="text/css" href="/css/globe.css" >
-		<link rel="stylesheet" type="text/css" href="/css/general.css" >
-		<link rel="stylesheet" type="text/css" href="/css/signup.css" >
+		<?php $this->assets->outputCss( 'header' ); ?>
 	</head>
 	<body>
 		<div id="root"></div>

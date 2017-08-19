@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class EditController extends ControllerBase
-{
+class EditController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/edit.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/edit.css" )->addCss( "../public/css/edit.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //read pet data

@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class WatchController extends ControllerBase
-{
+class WatchController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/watch.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/watch.css" )->addCss( "../public/css/watch.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //read data for watch page

@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class PetController extends ControllerBase
-{
+class PetController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/pet.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/pet.css" )->addCss( "../public/css/pet.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     //read information for one pet

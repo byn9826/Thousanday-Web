@@ -1,10 +1,13 @@
 <?php
+use Phalcon\Assets\Filters\Cssmin;
 
-class ExploreController extends ControllerBase
-{
+class ExploreController extends ControllerBase {
 
     public function indexAction() {
-
+        $this->assets->collection( "header" )->setTargetPath( "../public/production/explore.css" )
+            ->addCss( "../public/css/globe.css" )->addCss( "../public/css/general.css" )
+            ->setTargetUri( "/../production/explore.css" )->addCss( "../public/css/explore.css" )
+            ->join( true )->addFilter( new Cssmin() );
     }
 
     public function readAction() {

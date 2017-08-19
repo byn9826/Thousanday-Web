@@ -6,3 +6,11 @@ php_errors.log
 todo.md
 package-lock.json
 composer.lock
+.htaccess
+.htrouter.php
+public/.htaccess
+
+public/production/*
+public/img/pet/*
+public/img/user/*
+app/library/Secret.php
