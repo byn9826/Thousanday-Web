@@ -2,27 +2,23 @@
 
 $loader = new \Phalcon\Loader();
 
+//Load Controller and Model
 $loader->registerDirs(
     [
-        $config->application->controllersDir
+        $config->application->controllersDir,
+        $config->application->modelsDir,
     ]
 );
 
+//Load Libraries
 $loader->registerClasses(
     [
         'DbConnection' => __DIR__ . '/../library/DbConnection.php',
-        'Moment' => __DIR__ . '/../library/Moment.php',
-        'Like' => __DIR__ . '/../library/Like.php',
-        'Pet' => __DIR__ . '/../library/Pet.php',
-        'Watch' => __DIR__ . '/../library/Watch.php',
-        'User' => __DIR__ . '/../library/User.php',
-        'Comment' => __DIR__ . '/../library/Comment.php',
-        'Token' => __DIR__ . '/../library/Token.php',
         'Secret' => __DIR__ . '/../library/Secret.php',
-        'Request' => __DIR__ . '/../library/Request.php'
     ]
 );
 
 $loader->register();
 
+//Auto Load from composer
 require_once(__DIR__ . '/../../vendor/autoload.php');
