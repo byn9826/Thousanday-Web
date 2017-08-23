@@ -5,11 +5,13 @@ import Header from "../general/Header";
 import Footer from "../general/Footer";
 import Waterfall from "../component/Waterfall";
 import Postimg from "../component/Postimg";
+import Progress from "../component/Progress";
 import noGetGender from "../js/noGetGender.js";
 import noGetType from "../js/noGetType.js";
 import noGetNature from "../js/noGetNature.js";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
+
 class Pet extends Component {
 	constructor(props) {
         super(props);
@@ -81,6 +83,7 @@ class Pet extends Component {
                     home = false;
                 }
                 this.setState({petData: result[0], familyData: result[1], friendData: result[2], galleryData: images, locker: locker, watchData: watch, petOwner: home});
+                console.log( result[0] );
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -168,6 +171,7 @@ class Pet extends Component {
         	processData: false,
 			success: function(result) {
                 result = JSON.parse(result);
+                console.log(result);
                 let add = [
                     "/img/pet/" + window.location.pathname.split("/").pop() + "/moment/" + result[1],
                     message,
@@ -262,7 +266,61 @@ class Pet extends Component {
                             <Postimg content="" max="120" title="Share new moment" submitImg={this.submitImg.bind(this)} fontFamily="'Rubik', sans-serif" reset={this.state.reset} />
                         ): null
                     }
-                    <div id="aside-title">
+                    <div className="aside-title">
+                        <img alt="moments" src="/img/icon/glyphicons-skill.png" / >
+                        <h4>Ability</h4>
+                    </div>
+                    <div id="aside-ability">
+                        <div id="aside-ability-left">
+                            <div>
+                                <h6>Attack</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.attack } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Defend</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.defend } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Health</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.health } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Swift</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.swift } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Lucky</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.lucky } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div id="aside-ability-right">
+                            <h4>
+                                Play & Win<br />
+                                { this.state.petData.win }
+                            </h4>
+                        </div>
+                    </div>
+                    <div className="aside-title">
                         <img alt="moments" src="/img/icon/glyphicons-moment.png" / >
                         <h4>Moments</h4>
                     </div>

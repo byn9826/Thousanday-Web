@@ -20,48 +20,41 @@ class PetController extends ControllerBase {
             $this->response->setStatusCode(500, 'Internal Server Error');
         } else if (!$pet) {
             $this->response->setStatusCode(404, 'Not Found');
-        } else {
-            $Moment = new Moment($db);
-            $moments = $Moment->readPetMoments($id, 0);
-            if ($moments === 0) {
+        } 
+        $Moment = new Moment($db);
+        $moments = $Moment->readPetMoments($id, 0);
+        if ($moments === 0) {
+            $this->response->setStatusCode(500, 'Internal Server Error');
+        } 
+        $Watch = new Watch($db);
+        $watchs = $Watch->readPetWatchs($id);
+        if ($watchs === 0) {
+            $this->response->setStatusCode(500, 'Internal Server Error');
+        }
+        if (isset($pet['relative_id'])) {
+            //if pet has relative
+            $User = new User($db);
+            $family = $User->readPetFamily($pet['owner_id'], $pet['relative_id']);
+            if ($family === 0) {
                 $this->response->setStatusCode(500, 'Internal Server Error');
-            } else {
-                $Watch = new Watch($db);
-                $watchs = $Watch->readPetWatchs($id);
-                if ($watchs === 0) {
-                    $this->response->setStatusCode(500, 'Internal Server Error');
-                } else {
-                    if (isset($pet['relative_id'])) {
-                        //if pet has relative
-                        $User = new User($db);
-                        $family = $User->readPetFamily($pet['owner_id'], $pet['relative_id']);
-                        if ($family === 0) {
-                            $this->response->setStatusCode(500, 'Internal Server Error');
-                        } else {
-                            $friends = $Pet->readPetFriends($pet['owner_id'], $pet['relative_id'], $id);
-                            if ($friends === 0) {
-                                $this->response->setStatusCode(500, 'Internal Server Error');
-                            } else {
-                                echo json_encode([$pet, $family, $friends, $moments, $watchs]);
-                            }
-                        }
-                    } else {
-                        //if pet do not have relative
-                        $User = new User($db);
-                        $family = $User->readUserName($pet['owner_id']);
-                        if ($family === 0) {
-                            $this->response->setStatusCode(500, 'Internal Server Error');
-                        } else {
-                            $friends = $Pet->readUserPets($pet['owner_id'], $id);
-                            if ($friends === 0) {
-                                $this->response->setStatusCode(500, 'Internal Server Error');
-                            } else {
-                                echo json_encode([$pet, [$family], $friends, $moments, $watchs]);
-                            }
-                        }
-                    }
-                }
             }
+            $friends = $Pet->readPetFriends($pet['owner_id'], $pet['relative_id'], $id);
+            if ($friends === 0) {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+            echo json_encode([$pet, $family, $friends, $moments, $watchs]);
+        } else {
+            //if pet do not have relative
+            $User = new User($db);
+            $family = $User->readUserName($pet['owner_id']);
+            if ($family === 0) {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            } 
+            $friends = $Pet->readUserPets($pet['owner_id'], $id);
+            if ($friends === 0) {
+                $this->response->setStatusCode(500, 'Internal Server Error');
+            }
+            echo json_encode([$pet, [$family], $friends, $moments, $watchs]);
         }
     }
 

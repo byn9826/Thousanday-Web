@@ -21,10 +21,9 @@ class Pet {
             return 0;
         }
     }
-
     //get owner id and relative id of one pet
     public function readPetFamily($id) {
-        $familyQuery = 'SELECT owner_id, relative_id FROM pet WHERE pet_id = :id';
+        $familyQuery = 'SELECT owner_id, relative_id, last_update FROM pet WHERE pet_id = :id';
         try {
             $familyStmt = $this->db->prepare($familyQuery);
             $familyStmt->bindValue(':id', $id, PDO::PARAM_INT);

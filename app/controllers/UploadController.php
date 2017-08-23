@@ -35,9 +35,8 @@ class UploadController extends ControllerBase
                         $moments = $Moment->createNewMoment($image, $message, $pet);
                         if ($moments === 0) {
                             $this->response->setStatusCode(500, 'Internal Server Error');
-                        } else {
-                            echo json_encode([$moments, $image]);
                         }
+                        echo json_encode([$moments, $image, $family['last_update'], date("Y-m-d H:i:s")]);
                     } else {
                         $this->response->setStatusCode(403, 'Forbidden');
                     }

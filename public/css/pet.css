@@ -126,10 +126,10 @@
     vertical-align: top;
 }
 
-#aside-title{
+.aside-title{
     display: block;
-    width: 80%;
-    padding: 5px 10%;
+    width: 90%;
+    padding: 5px 5%;
     border-bottom: 1px solid #f7d7b4;
     padding-bottom: 10px;
     margin-bottom: 15px;
@@ -139,26 +139,57 @@
     box-shadow: 2px 2px 1px #e5e5e5; 
     border-bottom: 1px solid #f7d7b4;
 }
-#aside-title img{
+.aside-title img{
     display: inline-block;
     vertical-align: middle;
     margin-right: 5%;
-    width: 35px;
+    width: 22px;
 }
-#aside-title h4{
+.aside-title h4{
     display: inline-block;
     vertical-align: middle;
     font-weight: bold;
 }
-#aside h6{
+
+#aside-ability{
     display: block;
     width: 100%;
+    margin-bottom: 30px;
+}
+#aside-ability-left{
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    min-width: 300px;
+}
+#aside-ability-left>div{
+    display: block;
+    width: 100%;
+    margin-top: 5px;
+}
+#aside-ability-left>div>h6{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+#aside-ability-left>div>span{
+    display: inline-block;
+    vertical-align: middle;
+    width: 220px;
+}
+#aside-ability-right{
+    display: inline-block;
+    vertical-align: middle;
+}
+#aside-ability-right>h4{
+    display: block;
+    width: 120px;
+    height: 80px;
+    padding-top: 40px;
+    border-left: 1px solid #ef8513;
+    border-bottom: 1px solid #ef8513;
+    border-radius: 50%;
     text-align: center;
-    color: black;
-    padding: 5px 0;
-    border-radius: 5px;
-    margin-top: 20px;
-    border: 1px solid #ef8513;
 }
 
 @media only screen and (max-width: 900px) {
