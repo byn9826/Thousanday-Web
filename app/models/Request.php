@@ -8,61 +8,40 @@ class Request {
         $this->db = $db;
     }
 
-    //read one user's all request
-    public function readUserRequests($user, $load) {
+    //* read one user's all request
+    public function readUserRequests( $user, $load ) {
         $pin = $load * 10;
-        $readQuery = 'SELECT * FROM request WHERE receiver_id = :user ORDER BY request_time DESC LIMIT :pin, 20';
-        try {
-            $readStmt = $this->db->prepare($readQuery);
-            $readStmt->bindValue(':user', $user, PDO::PARAM_INT);
-            $readStmt->bindValue(':pin', $pin, PDO::PARAM_INT);
-            $readStmt->execute();
-            return $readStmt->fetchAll(PDO::FETCH_ASSOC);
-        }  catch (PDOException $e) {
-            print $e->getMessage();
-            return 0;
-        }
+        $readQuery = 'SELECT * FROM request WHERE receiver_id = :user 
+                      ORDER BY request_time DESC LIMIT :pin, 20';
+        $readStmt = $this->db->prepare( $readQuery );
+        $readStmt->bindValue( ':user', $user, PDO::PARAM_INT );
+        $readStmt->bindValue( ':pin', $pin, PDO::PARAM_INT );
+        $readStmt->execute();
+        return $readStmt->fetchAll( PDO::FETCH_ASSOC );
     }
 
     //create relative request
-    public function createPetRequest($sender, $receiver, $pet) {
-        $time = date('Y-m-d H:i:s');
-        $addQuery = 'INSERT INTO request (sender_id, receiver_id, pet_id, request_time) 
-                     VALUES (:sender, :receiver, :pet, :time)';
-        try {
-            $addStmt = $this->db->prepare($addQuery);
-            $addStmt->bindValue(':sender', $sender, PDO::PARAM_INT);
-            $addStmt->bindValue(':receiver', $receiver, PDO::PARAM_INT);
-            $addStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
-            $addStmt->bindValue(':time', $time);
-            $this->db->beginTransaction();
-            $addStmt->execute();
-            $this->db->commit();
-            return 1;
-        } catch (PDOException $e) {
-            print $e->getMessage();
-            $this->db->rollback();
-            return 0;
-        }
+    public function createPetRequest( $sender, $receiver, $pet ) {
+        $time = date( 'Y-m-d H:i:s' );
+        $addQuery = 'INSERT INTO request ( sender_id, receiver_id, pet_id, request_time ) 
+                     VALUES ( :sender, :receiver, :pet, :time )';
+        $addStmt = $this->db->prepare( $addQuery );
+        $addStmt->bindValue( ':sender', $sender, PDO::PARAM_INT );
+        $addStmt->bindValue( ':receiver', $receiver, PDO::PARAM_INT );
+        $addStmt->bindValue( ':pet', $pet, PDO::PARAM_INT );
+        $addStmt->bindValue( ':time', $time );
+        $addStmt->execute();
+        return $addStmt->rowCount();
     }
 
-    //delete all request based on one user
-    public function deleteUserRequest($receiver, $pet) {
+    //* delete request based on one user
+    public function deleteUserRequest( $receiver, $pet ) {
         $removeQuery = 'DELETE FROM request WHERE pet_id = :pet AND receiver_id = :receiver';
-        try {
-            $removeStmt = $this->db->prepare($removeQuery);
-            $removeStmt->bindValue(':receiver', $receiver, PDO::PARAM_INT);
-            $removeStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
-            $this->db->beginTransaction();
-            $removeStmt->execute();
-            $count = $removeStmt->rowCount();
-            $this->db->commit();
-            return $count;
-        } catch (PDOException $e) {
-            print $e->getMessage();
-            $this->db->rollback();
-            return 0;
-        }
+        $removeStmt = $this->db->prepare( $removeQuery );
+        $removeStmt->bindValue( ':receiver', $receiver, PDO::PARAM_INT );
+        $removeStmt->bindValue( ':pet', $pet, PDO::PARAM_INT );
+        $removeStmt->execute();
+        return $removeStmt->rowCount();
     }
 
 }

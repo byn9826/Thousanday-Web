@@ -113,14 +113,12 @@ class Pet extends Component {
                     "pet": window.location.pathname.split("/").pop()
                 }),
                 success: function(result) {
-                    if (result == 1) {
-                        if (action == 1) {
-                            this.state.watchData.push(this.state.userId);
-                        } else {
-                            this.state.watchData.splice(this.state.watchData.indexOf(this.state.userId), 1);
-                        }
-                        this.setState({watchData: this.state.watchData});
+                    if (action == 1) {
+                        this.state.watchData.push(this.state.userId);
+                    } else {
+                        this.state.watchData.splice(this.state.watchData.indexOf(this.state.userId), 1);
                     }
+                    this.setState({watchData: this.state.watchData});
                 }.bind(this),
                 error: function (err) {
                     processError(err);

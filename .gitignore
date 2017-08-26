@@ -8,6 +8,8 @@ composer.lock
 .htaccess
 .htrouter.php
 public/.htaccess
+php_errors.log
+task.md
 
 public/production/*
 public/img/pet/*

@@ -55,10 +55,8 @@ class Request extends Component {
                 "user": this.state.userId
             }),
             success: function(result) {
-                if (result == 1) {
-                    this.state.requestData.splice(index, 1);
-                    this.setState({requestData: this.state.requestData});
-                }
+                this.state.requestData.splice(index, 1);
+                this.setState({requestData: this.state.requestData});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -78,10 +76,8 @@ class Request extends Component {
                 "user": this.state.userId
             }),
             success: function(result) {
-                if (result == 1) {
-                    this.state.requestData.splice(index, 1);
-                    this.setState({requestData: this.state.requestData});
-                }
+                this.state.requestData.splice(index, 1);
+                this.setState({requestData: this.state.requestData});
             }.bind(this),
             error: function (err) {
                 processError(err);

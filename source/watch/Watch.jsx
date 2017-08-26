@@ -58,7 +58,9 @@ class Watch extends Component {
                         images = processGallery(result[1]);
                         locker = true;
                     }
-                    this.setState({petsList: result[2], watchList: result[0], galleryData: images, locker: locker});
+                    this.setState({
+                        petsList: result[2], watchList: result[0], galleryData: images, locker: locker
+                    });
                 }.bind(this),
                 error: function (err) {
                     processError(err);
@@ -85,17 +87,15 @@ class Watch extends Component {
                 "pet": id
             }),
             success: function(result) {
-                if (result == 1) {
-                    this.state.unwatch.push(id);
-                    this.setState({unwatch: this.state.unwatch});
-                }
+                this.state.unwatch.push(id);
+                this.setState({unwatch: this.state.unwatch});
             }.bind(this),
             error: function (err) {
                 processError(err);
             }
         });
     }
-    //re watch a pet
+    //re-watch a pet
     reWatch(id) {
         reqwest({
             url: "/watch/add",
@@ -108,10 +108,8 @@ class Watch extends Component {
                 "pet": id
             }),
             success: function(result) {
-                if (result == 1) {
-                    this.state.unwatch.splice(this.state.unwatch.indexOf(id), 1);
-                    this.setState({unwatch: this.state.unwatch});
-                }
+                this.state.unwatch.splice(this.state.unwatch.indexOf(id), 1);
+                this.setState({unwatch: this.state.unwatch});
             }.bind(this),
             error: function (err) {
                 processError(err);
