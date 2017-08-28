@@ -9,6 +9,7 @@ import Progress from "../component/Progress";
 import noGetGender from "../js/noGetGender.js";
 import noGetType from "../js/noGetType.js";
 import noGetNature from "../js/noGetNature.js";
+import noGetAbility from "../js/noGetAbility.js";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
 
@@ -83,7 +84,6 @@ class Pet extends Component {
                     home = false;
                 }
                 this.setState({petData: result[0], familyData: result[1], friendData: result[2], galleryData: images, locker: locker, watchData: watch, petOwner: home});
-                console.log( result[0] );
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -169,14 +169,25 @@ class Pet extends Component {
         	processData: false,
 			success: function(result) {
                 result = JSON.parse(result);
-                console.log(result);
                 let add = [
                     "/img/pet/" + window.location.pathname.split("/").pop() + "/moment/" + result[1],
                     message,
                     "/moment/" + result[0]
                 ];
                 this.state.galleryData.unshift(add);
-                this.setState({galleryData: this.state.galleryData, reset: this.state.reset + 1, add: this.state.add + 1});
+                if ( result.length === 3 ) {
+                    const ability = noGetAbility( result[ 2 ] );
+                    this.state.petData[ ability ] = parseInt( this.state.petData[ ability ] ) + 1;
+                    this.setState({
+                        galleryData: this.state.galleryData, reset: this.state.reset + 1, 
+                        add: this.state.add + 1, petData: this.state.petData
+                    });
+                } else {
+                    this.setState({
+                        galleryData: this.state.galleryData, reset: this.state.reset + 1, 
+                        add: this.state.add + 1
+                    }); 
+                }
             }.bind(this),
             error: function (err) {
                 processError(err);

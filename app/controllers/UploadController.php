@@ -38,8 +38,13 @@ class UploadController extends ControllerBase
                     $Moment = new Moment( $db );
                     $db->beginTransaction();
                     $moments = $Moment->createNewMoment( $image, $message, $pet );
+                    $time = date( 'Y-m-d' );
+                    $last = $family[ 'last_update' ];
+                    if ( $time !== $last ) {
+                        $code = $Pet->updatePetAbility( $pet, $time );
+                    }
                     $db->commit();
-                    return json_encode( [ $moments, $image ] );
+                    return json_encode( [ $moments, $image, $code ] );
                 } else {
                     return $this->response->setStatusCode( 403, 'Forbidden' );
                 }

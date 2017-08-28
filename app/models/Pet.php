@@ -130,10 +130,39 @@ class Pet {
         $petQuery = 'UPDATE pet SET relative_id = :relative 
                      WHERE pet_id = :pet AND relative_id is NULL';
         $petStmt = $this->db->prepare($petQuery);
-        $petStmt->bindValue(':relative', $user, PDO::PARAM_INT);
-        $petStmt->bindValue(':pet', $pet, PDO::PARAM_INT);
+        $petStmt->bindValue( ':relative', $user, PDO::PARAM_INT );
+        $petStmt->bindValue( ':pet', $pet, PDO::PARAM_INT );
         $petStmt->execute();
         return $petStmt->rowCount();
+    }
+    
+    //* pet gain ability from upload moment daily
+    public function updatePetAbility( $pet, $time ) {
+        $code = mt_rand( 0, 4 );
+        switch ( $code ) {
+            case 0:
+                $ability = 'attack';
+                break;
+            case 1:
+                $ability = 'defend';
+                break;
+            case 2:
+                $ability = 'health';
+                break;
+            case 3:
+                $ability = 'swift';
+                break;
+            case 4:
+                $ability = 'lucky';
+                break;
+        }
+        $petQuery = 'UPDATE pet SET last_update = :time, ' . $ability . ' = ' . $ability . 
+                    ' + 1 WHERE pet_id = :pet';
+        $petStmt = $this->db->prepare($petQuery);
+        $petStmt->bindValue( ':time', $time );
+        $petStmt->bindValue( ':pet', $pet, PDO::PARAM_INT );
+        $petStmt->execute();
+        return $code;
     }
 
 }

@@ -10,6 +10,7 @@ composer.lock
 public/.htaccess
 php_errors.log
 task.md
+phalcon-devtools
 
 public/production/*
 public/img/pet/*
