@@ -10,10 +10,13 @@
 		<meta name="author" content="Baozier">
 		<title>Thousanday - Homepage for pets</title>
 		<link rel="shortcut icon" href="/img/logo.png" type="image/x-icon"/>
-		<?php $this->assets->outputCss( 'header' ); ?>
+		<?php $this->assets->outputCss('header'); ?>
 	</head>
 	<body>
 		<div id="root"></div>
+		<script>
+			var data = <?= $data; ?>;
+		</script>
 		<script type="text/javascript" src="/js/public.bundle.js"></script>
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

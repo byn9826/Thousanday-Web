@@ -5,7 +5,7 @@ use Phalcon\Mvc\View\Engine\Php as PhpEngine;
 use Phalcon\Mvc\Url as UrlResolver;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Session\Adapter\Files as SessionAdapter;
-use Phalcon\Flash\Direct as Flash;
+// use Phalcon\Flash\Direct as Flash;
 
 $di->setShared('config', function () {
     return include APP_PATH . "/config/config.php";
@@ -24,7 +24,7 @@ $di->setShared('view', function () {
     $view->setDI($this);
     $view->setViewsDir($config->application->viewsDir);
     $view->registerEngines([
-        '.phtml' => PhpEngine::class
+        '.php' => PhpEngine::class
     ]);
     return $view;
 });
