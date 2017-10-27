@@ -12,10 +12,16 @@ class IndexController extends ControllerBase {
             ->setTargetUri('/../production/public.css')
             ->join(true)->addFilter(new Cssmin());
         try {
-            $db = DbConnection::getConnection();
-            $Moment = new Moment($db);
-            $moments = json_encode($Moment->readPublicMoments(0));
-            $this->view->data = $moments;
+            $redis = new Predis\Client();
+            if ($redis->exists("data-public")) {
+                $this->view->data = $redis->get('data-public');
+            } else {
+                $db = DbConnection::getConnection();
+                $Moment = new Moment($db);
+                $moments = json_encode($Moment->readPublicMoments(0));
+                $redis->set('data-public', $moments);
+                $this->view->data = $moments;
+            }
         } catch (Exception $e) {
             return $this->response->setStatusCode( 500, 'Internal Server Error' );
         }
@@ -27,8 +33,7 @@ class IndexController extends ControllerBase {
         try {
             $db = DbConnection::getConnection();
             $Moment = new Moment($db);
-            $moments = json_encode($Moment->readPublicMoments($load));
-            return $moments;
+            return json_encode($Moment->readPublicMoments($load));
         } catch (Exception $e) {
             return $this->response->setStatusCode(500, 'Internal Server Error');
         }

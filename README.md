@@ -11,11 +11,10 @@ Mobile App by React Native:<br/>
 
 App architecture
 --
-1. Frontend Framework: React<br/>
-2. Backend Framework: Phalcon for routing<br/>
-3. Database: MySQL<br/>
-4. DB query: PDO<br/>
-5. Login System: Google SDK, Facebook SDK
+1. Frontend: React<br/>
+2. Backend: Phalcon<br/>
+3. Database: MySQL, Redis<br/>
+4. SDK: Google SDK, Facebook SDK
 
 Features:
 --
@@ -33,14 +32,6 @@ Screen Shot
 
 <b>Private page for your pet</b><br /><br />
 ![pet](https://raw.githubusercontent.com/byn9826/Thousand-Day/master/~legend/pet.png)<br/>
-
-Test on your localhost
---
-1. git clone this repo<br/>
-2. npm install<br/>
-3. Webpack --watch<br/> 
-4. Modify urls to https://thousanday.com/ ...
-
 
 Other
 --
