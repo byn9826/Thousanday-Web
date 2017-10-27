@@ -41,7 +41,7 @@ class UploadController extends ControllerBase
                     $time = date('Y-m-d');
                     $last = $family['last_update'];
                     if ($time !== $last) {
-                        $code = $Pet->updatePetAbility($pet, $time);
+                        $code = $Pet->updatePetAbility($pet, $time, 'last_update');
                     }
                     $db->commit();
                     $redis = new Predis\Client();

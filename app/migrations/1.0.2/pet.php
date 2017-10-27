@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PetMigration_101
+ * Class PetMigration_102
  */
-class PetMigration_101 extends Migration
+class PetMigration_102 extends Migration
 {
     /**
      * Define the table structure
@@ -101,63 +101,79 @@ class PetMigration_101 extends Migration
                     'attack',
                     [
                         'type' => Column::TYPE_CHAR,
+                        'default' => "50",
                         'size' => 3,
-                        'default' => 50
+                        'after' => 'relative_id'
                     ]
                 ),
                 new Column(
                     'defend',
                     [
                         'type' => Column::TYPE_CHAR,
+                        'default' => "50",
                         'size' => 3,
-                        'default' => 50
+                        'after' => 'attack'
                     ]
                 ),
                 new Column(
                     'health',
                     [
                         'type' => Column::TYPE_CHAR,
+                        'default' => "50",
                         'size' => 3,
-                        'default' => 50
+                        'after' => 'defend'
                     ]
                 ),
                 new Column(
                     'swift',
                     [
                         'type' => Column::TYPE_CHAR,
+                        'default' => "50",
                         'size' => 3,
-                        'default' => 50
+                        'after' => 'health'
                     ]
                 ),
                 new Column(
                     'lucky',
                     [
                         'type' => Column::TYPE_CHAR,
+                        'default' => "50",
                         'size' => 3,
-                        'default' => 50
+                        'after' => 'swift'
                     ]
                 ),
                 new Column(
                     'win',
                     [
                         'type' => Column::TYPE_INTEGER,
-                        'default' => 0
+                        'default' => "0",
+                        'size' => 11,
+                        'after' => 'lucky'
                     ]
                 ),
                 new Column(
                     'last_update',
                     [
                         'type' => Column::TYPE_DATE,
-                        'size' => 1
+                        'size' => 1,
+                        'after' => 'win'
                     ]
                 ),
+                new Column(
+                    'last_grow',
+                    [
+                        'type' => Column::TYPE_DATE,
+                        'size' => 1,
+                        'after' => 'last_update'
+                    ]
+                )
             ],
             'indexes' => [
                 new Index('PRIMARY', ['pet_id'], 'PRIMARY')
             ],
             'options' => [
                 'TABLE_TYPE' => 'BASE TABLE',
-                'AUTO_INCREMENT' => '3',
+                'AUTO_INCREMENT' => '21',
                 'ENGINE' => 'InnoDB',
                 'TABLE_COLLATION' => 'utf8_general_ci'
             ],

@@ -137,7 +137,7 @@ class Pet {
     }
     
     //* pet gain ability from upload moment daily
-    public function updatePetAbility($pet, $time) {
+    public function updatePetAbility($pet, $time, $checker) {
         $code = mt_rand(0, 4);
         switch ($code) {
             case 0:
@@ -156,7 +156,7 @@ class Pet {
                 $ability = 'lucky';
                 break;
         }
-        $petQuery = 'UPDATE pet SET last_update = :time, ' . $ability . ' = ' . $ability . 
+        $petQuery = 'UPDATE pet SET ' . $checker . ' = :time, ' . $ability . ' = ' . $ability . 
                     ' + 1 WHERE pet_id = :pet';
         $petStmt = $this->db->prepare($petQuery);
         $petStmt->bindValue(':time', $time);
