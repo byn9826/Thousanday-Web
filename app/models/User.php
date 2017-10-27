@@ -7,6 +7,13 @@ class User {
     public function __construct($db) {
         $this->db = $db;
     }
+    
+    public function countUsersNumber() {
+        $userQuery = 'SELECT COUNT(*) AS count FROM user';
+        $userStmt = $this->db->prepare($userQuery);
+        $userStmt->execute();
+        return $userStmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     //* check if facebook id have registered
     public function checkFacebookId( $id ) {

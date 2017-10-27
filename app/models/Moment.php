@@ -7,6 +7,13 @@ class Moment {
     public function __construct($db) {
         $this->db = $db;
     }
+    
+    public function countMomentsNumber() {
+        $momentQuery = 'SELECT COUNT(*) AS count FROM moment';
+        $momentStmt = $this->db->prepare($momentQuery);
+        $momentStmt->execute();
+        return $momentStmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     //read 20 public moments start from the pin point, return moment list;
     //return 0 for error;

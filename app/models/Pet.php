@@ -7,6 +7,13 @@ class Pet {
     public function __construct($db) {
         $this->db = $db;
     }
+    
+    public function countPetsNumber() {
+        $petQuery = 'SELECT COUNT(*) AS count FROM pet';
+        $petStmt = $this->db->prepare($petQuery);
+        $petStmt->execute();
+        return $petStmt->fetch(PDO::FETCH_ASSOC);
+    }
 
     //* read data for one pet
     public function readOnePet($id) {

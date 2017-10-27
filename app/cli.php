@@ -7,9 +7,19 @@ use Phalcon\Loader;
 $di = new CliDI();
 
 $loader = new Loader();
-$loader->registerDirs([
-    __DIR__ . "/tasks",
-]);
+$loader->register();
+$loader->registerDirs(
+    [
+        __DIR__ . "/tasks",
+        __DIR__ . "/models",
+    ]
+);
+$loader->registerClasses(
+    [
+        'DbConnection' => __DIR__ . '/library/DbConnection.php',
+        'Secret' => __DIR__ . '/library/Secret.php',
+    ]
+);
 $loader->register();
 
 $configFile = __DIR__ . "/config/config.php";
