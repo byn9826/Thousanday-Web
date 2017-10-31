@@ -1,6 +1,6 @@
 <?php
 class Params {
 
-    public $admin_id = 1;
+    //public $admin_id = 1;
 
 }

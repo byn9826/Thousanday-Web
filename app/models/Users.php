@@ -8,4 +8,13 @@ class Users extends Model {
         $this->setSource('user');
     }
     
+    public function getAccountType() {
+        switch ($this->user_type) {
+            case '1':
+                return "Admin";
+            default:
+                return "Normal";
+        }
+    }
+    
 }

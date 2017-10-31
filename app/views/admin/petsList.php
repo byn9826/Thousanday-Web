@@ -3,7 +3,6 @@
         <title>Admin Management</title>
         <?php $this->assets->outputCss(); ?>
     </head>
-    <h2>Manage Pets</h2>
     <body>
         <table class="table table-striped table-hover table-sm">
             <caption>Manage Pets</caption>

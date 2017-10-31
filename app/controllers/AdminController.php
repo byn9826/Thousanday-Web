@@ -15,16 +15,17 @@ class adminController extends ControllerBase {
     public function permissionAction() {
         $id = (int) $this->request->get('id');
         $token = $this->request->get('token');
-        $validation = Tokens::find( [
+        $validation = Tokens::findFirst([
             "user_id" => $id,
-            "user_token" => $token
+            "user_token" => $token,
+            "user_type" => '1'
         ]);
         $params = new Params();
-        if(isset($validation) && $id === $params->admin_id) {
+        if(isset($validation)) {
             $this->session->set('permission', 'pass');
             $this->dispatcher->forward([
                 "controller" => "admin",
-                "action"     => "index",
+                "action" => "index"
             ]);
         }
         return $this->response->setStatusCode(403, 'Permission Denied');
@@ -40,14 +41,32 @@ class adminController extends ControllerBase {
         if (!isset($page)) {
             $page = 1;
         }
-        $pets = Pets::find();
+        $params = $this->dispatcher->getParams()[0];
+        switch ($params) {
+            case 'pet':
+                $data = Pets::find();
+                $this->view->pick('admin/petsList');
+                break;
+            case 'user':
+                $data = Users::find();
+                $this->view->pick('admin/usersList');
+                break;
+            case 'moment':
+                $data = Moments::find();
+                $this->view->pick('admin/momentsList');
+                break;
+            case 'comment':
+                $data = Comments::find();
+                $this->view->pick('admin/commentsList');
+                break;
+        }
+        
         $paginator = new PaginatorModel([
-            'data'  => $pets,
+            'data'  => $data,
             'limit' => 10,
             'page'  => $page
         ]);
         $this->view->data = $paginator->getPaginate();
-        $this->view->pick('admin/petsList');
     }
     
     public function readAction() {
