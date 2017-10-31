@@ -1,0 +1,1 @@
+<a href="/admin/list/pet">Pets List</a>

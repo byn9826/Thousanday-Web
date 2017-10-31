@@ -37,7 +37,7 @@ $router->addPost("/moment/like", ["controller" => "moment", "action" => "like"])
 $router->addPost("/moment/comment", ["controller" => "moment", "action" => "comment"]);
 $router->addGet("/moment/load", ["controller" => "moment", "action" => "load"]);
 
-$router->addGet("/request", ["controller" => "request", "action" => "index", "params" => 1]);
+$router->addGet("/request", ["controller" => "request", "action" => "index"]);
 $router->addGet("/request/read", ["controller" => "request", "action" => "read"]);
 $router->addPost("/request/accept", ["controller" => "request", "action" => "accept"]);
 $router->addPost("/request/delete", ["controller" => "request", "action" => "delete"]);
@@ -63,11 +63,17 @@ $router->addPost("/watch/load", ["controller" => "watch", "action" => "load"]);
 $router->addGet("/about", ["controller" => "about", "action" => "index"]);
 $router->addGet("/react", ["controller" => "react", "action" => "index"]);
 
+$router->addGet("/admin/permission", ["controller" => "admin", "action" => "permission"]);
+$router->addGet("/admin/index", ["controller" => "admin", "action" => "index"]);
+$router->addGet("/admin/list/:params", ["controller" => "admin", "action" => "list", "params" => 1]);
 $router->addGet("/test", ["controller" => "test", "action" => "index"]);
+//$router->addPost("/test/read", ["controller" => "test", "action" => "read"]);
 
 $router->addGet("/error/page403", ["controller" => "error", "action" => "page403"]);
 $router->addGet("/error/page404", ["controller" => "error", "action" => "page404"]);
 $router->addGet("/error/page500", ["controller" => "error", "action" => "page500"]);
 $router->notFound(["controller" => "error", "action" => "page404"]);
+
+
 
 $router->handle();

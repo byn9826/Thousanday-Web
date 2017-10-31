@@ -1,21 +1,24 @@
 <?php
 
+use \DataTables\DataTable;
 
 class TestController extends ControllerBase {
 
     public function indexAction() {
-        // echo '123';
-        // $redis = new Predis\Client();
-        // //echo $redis->get("test");
-        // $redis->lpush("tutorial-list", "Redis");
-        // $redis->lpush("tutorial-list", "Mongodb");
-        // $redis->lpush("tutorial-list", "Mysql");
-        // $arList = $redis->lrange("tutorial-list", 0 ,5);
-        // //echo "Stored string in redis";
-        // //print_r($arList);
-        // $arList = $redis->keys("*");
-        // echo "Stored keys in redis:: ";
-        // print_r(json_encode($arList));
+        // $this->assets->addCss('https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css', false);
+        // $this->assets->addCss('https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.css', false);
+        // $this->assets->addJs('https://code.jquery.com/jquery-1.12.4.js', false);
+        // $this->assets->addJs('https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js', false);
+        // $this->assets->addJs('https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap4.min.js', false);
+    }
+    
+    public function readAction() {
+        // $builder = $this->modelsManager->createBuilder()
+        //                   ->columns('pet_name')
+        //                   ->from('Pets');
+
+        // $dataTables = new DataTable();
+        // $dataTables->fromBuilder($builder)->sendResponse();
     }
 
 }

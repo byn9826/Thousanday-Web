@@ -33,7 +33,6 @@ $di->setShared('modelsMetadata', function () {
     return new MetaDataAdapter();
 });
 
-/*
 $di->setShared('db', function() {
     $config = $this->getConfig();
     $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
@@ -48,6 +47,7 @@ $di->setShared('db', function() {
     return $connection;
 });
 
+/*
 $di->set('flash', function () {
     return new Flash([
         'error'   => 'alert alert-danger',
@@ -56,10 +56,11 @@ $di->set('flash', function () {
         'warning' => 'alert alert-warning'
     ]);
 });
+*/
+
 
 $di->setShared('session', function () {
     $session = new SessionAdapter();
     $session->start();
     return $session;
 });
-*/

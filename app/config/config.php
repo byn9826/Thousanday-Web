@@ -17,7 +17,6 @@ return new \Phalcon\Config([
     //Define params for Mysql
     'database' => [
         'adapter'     => 'Mysql',
-        'host'        => getenv('IP'),
         'username'    => getenv('C9_USER'),
         'password'    => '',
         'dbname'      => 'c9',
