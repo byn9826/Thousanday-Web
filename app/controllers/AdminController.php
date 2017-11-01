@@ -15,13 +15,19 @@ class adminController extends ControllerBase {
     public function permissionAction() {
         $id = (int) $this->request->get('id');
         $token = $this->request->get('token');
+        $conditions = ['user_id'=> $id, 'user_token'=> $token];
         $validation = Tokens::findFirst([
-            "user_id" => $id,
-            "user_token" => $token,
-            "user_type" => '1'
+            'conditions' => 'user_id=:user_id: AND user_token=:user_token:',
+            'bind' => $conditions,
         ]);
-        $params = new Params();
-        if(isset($validation)) {
+        if ($validation) {
+            $conditions = ['user_id'=> $id, 'user_type'=> '1'];
+            $admin = Users::findFirst([
+                'conditions' => 'user_id=:user_id: AND user_type=:user_type:',
+                'bind' => $conditions,
+            ]);
+        }
+        if($admin) {
             $this->session->set('permission', 'pass');
             $this->dispatcher->forward([
                 "controller" => "admin",
@@ -33,6 +39,13 @@ class adminController extends ControllerBase {
     
     public function indexAction() {
         $this->assets->addCss('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', false);
+        $data = Users::find(['conditions' => 'user_type = "1"']);
+        $paginator = new PaginatorModel([
+            'data'  => $data,
+            'limit' => 10,
+            'page'  => $page
+        ]);
+        $this->view->data = $paginator->getPaginate();
     }
 
     public function listAction() {
@@ -60,13 +73,41 @@ class adminController extends ControllerBase {
                 $this->view->pick('admin/commentsList');
                 break;
         }
-        
         $paginator = new PaginatorModel([
             'data'  => $data,
             'limit' => 10,
             'page'  => $page
         ]);
         $this->view->data = $paginator->getPaginate();
+    }
+    
+    public function momentAction() {
+        $params = $this->dispatcher->getParams()[0];
+        $id = (int) $this->request->get('id');
+        if ($params === 'display') {
+            $moment = Moments::findFirst($id);
+        }
+        $moment->display = $moment->display === '1' ? 0 : 1;
+        $moment->save();
+        $this->dispatcher->forward([
+            "controller" => "admin",
+            "action" => "list",
+            "params" => ["moment"]
+        ]);
+    }
+    
+    public function commentAction() {
+        $params = $this->dispatcher->getParams()[0];
+        $id = (int) $this->request->get('id');
+        if ($params === 'delete') {
+            $comment = Comments::findFirst($id);
+        }
+        $comment->delete();
+        $this->dispatcher->forward([
+            "controller" => "admin",
+            "action" => "list",
+            "params" => ["comment"]
+        ]);
     }
     
     public function readAction() {

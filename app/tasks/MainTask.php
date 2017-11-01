@@ -9,7 +9,7 @@ class MainTask extends Task {
     }
     
     public function backupAction() {
-        shell_exec("php app/cli.php main statistic");
+        //shell_exec("php app/cli.php main statistic");
         shell_exec("php app/cli.php main sql");
         shell_exec("php app/cli.php main image");
     }

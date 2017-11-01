@@ -1,12 +1,22 @@
-<html>
-    <head>
-        <title>Admin Dashboard</title>
-        <?php $this->assets->outputCss(); ?>
-    </head>
-    <body>
-        <a href="/admin/list/pet" type="button" class="btn btn-outline-secondary">Pets List</a>
-        <a href="/admin/list/user" type="button" class="btn btn-outline-secondary">Users List</a>
-        <a href="/admin/list/moment" type="button" class="btn btn-outline-secondary">Moments List</a>
-        <a href="/admin/list/comment" type="button" class="btn btn-outline-secondary">Comments List</a>
-    </body>
-</html>
+<div class="jumbotron">
+    <p class="lead">Admins</p>
+</div>
+<table class="table table-striped table-hover table-sm">
+    <caption>Manage Admins</caption>
+    <thead class="thead-dark">
+        <th>Id</th>
+        <th>Name</th>
+        <th>Type</th>
+    </thead>
+    <?php foreach ($data->items as $item) { ?>
+        <tr>
+            <td><?= $item->user_id; ?></td>
+            <td><?= $item->user_name; ?></td>
+            <td><?= $item->accounttype; ?></td>
+        </tr>
+    <?php } ?>
+</table>
+<a type="button" class="btn btn-outline-secondary" href='/admin'>First</a>
+<a type="button" class="btn btn-outline-secondary" href='/admin?page=<?= $data->before; ?>'>Previous</a>
+<a type="button" class="btn btn-outline-secondary" href='/admin?page=<?= $data->next; ?>'>Next</a>
+<a type="button" class="btn btn-outline-secondary" href='/admin?page=<?= $data->last; ?>'>Last</a>
