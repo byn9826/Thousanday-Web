@@ -25,6 +25,7 @@ Features:
 4. Post moments, record your lovely moments with your pets  
 5. Leave comments, comment on any photo makes you laugh  
 6. Love moments, save moments in your personal list  
+...  
 
 Screen Shot
 --
@@ -36,10 +37,16 @@ Screen Shot
 
 Development Setup
 --
-1. npm install
-2. composer install
-3. $ crontab -e : * * * * * php /var/www/html/app/cli.php main report >/dev/null 2>&1 (php app/cli.php main report)  
-4. service cron start  
+1. Install dependencies  
+npm install    
+composer install  
+2. Set up Cron  
+crontab -e :  
+0 0 * * 0 php /var/www/html/app/cli.php main backup >/dev/null 2>&1  
+3. Start Services  
+service redis-server start  
+service mysql start  
+service cron start  
 
 Other  
 --

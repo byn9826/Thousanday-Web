@@ -8,8 +8,31 @@ class MainTask extends Task {
         echo "Test console controller success" . PHP_EOL;
     }
     
-    public function reportAction() {
-        $path = "statistic/weekly_report.txt";
+    public function backupAction() {
+        shell_exec("php app/cli.php main statistic");
+        shell_exec("php app/cli.php main sql");
+        shell_exec("php app/cli.php main image");
+    }
+    
+    public function sqlAction() {
+        $db = $this->config->database;
+        $date = Date("y-m-d");
+        shell_exec(
+            "mysqldump --user=" . $db->username . " --password=" . $db->password . " " . $db->dbname . " > backup/" . $date . ".sql"
+        );
+    }
+    
+    public function imageAction() {
+        shell_exec(
+            "cp public/img/pet backup -r"
+        );
+        shell_exec(
+            "cp public/img/user backup -r"
+        );
+    }
+    
+    public function statisticAction() {
+        $path = "backup/report.txt";
         try {
             $db = DbConnection::getConnection();
             $Pet = new Pet($db);

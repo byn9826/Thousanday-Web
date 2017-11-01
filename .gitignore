@@ -13,4 +13,4 @@ public/img/pet/*
 public/img/user/*
 app/library/Secret.php
 app/library/DbConnection.php
-statistic/*
+backup/*

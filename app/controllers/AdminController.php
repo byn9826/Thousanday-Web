@@ -32,7 +32,7 @@ class adminController extends ControllerBase {
     }
     
     public function indexAction() {
-        
+        $this->assets->addCss('https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css', false);
     }
 
     public function listAction() {
