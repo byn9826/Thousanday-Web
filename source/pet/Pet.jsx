@@ -284,7 +284,8 @@ class Pet extends Component {
                             <div>
                                 <h6>Attack</h6>
                                 <span>
-                                    <Progress progress={ this.state.petData.attack } 
+                                    <Progress 
+                                        progress={ this.state.petData.attack } 
                                         max="999" percentage="false" 
                                     />
                                 </span>
