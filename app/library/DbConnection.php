@@ -1,9 +1,9 @@
 <?php
 
 class DbConnection {
-    private static $_dsn = 'mysql:host=localhost:3306;dbname=c9';
-    private static $_username = 'root';
-    private static $_password = '';
+    private static $_dsn = 'mysql:host=127.0.0.1;dbname=thousanday';
+    private static $_username = 'paulbao';
+    private static $_password = '8shEsrLs@dPhm3$WkdcGT!';
     private static $_objConnection;
 
     public static function getConnection () {
