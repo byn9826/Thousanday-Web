@@ -98,7 +98,7 @@ class AccountController extends ControllerBase
             } else {
                 $create = $Token->createUserToken( $userId, $newToken, 1 );
             }
-            if ( $create !== 1 ) {
+            if ( $create !== 1 && $create !== 2 ) {
                 $db->rollBack();
                 return $this->response->setStatusCode( 500, 'Internal Server Error' );
             }
