@@ -21,5 +21,6 @@ return new \Phalcon\Config([
         'password'    => '8shEsrLs@dPhm3$WkdcGT!',
         'dbname'      => 'thousanday',
         'charset'     => 'utf8'
-     ]
+     ],
+     appName => 'Smilings'
 ]);

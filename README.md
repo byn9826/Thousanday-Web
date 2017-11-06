@@ -1,12 +1,12 @@
-# Thousanday-Web
+# Smilings-Web
 Photo sharing social web app for your pets and you.  
 
 <b>Please test with real pets images, thanks!</b>  
 
-[Live Site](https://thousanday.com)  
+[Live Site](https://smilings.me)  
 
 Mobile App by React Native:  
-[Repo](https://github.com/byn9826/Thousanday-Mobile)  
+[Smilings Mobile](https://github.com/byn9826/Thousanday-Mobile)  
 <img src="https://github.com/byn9826/Thousanday-Mobile/blob/master/example.gif?raw=true" width="200px" />  
 
 App architecture
