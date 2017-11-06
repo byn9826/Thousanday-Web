@@ -28,6 +28,7 @@ class Header extends Component {
 				method: "POST",
 				data: JSON.stringify({"token": user.token, "platform": "website"}),
 				success: function(result) {
+					console.log(result);
 					if (result.id) {
 						localStorage.setItem("newId", result.id);
 						localStorage.setItem("newToken", user.token);

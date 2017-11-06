@@ -1,16 +1,16 @@
-cache/*
-node_modules
-vendor
 php.ini
-php_errors.log
-todo.md
-package-lock.json
-composer.lock
 .htaccess
 .htrouter.php
 public/.htaccess
+php_errors.log
+phalcon-devtools
+
+node_modules
+vendor
 
 public/production/*
 public/img/pet/*
 public/img/user/*
 app/library/Secret.php
+app/library/DbConnection.php
+backup/*

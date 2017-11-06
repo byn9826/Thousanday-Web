@@ -96,7 +96,7 @@ class Confirmdel extends Component {
         let button;
         if (this.props.message == this.state.content) {
             button = (
-                <input type="button" style={confirmStyle} onClick={this.props.confirmDel.bind(null)} value="Confirm Delete" />
+                <input type="button" style={confirmStyle} onClick={this.props.confirmDel.bind(null)} value="Confirm" />
             );
         } else {
             button = (

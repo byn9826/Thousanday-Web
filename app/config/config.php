@@ -1,29 +1,25 @@
 <?php
-/*
- * Modified: prepend directory path of current file, because of this file own different ENV under between Apache and command line.
- * NOTE: please remove this comment.
- */
+
+//Define base path and app folder path
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
 
 return new \Phalcon\Config([
+    //Define path for MVC
     'application' => [
         'appDir'         => APP_PATH . '/',
         'controllersDir' => APP_PATH . '/controllers/',
         'viewsDir'       => APP_PATH . '/views/',
+        'modelsDir'      => APP_PATH . '/models/',
         'libraryDir'     => APP_PATH . '/library/',
-        'cacheDir'       => BASE_PATH . '/cache/',
-
-        // This allows the baseUri to be understand project paths that are not in the root directory
-        // of the webpspace.  This will break if the public/index.php entry point is moved or
-        // possibly if the web server rewrite rules are changed. This can also be set to a static path.
         'baseUri'        => preg_replace('/public([\/\\\\])index.php$/', '', $_SERVER["PHP_SELF"]),
     ],
+    //Define params for Mysql
     'database' => [
         'adapter'     => 'Mysql',
-        'host'        => getenv('IP'),
-        'username'    => getenv('C9_USER'),
-        'password'    => '',
-        'dbname'      => 'c9'
+        'username'    => 'paulbao',
+        'password'    => '8shEsrLs@dPhm3$WkdcGT!',
+        'dbname'      => 'thousanday',
+        'charset'     => 'utf8'
      ]
 ]);

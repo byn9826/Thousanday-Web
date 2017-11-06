@@ -8,9 +8,10 @@
     ],
     "require": {
         "google/apiclient": "^2.0",
-        "firebase/php-jwt": "4.0"
+        "firebase/php-jwt": "4.0",
+        "predis/predis": "1.1.1"
     },
     "require-dev": {
-        "phalcon/devtools": "~3.2"
+        "phalcon/devtools": "dev-master"
     }
 }

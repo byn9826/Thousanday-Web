@@ -90,9 +90,7 @@ class Add extends Component {
                 contentType: false,
                 processData: false,
                 success: function(result) {
-                    if (result == 1) {
-                        window.location.replace("/user/" + this.state.userId);
-                    }
+                    window.location.replace("/user/" + this.state.userId);
                 }.bind(this),
                 error: function (err) {
                     processError(err);

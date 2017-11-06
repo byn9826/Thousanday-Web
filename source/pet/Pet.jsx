@@ -5,11 +5,14 @@ import Header from "../general/Header";
 import Footer from "../general/Footer";
 import Waterfall from "../component/Waterfall";
 import Postimg from "../component/Postimg";
+import Progress from "../component/Progress";
 import noGetGender from "../js/noGetGender.js";
 import noGetType from "../js/noGetType.js";
 import noGetNature from "../js/noGetNature.js";
+import noGetAbility from "../js/noGetAbility.js";
 import processGallery from "../js/processGallery.js";
 import processError from "../js/processError.js";
+
 class Pet extends Component {
 	constructor(props) {
         super(props);
@@ -110,14 +113,12 @@ class Pet extends Component {
                     "pet": window.location.pathname.split("/").pop()
                 }),
                 success: function(result) {
-                    if (result == 1) {
-                        if (action == 1) {
-                            this.state.watchData.push(this.state.userId);
-                        } else {
-                            this.state.watchData.splice(this.state.watchData.indexOf(this.state.userId), 1);
-                        }
-                        this.setState({watchData: this.state.watchData});
+                    if (action == 1) {
+                        this.state.watchData.push(this.state.userId);
+                    } else {
+                        this.state.watchData.splice(this.state.watchData.indexOf(this.state.userId), 1);
                     }
+                    this.setState({watchData: this.state.watchData});
                 }.bind(this),
                 error: function (err) {
                     processError(err);
@@ -174,7 +175,19 @@ class Pet extends Component {
                     "/moment/" + result[0]
                 ];
                 this.state.galleryData.unshift(add);
-                this.setState({galleryData: this.state.galleryData, reset: this.state.reset + 1, add: this.state.add + 1});
+                if ( result.length === 3 ) {
+                    const ability = noGetAbility( result[ 2 ] );
+                    this.state.petData[ ability ] = parseInt( this.state.petData[ ability ] ) + 1;
+                    this.setState({
+                        galleryData: this.state.galleryData, reset: this.state.reset + 1, 
+                        add: this.state.add + 1, petData: this.state.petData
+                    });
+                } else {
+                    this.setState({
+                        galleryData: this.state.galleryData, reset: this.state.reset + 1, 
+                        add: this.state.add + 1
+                    }); 
+                }
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -262,7 +275,61 @@ class Pet extends Component {
                             <Postimg content="" max="120" title="Share new moment" submitImg={this.submitImg.bind(this)} fontFamily="'Rubik', sans-serif" reset={this.state.reset} />
                         ): null
                     }
-                    <div id="aside-title">
+                    <div className="aside-title">
+                        <img alt="moments" src="/img/icon/glyphicons-skill.png" / >
+                        <h4>Ability</h4>
+                    </div>
+                    <div id="aside-ability">
+                        <div id="aside-ability-left">
+                            <div>
+                                <h6>Attack</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.attack } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Defend</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.defend } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Health</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.health } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Swift</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.swift } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                            <div>
+                                <h6>Lucky</h6>
+                                <span>
+                                    <Progress progress={ this.state.petData.lucky } 
+                                        max="999" percentage="false" 
+                                    />
+                                </span>
+                            </div>
+                        </div>
+                        <div id="aside-ability-right">
+                            <h4>
+                                Play & Win<br />
+                                { this.state.petData.win }
+                            </h4>
+                        </div>
+                    </div>
+                    <div className="aside-title">
                         <img alt="moments" src="/img/icon/glyphicons-moment.png" / >
                         <h4>Moments</h4>
                     </div>

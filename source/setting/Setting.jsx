@@ -60,9 +60,7 @@ class Setting extends Component {
             contentType: false,
             processData: false,
             success: function(result) {
-                if (result == 1) {
-                    this.setState({update: "Avatar Successfully updated !"});
-                }
+                this.setState({update: "Avatar Successfully updated !"});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -86,10 +84,8 @@ class Setting extends Component {
                         "name": userName
                     }),
 					success: function(result) {
-						if (result == 1) {
-                            localStorage.setItem("name", userName);
-                            this.setState({userName: userName, update: "Name Successfully updated !"});
-                        }
+                        localStorage.setItem("name", userName);
+                        this.setState({userName: userName, update: "Name Successfully updated !"});
 					}.bind(this),
 					error: function (err) {
                         processError(err);
@@ -118,12 +114,10 @@ class Setting extends Component {
                     "about": userAbout
                 }),
                 success: function(result) {
-                    if (result == 1) {
-                        if (!userAbout) {
-                            userAbout = "";
-                        }
-                        this.setState({userAbout: userAbout, update: "Mood Successfully updated !"});
+                    if (!userAbout) {
+                        userAbout = "";
                     }
+                    this.setState({userAbout: userAbout, update: "Mood Successfully updated !"});
                 }.bind(this),
                 error: function (err) {
                     processError(err);

@@ -74,9 +74,7 @@ class Edit extends Component {
             contentType: false,
             processData: false,
             success: function(result) {
-                if (result == 1) {
-                    this.setState({update: "Avatar updated successfully !"});
-                }
+                this.setState({update: "Avatar updated successfully !"});
             }.bind(this),
             error: function (err) {
                 processError(err);
@@ -100,9 +98,7 @@ class Edit extends Component {
                         "name": petName
                     }),
 					success: function(result) {
-						if (result == 1) {
-                            this.setState({petName: petName, update: "Name Successfully updated !"});
-                        }
+                        this.setState({petName: petName, update: "Name Successfully updated !"});
 					}.bind(this),
 					error: function (err) {
                         processError(err);
@@ -133,9 +129,7 @@ class Edit extends Component {
                 "pet": window.location.pathname.split("/").pop(),
             }),
 			success: function(result) {
-                if (result == 1) {
-                    window.location.replace("/user/" + this.state.userId);
-                }
+                window.location.replace("/user/" + this.state.userId);
 			}.bind(this),
 			error: function (err) {
                 processError(err);
@@ -192,9 +186,7 @@ class Edit extends Component {
                 "add": this.state.searchData.user_id
             }),
 			success: function(result) {
-                if (result == 1) {
-                    this.setState({showAdd: false, search: "", searchData: null, update: "Request sent successfully !"});
-                }
+                this.setState({showAdd: false, search: "", searchData: null, update: "Request sent successfully !"});
 			}.bind(this),
 			error: function (err) {
                 processError(err);
@@ -218,11 +210,9 @@ class Edit extends Component {
                 "pet": window.location.pathname.split("/").pop(),
             }),
 			success: function(result) {
-                if (result == 1) {
-                    let data = this.state.petData;
-                    data.relative_id = null;
-                    this.setState({petData: data, showRemove: false, update: "Successfully removed relative !"});
-                }
+                let data = this.state.petData;
+                data.relative_id = null;
+                this.setState({petData: data, showRemove: false, update: "Successfully removed relative !"});
 			}.bind(this),
 			error: function (err) {
                 processError(err);
@@ -255,14 +245,12 @@ class Edit extends Component {
                 "relative": this.state.petData.relative_id
             }),
 			success: function(result) {
-                if (result == 1) {
-                    let data = this.state.petData;
-                    let ownerId = this.state.petData.owner_id;
-                    let relativeId = this.state.petData.relative_id;
-                    data.relative_id = ownerId;
-                    data.owner_id = relativeId;
-                    this.setState({petData: data, showTransfer: false, update: "Successfully transferred ownership !"});
-                }
+                let data = this.state.petData;
+                let ownerId = this.state.petData.owner_id;
+                let relativeId = this.state.petData.relative_id;
+                data.relative_id = ownerId;
+                data.owner_id = relativeId;
+                this.setState({petData: data, showTransfer: false, update: "Successfully transferred ownership !"});
 			}.bind(this),
 			error: function (err) {
                 processError(err);
