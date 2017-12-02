@@ -1,9 +1,10 @@
 <?php
 
 class DbConnection {
+    public static $_username = 'paulbao';
+    public static $_password = '8shEsrLs@dPhm3$WkdcGT!';
+    public static $_dbname = 'thousanday';
     private static $_dsn = 'mysql:host=127.0.0.1;dbname=thousanday';
-    private static $_username = 'paulbao';
-    private static $_password = '8shEsrLs@dPhm3$WkdcGT!';
     private static $_objConnection;
 
     public static function getConnection () {

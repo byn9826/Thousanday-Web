@@ -3,6 +3,7 @@
 //Define base path and app folder path
 defined('BASE_PATH') || define('BASE_PATH', getenv('BASE_PATH') ?: realpath(dirname(__FILE__) . '/../..'));
 defined('APP_PATH') || define('APP_PATH', BASE_PATH . '/app');
+require_once(__DIR__ . '/../library/DbConnection.php');
 
 return new \Phalcon\Config([
     //Define path for MVC
@@ -17,10 +18,10 @@ return new \Phalcon\Config([
     //Define params for Mysql
     'database' => [
         'adapter'     => 'Mysql',
-        'username'    => 'paulbao',
-        'password'    => '8shEsrLs@dPhm3$WkdcGT!',
-        'dbname'      => 'thousanday',
+        'username'    => DbConnection::$_username,
+        'password'    => DbConnection::$_password,
+        'dbname'      => DbConnection::$_dbname,
         'charset'     => 'utf8'
      ],
-     appName => 'Smilings'
+     'appName' => 'Smilings'
 ]);
