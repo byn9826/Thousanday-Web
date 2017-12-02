@@ -94,6 +94,20 @@ class Pet {
         $petStmt->execute();
         return $petStmt->rowCount();
     }
+    
+    //update pet's skill
+    public function updatePetSkill($index, $name, $skill, $image, $id) {
+        $petQuery = 'UPDATE pet SET skill' . $index . '_index = :skill, skill' . $index . '_name = :name,
+                     skill' . $index . '_image = :image WHERE pet_id = :id';
+        $petStmt = $this->db->prepare($petQuery);
+        $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
+        $petStmt->bindValue(':name', $name, PDO::PARAM_STR);
+        $petStmt->bindValue(':index', $index, PDO::PARAM_STR);
+        $petStmt->bindValue(':skill', $name, PDO::PARAM_STR);
+        $petStmt->bindValue(':image', $image, PDO::PARAM_INT);
+        $petStmt->execute();
+        return $petStmt->rowCount();
+    }
 
     //* end relative of one pet
     public function endPetRelation($id) {

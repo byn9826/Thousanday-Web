@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PetMigration_100
+ * Class PetMigration_104
  */
-class PetMigration_100 extends Migration
+class PetMigration_104 extends Migration
 {
     /**
      * Define the table structure
@@ -73,7 +73,6 @@ class PetMigration_100 extends Migration
                         'pet_reg',
                         [
                             'type' => Column::TYPE_DATE,
-                            'notNull' => true,
                             'size' => 1,
                             'after' => 'pet_nature'
                         ]
@@ -172,7 +171,95 @@ class PetMigration_100 extends Migration
                             'size' => 1,
                             'after' => 'last_update'
                         ]
-                    )
+                    ),
+                    new Column(
+                        'skill0_index',
+                        [
+                            'type' => Column::TYPE_CHAR,
+                            'size' => 2
+                        ]
+                    ),
+                    new Column(
+                        'skill0_name',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => 'No Name',
+                            'size' => 10
+                        ]
+                    ),
+                    new Column(
+                        'skill0_image',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                        ]
+                    ),
+                    new Column(
+                        'skill1_index',
+                        [
+                            'type' => Column::TYPE_CHAR,
+                            'size' => 2
+                        ]
+                    ),
+                    new Column(
+                        'skill1_name',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => 'No Name',
+                            'size' => 10
+                        ]
+                    ),
+                    new Column(
+                        'skill1_image',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                        ]
+                    ),
+                    new Column(
+                        'skill2_index',
+                        [
+                            'type' => Column::TYPE_CHAR,
+                            'size' => 2
+                        ]
+                    ),
+                    new Column(
+                        'skill2_name',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => 'No Name',
+                            'size' => 10
+                        ]
+                    ),
+                   new Column(
+                        'skill2_image',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                        ]
+                    ),
+                    new Column(
+                        'skill3_index',
+                        [
+                            'type' => Column::TYPE_CHAR,
+                            'size' => 2
+                        ]
+                    ),
+                    new Column(
+                        'skill3_name',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'default' => 'No Name',
+                            'size' => 10
+                        ]
+                    ),
+                    new Column(
+                        'skill3_image',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'size' => 11,
+                        ]
+                    ),
                 ],
                 'indexes' => [
                     new Index('PRIMARY', ['pet_id'], 'PRIMARY')

@@ -40,7 +40,7 @@ class EditController extends ControllerBase {
         $user = ( int ) $data[ 'user' ];
         $pet = ( int ) $data[ 'pet' ];
         $update = $data[ 'name' ];
-        $name = ( strlen( $update ) > 10 ) ? substr( $update, 0, 10 ) : $update;
+        $name = strlen( $update ) > 10 ? substr( $update, 0, 10 ) : $update;
         try {
             $db = DbConnection::getConnection();
             $Token = new Token( $db );

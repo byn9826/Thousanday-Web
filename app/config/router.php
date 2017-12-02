@@ -63,6 +63,9 @@ $router->addPost("/watch/load", ["controller" => "watch", "action" => "load"]);
 $router->addGet("/about", ["controller" => "about", "action" => "index"]);
 $router->addGet("/react", ["controller" => "react", "action" => "index"]);
 
+$router->addGet("/skill/read", ["controller" => "skill", "action" => "read"]);
+$router->addPost("/skill/build", ["controller" => "skill", "action" => "build"]);
+
 $router->addGet("/admin", ["controller" => "admin", "action" => "index"]);
 $router->addGet("/admin/permission", ["controller" => "admin", "action" => "permission"]);
 $router->addGet("/admin/list/:params", ["controller" => "admin", "action" => "list", "params" => 1]);

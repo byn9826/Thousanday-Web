@@ -28,6 +28,11 @@ Server Setup
 sudo service redis-server start  
 sudo service mysql start  
 sudo service nginx start  
+npm install  
+composer update  
+webpack --watch  
+vendor/phalcon/devtools/phalcon.php  
+php app/cli.php main    
    
 Screen Shot
 --

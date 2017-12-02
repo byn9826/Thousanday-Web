@@ -44,4 +44,7 @@ try {
 } catch (\Exception $e) {
     echo $e->getMessage() . '<br>';
     echo '<pre>' . $e->getTraceAsString() . '</pre>';
+    $logger = new \Phalcon\Logger\Adapter\File('../error.log');
+    $logger->error($e->getMessage());
+    $logger->error($e->getTraceAsString());
 }
