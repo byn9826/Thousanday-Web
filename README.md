@@ -31,8 +31,8 @@ sudo service nginx start
 npm install  
 composer update  
 webpack --watch  
-vendor/phalcon/devtools/phalcon.php  
-php app/cli.php main    
+vendor/phalcon/devtools/phalcon.php migration   
+php app/cli.php main backup   
    
 Screen Shot
 --

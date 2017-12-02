@@ -15,7 +15,8 @@ $loader->registerClasses(
     [
         'DbConnection' => __DIR__ . '/../library/DbConnection.php',
         'Secret' => __DIR__ . '/../library/Secret.php',
-        'Skills' => __DIR__ . '/../library/Skills.php'
+        'Skills' => __DIR__ . '/../library/Skills.php',
+        'Monsters' => __DIR__ . '/../library/Monsters.php'
     ]
 );
 

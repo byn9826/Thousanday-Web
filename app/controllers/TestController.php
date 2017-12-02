@@ -5,7 +5,7 @@ use \DataTables\DataTable;
 class TestController extends ControllerBase {
 
     public function indexAction() {
-        var_dump(Pets::find());
+        var_dump(Monsters::getZodiac());
         exit;
     }
     
