@@ -33,6 +33,7 @@ composer update
 webpack --watch  
 vendor/phalcon/devtools/phalcon.php migration   
 php app/cli.php main backup   
+php app/cli.php api   
    
 Screen Shot
 --

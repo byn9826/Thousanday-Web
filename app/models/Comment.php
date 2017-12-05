@@ -10,7 +10,7 @@ class Comment {
 
     //* get five comments for one moment from the pin point
     public function readMomentComments( $moment, $pin, $number ) {
-        $momentQuery = 'SELECT comment_content, user_id, comment_time 
+        $momentQuery = 'SELECT comment_id, comment_content, user_id, comment_time 
                         FROM moment_comment WHERE moment_id = :moment
                         ORDER BY comment_id DESC LIMIT :pin, :number';
         $momentStmt = $this->db->prepare( $momentQuery );

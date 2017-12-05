@@ -11,7 +11,8 @@ class Skills {
         6 => ['Sleep', 'Restore 50% health, with 50% chance skip moving for next round'],
         7 => ['Pee', 'Increate 20% lucky'],
         8 => ['Howl', 'Increate 15% attack'],
-        9 => ['Slip', 'Increate 30% chance of avoid attacks in three rounds']，
+        9 => ['Slip', 'Increate 30% chance of avoid attacks in three rounds'],
         10 => ['Grind', 'Increase attack by 100 points for next round']
     ];
+
 }

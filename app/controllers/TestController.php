@@ -1,7 +1,5 @@
 <?php
 
-use \DataTables\DataTable;
-
 class TestController extends ControllerBase {
 
     public function indexAction() {
