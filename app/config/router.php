@@ -19,6 +19,7 @@ $router->addGet("/pet/:int", ["controller" => "pet", "action" => "index", "param
 $router->addGet("/pet/read", ["controller" => "pet", "action" => "read"]);
 $router->addGet("/pet/load", ["controller" => "pet", "action" => "load"]);
 $router->addPost("/pet/watch", ["controller" => "pet", "action" => "watch"]);
+
 $router->addGet("/edit/:int", ["controller" => "edit", "action" => "index", "params" => 1]);
 $router->addGet("/edit/read", ["controller" => "edit", "action" => "read"]);
 $router->addPost("/edit/name", ["controller" => "edit", "action" => "name"]);
@@ -27,6 +28,8 @@ $router->addPost("/edit/add", ["controller" => "edit", "action" => "add"]);
 $router->addPost("/edit/remove", ["controller" => "edit", "action" => "remove"]);
 $router->addPost("/edit/transfer", ["controller" => "edit", "action" => "transfer"]);
 $router->addPost("/edit/end", ["controller" => "edit", "action" => "end"]);
+
+$router->addGet("/learn/read", ["controller" => "learn", "action" => "read"]);
 
 $router->addGet("/add", ["controller" => "add", "action" => "index"]);
 
