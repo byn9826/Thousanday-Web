@@ -9,3 +9,4 @@ app/library/Secret.php
 app/library/DbConnection.php
 
 backup/*
+cache/*

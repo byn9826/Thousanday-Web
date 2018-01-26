@@ -25,12 +25,21 @@ class Pet {
   }
 
   public function readPetSkills($id) {
-    $petQuery = 'SELECT skill0_index, skill0_name, skill1_index, skill1_name, skill2_index, skill2_name,
-                 skill3_index, skill3_name FROM pet WHERE pet_id = :id';
+    $petQuery = 'SELECT skill0_index, skill1_index, skill2_index, skill3_index FROM pet WHERE pet_id = :id';
     $petStmt = $this->db->prepare($petQuery);
     $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
     $petStmt->execute();
     return $petStmt->fetch(PDO::FETCH_ASSOC);
+  }
+  
+  //update pet's skill
+  public function updatePetSkill($index, $skill, $id) {
+    $petQuery = 'UPDATE pet SET skill' . $index . '_index = :skill WHERE pet_id = :id';
+    $petStmt = $this->db->prepare($petQuery);
+    $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $petStmt->bindValue(':skill', $skill, PDO::PARAM_STR);
+    $petStmt->execute();
+    return $petStmt->rowCount();
   }
 
   //* return owner id and relative id of one pet
@@ -100,20 +109,6 @@ class Pet {
     $petStmt = $this->db->prepare($petQuery);
     $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
     $petStmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $petStmt->execute();
-    return $petStmt->rowCount();
-  }
-
-  //update pet's skill
-  public function updatePetSkill($index, $name, $skill, $image, $id) {
-    $petQuery = 'UPDATE pet SET skill' . $index . '_index = :skill, skill' . $index . '_name = :name,
-                 skill' . $index . '_image = :image WHERE pet_id = :id';
-    $petStmt = $this->db->prepare($petQuery);
-    $petStmt->bindValue(':id', $id, PDO::PARAM_INT);
-    $petStmt->bindValue(':name', $name, PDO::PARAM_STR);
-    $petStmt->bindValue(':index', $index, PDO::PARAM_STR);
-    $petStmt->bindValue(':skill', $name, PDO::PARAM_STR);
-    $petStmt->bindValue(':image', $image, PDO::PARAM_INT);
     $petStmt->execute();
     return $petStmt->rowCount();
   }

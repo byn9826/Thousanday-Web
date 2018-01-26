@@ -1,6 +1,6 @@
 <?php
 
-$router = $di->getRouter( false );
+$router = $di->getRouter(false);
 
 $router->addGet("/", ["controller" => "index", "action" => "index"]);
 $router->addGet("/index/read", ["controller" => "index", "action" => "read"]);
@@ -30,6 +30,7 @@ $router->addPost("/edit/transfer", ["controller" => "edit", "action" => "transfe
 $router->addPost("/edit/end", ["controller" => "edit", "action" => "end"]);
 
 $router->addGet("/learn/read", ["controller" => "learn", "action" => "read"]);
+$router->addPost("/learn/update", ["controller" => "learn", "action" => "update"]);
 
 $router->addGet("/add", ["controller" => "add", "action" => "index"]);
 
@@ -56,6 +57,7 @@ $router->addPost("/upload/add", ["controller" => "upload", "action" => "add"]);
 $router->addPost("/upload/moment", ["controller" => "upload", "action" => "moment"]);
 $router->addPost("/upload/create", ["controller" => "upload", "action" => "create"]);
 $router->addPost("/upload/user", ["controller" => "upload", "action" => "user"]);
+$router->addPost("/upload/skill", ["controller" => "upload", "action" => "skill"]);
 
 $router->addGet("/watch", ["controller" => "watch", "action" => "index"]);
 $router->addGet("/watch/read", ["controller" => "watch", "action" => "read"]);
