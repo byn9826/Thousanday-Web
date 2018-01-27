@@ -1,12 +1,11 @@
 node_modules
 vendor
 
-public/production/*
 public/img/pet/*
 public/img/user/*
 
 app/library/Secret.php
 app/library/DbConnection.php
 
+.phalcon
 backup/*
-cache/*
