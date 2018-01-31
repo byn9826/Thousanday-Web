@@ -2,13 +2,16 @@
 
 class TestController extends ControllerBase {
 
-    public function indexAction() {
-        var_dump(Monsters::getZodiac());
-        exit;
+  public function indexAction() {
+    $CrawlerDetect = new CrawlerDetect;
+    if($CrawlerDetect->isCrawler()) {
+      
     }
-    
-    public function readAction() {
+    return $this->view->pick('ssr/public');
+  }
 
-    }
+  public function readAction() {
+
+  }
 
 }

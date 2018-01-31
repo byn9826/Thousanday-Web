@@ -9,7 +9,8 @@
     "require": {
         "google/apiclient": "^2.0",
         "firebase/php-jwt": "4.0",
-        "predis/predis": "1.1.1"
+        "predis/predis": "1.1.1",
+        "jaybizzle/crawler-detect": "^1.2"
     },
     "require-dev": {
         "phalcon/devtools": "dev-master"
