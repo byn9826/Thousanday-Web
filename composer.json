@@ -1,18 +1,27 @@
 {
-    "name": "thousanday",
-    "authors": [
-        {
-            "name": "Baozier",
-            "email": "byn9826@gmail.com"
-        }
-    ],
-    "require": {
-        "google/apiclient": "^2.0",
-        "firebase/php-jwt": "4.0",
-        "predis/predis": "1.1.1",
-        "jaybizzle/crawler-detect": "^1.2"
-    },
-    "require-dev": {
-        "phalcon/devtools": "dev-master"
+  "name": "thousanday",
+  "authors": [
+    {
+      "name": "Baozier",
+      "email": "byn9826@gmail.com"
     }
+  ],
+  "require": {
+    "google/apiclient": "^2.0",
+    "firebase/php-jwt": "4.0",
+    "predis/predis": "1.1.1",
+    "jaybizzle/crawler-detect": "^1.2",
+    "jonnyw/php-phantomjs": "4.*"
+  },
+  "require-dev": {
+    "phalcon/devtools": "dev-master"
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ],
+    "post-update-cmd": [
+      "PhantomInstaller\\Installer::installPhantomJS"
+    ]
+  }
 }
