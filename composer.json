@@ -10,18 +10,9 @@
     "google/apiclient": "^2.0",
     "firebase/php-jwt": "4.0",
     "predis/predis": "1.1.1",
-    "jaybizzle/crawler-detect": "^1.2",
-    "jonnyw/php-phantomjs": "4.*"
+    "byn9826/fake-ssr": "dev-master"
   },
   "require-dev": {
     "phalcon/devtools": "dev-master"
-  },
-  "scripts": {
-    "post-install-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
-    ],
-    "post-update-cmd": [
-      "PhantomInstaller\\Installer::installPhantomJS"
-    ]
   }
 }

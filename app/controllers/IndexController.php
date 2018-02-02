@@ -1,15 +1,16 @@
 <?php
 use Phalcon\Assets\Filters\Cssmin;
-use Jaybizzle\CrawlerDetect\CrawlerDetect;
+use byn9826\FakeSSR\FakeSSR;
 
 class IndexController extends ControllerBase {
 
   public function indexAction() {
     
-    $CrawlerDetect = new CrawlerDetect;
-    if($CrawlerDetect->isCrawler()) {
-      return $this->view->pick('ssr/public');
-    }
+    FakeSSR::detect(
+      'https://smilings.me',
+      dirname(__dir__) . '/.ssr',
+      false
+    );
     
     $this->assets->collection('header')
       ->setTargetPath('../public/production/public.css')
