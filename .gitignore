@@ -7,8 +7,5 @@ public/img/user/*
 app/library/Secret.php
 app/library/DbConnection.php
 
-app/bin/*
 app/.ssr/*
-
 .phalcon
-backup/*
