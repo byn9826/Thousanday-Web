@@ -59,55 +59,55 @@ class AccountController extends ControllerBase
         }
     }
 
-    //* response to user's facebook login action
-    public function facebookAction() {
-        $data = $this->request->getJsonRawBody( true );
-        $fbToken = $data[ 'token' ];
-        $platform = $data[ 'platform' ];
-        $Secret = new Secret();
-        $fbSecret = $Secret->getFacebook();
-        $access = file_get_contents(
-            'https://graph.facebook.com/oauth/access_token?client_id=447688265576125&client_secret=' . $fbSecret . '&grant_type=client_credentials'
-        );
-        $accessData = json_decode( $access );
-        $appToken = $accessData->access_token;
-        $verify = file_get_contents(
-            'https://graph.facebook.com/debug_token?input_token=' . $fbToken . '&access_token=' . $appToken
-        );
-        $verifyData = json_decode( $verify );
-        $fbId = $verifyData->data->user_id;
-        if ( !$fbId ) {
-             return $this->response->setStatusCode( 403, 'Forbidden' );
-        }
-        try {
-            $db = DbConnection::getConnection();
-            $User = new User( $db );
-            //check if user already registered or not
-            $check = $User->checkFacebookId( $fbId );
-            if ( !$check ) {
-                return json_encode( [ 'id' => $fbId ] );
-            } 
-            //account exist, get user id
-            $userId = $check[ 'user_id' ];
-            $userName = $check[ 'user_name' ];
-            $newToken = $Secret->getToken( $userId );
-            $Token = new Token( $db );
-            $db->beginTransaction();
-            if ( $platform === 'website' ) {
-                $create = $Token->createUserToken( $userId, $newToken, 0 );
-            } else {
-                $create = $Token->createUserToken( $userId, $newToken, 1 );
-            }
-            if ( $create !== 1 && $create !== 2 ) {
-                $db->rollBack();
-                return $this->response->setStatusCode( 500, 'Internal Server Error' );
-            }
-            $db->commit();
-            return json_encode( [ $userId, $userName, $newToken ] );
-        } catch ( Exception $e ) {
-            return $this->response->setStatusCode( 500, 'Internal Server Error' );
-        }
+  //* response to user's facebook login action
+  public function facebookAction() {
+    $data = $this->request->getJsonRawBody( true );
+    $fbToken = $data[ 'token' ];
+    $platform = $data[ 'platform' ];
+    $Secret = new Secret();
+    $fbSecret = $Secret->getFacebook();
+    $access = file_get_contents(
+      'https://graph.facebook.com/oauth/access_token?client_id=447688265576125&client_secret=' . $fbSecret . '&grant_type=client_credentials'
+    );
+    $accessData = json_decode( $access );
+    $appToken = $accessData->access_token;
+    $verify = file_get_contents(
+      'https://graph.facebook.com/debug_token?input_token=' . $fbToken . '&access_token=' . $appToken
+    );
+    $verifyData = json_decode( $verify );
+    $fbId = $verifyData->data->user_id;
+    if ( !$fbId ) {
+     return $this->response->setStatusCode( 403, 'Forbidden' );
     }
+    try {
+      $db = DbConnection::getConnection();
+      $User = new User( $db );
+      //check if user already registered or not
+      $check = $User->checkFacebookId( $fbId );
+      if ( !$check ) {
+        return json_encode( [ 'id' => $fbId ] );
+      } 
+      //account exist, get user id
+      $userId = $check[ 'user_id' ];
+      $userName = $check[ 'user_name' ];
+      $newToken = $Secret->getToken( $userId );
+      $Token = new Token( $db );
+      $db->beginTransaction();
+      if ( $platform === 'website' ) {
+        $create = $Token->createUserToken( $userId, $newToken, 0 );
+      } else {
+        $create = $Token->createUserToken( $userId, $newToken, 1 );
+      }
+      if ( $create !== 1 && $create !== 2 ) {
+        $db->rollBack();
+        return $this->response->setStatusCode( 500, 'Internal Server Error' );
+      }
+      $db->commit();
+      return json_encode( [ $userId, $userName, $newToken ] );
+    } catch ( Exception $e ) {
+      return $this->response->setStatusCode( 500, 'Internal Server Error' );
+    }
+  }
 
     //* logout remove token in database
     public function logoutAction() {

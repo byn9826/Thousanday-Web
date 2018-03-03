@@ -88,7 +88,9 @@ export default class Waterfall extends Component {
 					>
 						<div 
 							style={
-								Object.assign({}, imageStyle, { backgroundImage: "url(" + this.props.image[i][0] + ")" })
+								Object.assign(
+									{}, imageStyle, { backgroundImage: "url(" + this.props.image[i][0] + ")" }
+								)
 							}
 						>
 						</div>
