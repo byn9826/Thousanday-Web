@@ -40,7 +40,10 @@ class IndexController extends ControllerBase {
     $load = (int) $this->request->get('load');
     try {
       $db = DbConnection::getConnection();
-      $Moment = new Moment($db);
+      $Moment = new Moment($db);                   
+      $this->response->setHeader('Access-Control-Allow-Origin', '*');
+      $this->response->setHeader('Access-Control-Allow-Headers', 'X-Requested-With');      
+      $this->response->sendHeaders();
       return json_encode($Moment->readPublicMoments($load));
     } catch (Exception $e) {
       return $this->response->setStatusCode(500, 'Internal Server Error');
