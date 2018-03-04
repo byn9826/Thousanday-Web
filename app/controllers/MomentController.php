@@ -24,6 +24,10 @@ class MomentController extends ControllerBase {
 
   //* read information for one moment 
   public function readAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $id = $this->request->get( 'id' );
     try {
       $db = DbConnection::getConnection();
