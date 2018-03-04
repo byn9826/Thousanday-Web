@@ -1,4 +1,4 @@
-import { SET_HOME_DATA } from '../actions/home';
+import { CHANGE_HOME_MOMENTS } from '../actions/home';
 import buildGallery from '../../helpers/buildGallery';
 
 const initState = {
@@ -12,7 +12,7 @@ const initState = {
 
 export default function reducer(state = initState, action) {
 	switch (action.type) {
-		case SET_HOME_DATA:
+		case CHANGE_HOME_MOMENTS:
 			const newData = buildGallery(action.data);
 			return {
 				...state,

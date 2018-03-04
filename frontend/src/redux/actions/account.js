@@ -1,27 +1,18 @@
 import { 
-	domainUrl, loadFacebookAccountApi, loadGoogleAccountApi
+	domainUrl, readAccountFacebookApi, readAccountGoogleApi
 } from '../../helpers/config';
 
-export const SET_ACCOUNT_DATA = "account/SET_ACCOUNT_DATA";
+export const CHANGE_ACCOUNT_DATA = "account/CHANGE_ACCOUNT_DATA";
 
-function setAccountData(data) {
+export function changeAccountData(data) {
 	return {
-		type: SET_ACCOUNT_DATA,
+		type: CHANGE_ACCOUNT_DATA,
 		data
 	}
 }
 
-export function fetchAccountData() {
-	//get stored user id, name from local, and treat as logged in user
-	if (localStorage.getItem("id")) {
-		const id = localStorage.getItem("id");
-		const name = localStorage.getItem("name");
-		return setAccountData([id, name]);
-	}
-}
-
-export function loadAccountData(portal, token) {
-	const apiUrl = portal === 'facebook' ? loadFacebookAccountApi : loadGoogleAccountApi;
+export function readAccountData(portal, token) {
+	const apiUrl = portal === 'facebook' ? readAccountFacebookApi : readAccountGoogleApi;
 	return function (dispatch) {
 		return fetch(domainUrl + apiUrl, {
 			method: 'POST',
@@ -41,7 +32,7 @@ export function loadAccountData(portal, token) {
 				localStorage.setItem("id", json[0]);
 				localStorage.setItem("name", json[1]);
 				localStorage.setItem("token", json[2]);
-				dispatch(setAccountData(json));
+				dispatch(changeAccountData(json));
 			}).catch(() => {
 				//error
 			});

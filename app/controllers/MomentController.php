@@ -50,6 +50,11 @@ class MomentController extends ControllerBase {
 
   //* delete one moment
   public function deleteAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody( true );
     $token = $data[ 'token'];
     $moment = ( int ) $data[ 'moment' ];
@@ -84,6 +89,11 @@ class MomentController extends ControllerBase {
 
   //* user like or dislike a moment
   public function likeAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody( true );
     $token = $data[ 'token' ];
     $moment = ( int ) $data[ 'moment' ];
@@ -120,6 +130,11 @@ class MomentController extends ControllerBase {
 
   //* user comment on one moment
   public function commentAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody( true );
     $token = $data[ 'token' ];
     $moment = ( int ) $data[ 'moment' ];
@@ -149,6 +164,10 @@ class MomentController extends ControllerBase {
 
   //load 10 more comment based on pin
   public function loadAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->sendHeaders();
     $id = ( int ) $this->request->get('id' );
     $load = ( int ) $this->request->get( 'load' );
     $add = ( int ) $this->request->get( 'add' );

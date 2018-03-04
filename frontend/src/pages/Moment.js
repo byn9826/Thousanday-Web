@@ -1,36 +1,91 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
-import { loadMomentData } from '../redux/actions/moment';
-import { showMomentDelete } from '../redux/actions/moment';
-import { fetchAccountData } from '../redux/actions/account';
+import { 
+	readMomentPage, showMomentDelete, deleteMomentPage, updateMomentLike, readMomentComments,
+	showCommentEmpty, createMomentComment
+} from '../redux/actions/moment';
+import { changeAccountData } from '../redux/actions/account';
 import { domainUrl } from '../helpers/config';
 import Like from '../components/Like';
 import Inputarea from '../components/Inputarea';
+import Commentlist from '../components/Commentlist';
 import '../styles/moment.css';
 
 class Moment extends Component {
 	componentWillMount() {
-		this.props.fetchAccountData();
+		this.props.changeAccountData(
+			[
+				localStorage.getItem('id'), 
+				localStorage.getItem('name'),
+				localStorage.getItem('token')
+			]
+		);
 	}
 	componentDidMount() {
-		this.props.loadMomentData(this.props.match.params.id);
+		this.props.readMomentPage(this.props.match.params.id);
 	}
 	showConfirm() {
 		this.props.showMomentDelete();
 	}
 	confirmDelete() {
-		
+		this.props.deleteMomentPage(
+			this.props.account.id,
+			this.props.account.token,
+			this.props.match.params.id,
+			this.props.moment.momentData.pet_id
+		);
 	}
-	sharePage() {
-		
-	}
-	changeLike() {
-		
+// 	sharePage() {
+// 		FB.ui({
+// 			display: 'popup',
+// 			method: 'share_open_graph',
+// 			action_type: 'og.shares',
+// 			action_properties: JSON.stringify({
+// 				object : {
+// 					"og:url": location.href,
+// 					"og:title": '"' + this.props.moment.momentData.moment_message + '"',
+// 					"og:description": "Smilings.me - Homepage for your pets",
+// 					"og:image": domainUrl + '/img/pet/' + this.props.moment.momentData.pet_id + 
+// 						"/moment/" + this.props.moment.momentData.image_name
+// 				}
+// 			})
+// 		});
+// 	}
+	changeLike(action) {
+		this.props.updateMomentLike(
+			this.props.account.id,
+			this.props.account.token,
+			this.props.match.params.id,
+			action
+		);
 	}
 	sendComment() {
-		
+		//comment content can't be empty
+		let content = this.refs.newComment.state.content.trim();
+		if (content === "") {
+			this.props.showCommentEmpty();
+		} else {
+			this.refs.newComment.setState({content: ""});
+			this.props.createMomentComment(
+				this.props.account.id,
+				this.props.account.token,
+				this.props.match.params.id,
+				content
+			);
+		}
+	}
+	loadComment() {
+		this.props.readMomentComments(
+			this.props.match.params.id,
+			this.props.moment.commentLoad,
+			this.props.moment.commentAdded
+		);
 	}
 	render() {
+		if (this.props.moment.redirectUser) {
+      return <Redirect to={ '/user/' + this.props.account.id } />;
+    }
 		let likeButton, commentArea, deleteButton;
 		if (this.props.account.id !== null) {
 			likeButton = <Like 
@@ -98,13 +153,13 @@ class Moment extends Component {
 				</section>
 				<section id="aside-social">
 					{ likeButton }
-					<img 
-						id="fb-share-button" 
-						onClick={ this.sharePage.bind(this) } 
-						alt="share" 
-						src="../public/img/facebook-share.png"
-					/>
 				</section>
+				<Commentlist 
+					data={ this.props.moment.commentData } 
+					locker={ this.props.moment.commentLocker } 
+					loadMore={ this.loadComment.bind(this) } 
+					fontFamily="'Rubik', sans-serif" 
+				/>
 				{ commentArea }
 			</aside>
 		]);
@@ -113,6 +168,9 @@ class Moment extends Component {
 
 export default connect(
   (state) => ({ account: state.account, moment: state.moment }),
-  { loadMomentData, fetchAccountData, showMomentDelete }
+  { 
+		readMomentPage, showMomentDelete, deleteMomentPage, updateMomentLike, readMomentComments,
+		showCommentEmpty, createMomentComment, changeAccountData
+	}
 )(Moment);
 

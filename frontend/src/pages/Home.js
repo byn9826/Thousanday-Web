@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadHomeData } from '../redux/actions/home';
-import { loadAccountData } from '../redux/actions/account';
-import { fetchAccountData } from '../redux/actions/account';
+import { readHomeMoments } from '../redux/actions/home';
+import { changeAccountData, readAccountData } from '../redux/actions/account';
 import { 
 	domainUrl, androidStoreUrl, googleClientId, facebookClientId 
 } from '../helpers/config';
@@ -13,26 +12,32 @@ import '../styles/public.css';
 
 class Home extends Component {
 	componentWillMount() {
-		this.props.fetchAccountData();
+		this.props.changeAccountData(
+			[
+				localStorage.getItem('id'), 
+				localStorage.getItem('name'),
+				localStorage.getItem('token')
+			]
+		);
 	}
   componentDidMount() {
-    this.props.loadHomeData(this.props.home.load);
+    this.props.readHomeMoments(this.props.home.load);
   }
 	gLogin(detail) {
 		if (this.props.account.id === null) {
 			//verify google login user
-			this.props.loadAccountData('google', detail.token);
+			this.props.readAccountData('google', detail.token);
 		}
 	}
 	fLogin(response, token) {
 		if (this.props.account.id === null) {
 			//verify facebook login user
-			this.props.loadAccountData('facebook', token);
+			this.props.readAccountData('facebook', token);
 		}
 	}
  	//load more moment
   loadMore() {
-    this.props.loadHomeData(this.props.home.load);
+    this.props.readHomeMoments(this.props.home.load);
   }
   render() {
 		//login board
@@ -107,5 +112,5 @@ class Home extends Component {
 
 export default connect(
   (state) => ({ home: state.home, account: state.account }),
-  { loadHomeData, loadAccountData, fetchAccountData }
+  { readHomeMoments, readAccountData, changeAccountData }
 )(Home);

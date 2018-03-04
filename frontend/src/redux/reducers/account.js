@@ -1,4 +1,4 @@
-import { SET_ACCOUNT_DATA } from '../actions/account';
+import { CHANGE_ACCOUNT_DATA } from '../actions/account';
 
 const initState = {
 	id: null,
@@ -8,7 +8,7 @@ const initState = {
 
 export default function reducer(state = initState, action) {
 	switch (action.type) {
-		case SET_ACCOUNT_DATA:
+		case CHANGE_ACCOUNT_DATA:
 			if (state.id === null) {
 				return {
 					...state,

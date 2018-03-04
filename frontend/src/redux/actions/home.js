@@ -1,22 +1,22 @@
-import { domainUrl, loadHomeDataApi } from '../../helpers/config';
+import { domainUrl, readHomeMomentsApi } from '../../helpers/config';
 
-export const SET_HOME_DATA = "home/SET_HOME_DATA";
+export const CHANGE_HOME_MOMENTS = "home/CHANGE_HOME_MOMENTS";
 
-function setHomeData(data) {
+function changeHomeMoments(data) {
 	return {
-		type: SET_HOME_DATA,
+		type: CHANGE_HOME_MOMENTS,
 		data
 	}
 }
 
-export function loadHomeData(load) {
+export function readHomeMoments(load) {
 	return function (dispatch) {
-		return fetch(domainUrl + loadHomeDataApi + '?load=' + load)
+		return fetch(domainUrl + readHomeMomentsApi + '?load=' + load)
 			.then((response => {
 				return response.json();
 			}))
 			.then((json) => {
-				dispatch(setHomeData(json))
+				dispatch(changeHomeMoments(json))
 			}).catch(() => {
 				//error
 			});
