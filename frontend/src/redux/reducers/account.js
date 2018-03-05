@@ -9,7 +9,7 @@ const initState = {
 export default function reducer(state = initState, action) {
 	switch (action.type) {
 		case CHANGE_ACCOUNT_DATA:
-			if (state.id === null) {
+			if (state.id === null && action.data[0] !== null) {
 				return {
 					...state,
 					id: parseInt(action.data[0]),
@@ -17,7 +17,6 @@ export default function reducer(state = initState, action) {
 					token: action.data[2]
 				};	
 			}
-			break;
 		default:
 			return state;
 	}

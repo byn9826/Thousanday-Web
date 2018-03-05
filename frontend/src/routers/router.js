@@ -1,9 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Bundle from './Bundle';
 import '../styles/general.css';
 
 import Home from 'bundle-loader?lazy&name=home!../pages/Home';
+import Pet from 'bundle-loader?lazy&name=pet!../pages/Pet';
 import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 
@@ -32,6 +33,7 @@ const getRouter = () => (
 			</header>
       <Switch>
         <Route exact path="/" component={ createComponent(Home) } />
+				<Route exact path="/pet/:id" component={ createComponent(Pet) } />
 				<Route exact path="/moment/:id" component={ createComponent(Moment) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
       </Switch>

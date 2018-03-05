@@ -24,6 +24,10 @@ class PetController extends ControllerBase {
 
   //* read information for one pet
   public function readAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $id = $this->request->get('id');
     try {
       $db = DbConnection::getConnection();
@@ -79,6 +83,10 @@ class PetController extends ControllerBase {
 
   //* load more pets moments
   public function loadAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $pet = $this->request->get('pet');
     $load = (int) $this->request->get('load');
     $add = (int) $this->request->get('add');
@@ -94,6 +102,11 @@ class PetController extends ControllerBase {
 
   //* user watch or unwatch a pet
   public function watchAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $pet = (int) $data['pet'];
