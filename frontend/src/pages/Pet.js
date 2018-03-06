@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { 
 	readPetPage, updatePetWatch, createPetMoment, readPetMoments, showAccountRequired 
 } from '../redux/actions/pet';
-import { changeAccountData } from '../redux/actions/account';
 import { noGetGender, noGetType, noGetNature, noGetAbility } from '../helpers/noToInfo';
 import { domainUrl } from '../helpers/config';
 import Postimg from '../components/Postimg';
@@ -12,15 +11,6 @@ import Waterfall from '../components/Waterfall';
 import '../styles/pet.css';
 
 class Pet extends Component {
-	componentWillMount() {
-		this.props.changeAccountData(
-			[
-				localStorage.getItem('id'), 
-				localStorage.getItem('name'),
-				localStorage.getItem('token')
-			]
-		);
-	}
   componentDidMount() {
 		this.props.readPetPage(this.props.match.params.id);
   }
@@ -188,7 +178,7 @@ class Pet extends Component {
 export default connect(
   (state) => ({ account: state.account, pet: state.pet }),
   { 
-		readPetPage, updatePetWatch, showAccountRequired, changeAccountData,
+		readPetPage, updatePetWatch, showAccountRequired,
 		readPetMoments, createPetMoment
 	}
 )(Pet);

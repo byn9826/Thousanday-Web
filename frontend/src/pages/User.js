@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { readUserPage, readUserMoments } from '../redux/actions/user';
-import { changeAccountData } from '../redux/actions/account';
 import { domainUrl } from '../helpers/config';
 import { noGetGender, noGetType } from '../helpers/noToInfo';
 import Waterfall from '../components/Waterfall';
 import '../styles/user.css';
 
 class User extends Component {
-	componentWillMount() {
-		this.props.changeAccountData(
-			[
-				localStorage.getItem('id'), 
-				localStorage.getItem('name'),
-				localStorage.getItem('token')
-			]
-		);
-	}
   componentDidMount() {
 		this.props.readUserPage(this.props.match.params.id);
   }
@@ -110,6 +100,6 @@ class User extends Component {
 export default connect(
   (state) => ({ account: state.account, user: state.user }),
   { 
-		readUserPage, changeAccountData, readUserMoments
+		readUserPage, readUserMoments
 	}
 )(User);

@@ -1,8 +1,9 @@
 import { 
-	domainUrl, readAccountFacebookApi, readAccountGoogleApi
+	domainUrl, readAccountFacebookApi, readAccountGoogleApi, deleteAccountTokenApi
 } from '../../helpers/config';
 
 export const CHANGE_ACCOUNT_DATA = "account/CHANGE_ACCOUNT_DATA";
+export const CLEAR_ACCOUNT_DATA = "account/CLEAR_ACCOUNT_DATA";
 
 export function changeAccountData(data) {
 	return {
@@ -38,3 +39,38 @@ export function readAccountData(portal, token) {
 			});
 	}
 }
+
+function clearAccountData() {
+	return {
+		type: CLEAR_ACCOUNT_DATA
+	}
+}
+
+export function deleteAccountToken(id, token) {
+	return function (dispatch) {
+		return fetch(domainUrl + deleteAccountTokenApi, {
+			method: 'POST',
+			mode: 'cors',
+			headers: {
+				Accept: 'application/json'
+			},
+			body: JSON.stringify({
+				"token": token, 
+				"id": id
+			})
+		})
+			.then((response => {
+				if (response.ok) {
+          return true;
+        }
+			}))
+			.then((json) => {
+				localStorage.clear();
+				dispatch(clearAccountData());
+			}).catch(() => {
+				//error
+			});
+	}
+}
+
+

@@ -5,7 +5,6 @@ import {
 	readMomentPage, showMomentDelete, deleteMomentPage, updateMomentLike, readMomentComments,
 	showCommentEmpty, createMomentComment
 } from '../redux/actions/moment';
-import { changeAccountData } from '../redux/actions/account';
 import { domainUrl } from '../helpers/config';
 import Like from '../components/Like';
 import Inputarea from '../components/Inputarea';
@@ -13,15 +12,6 @@ import Commentlist from '../components/Commentlist';
 import '../styles/moment.css';
 
 class Moment extends Component {
-	componentWillMount() {
-		this.props.changeAccountData(
-			[
-				localStorage.getItem('id'), 
-				localStorage.getItem('name'),
-				localStorage.getItem('token')
-			]
-		);
-	}
 	componentDidMount() {
 		this.props.readMomentPage(this.props.match.params.id);
 	}
@@ -170,7 +160,7 @@ export default connect(
   (state) => ({ account: state.account, moment: state.moment }),
   { 
 		readMomentPage, showMomentDelete, deleteMomentPage, updateMomentLike, readMomentComments,
-		showCommentEmpty, createMomentComment, changeAccountData
+		showCommentEmpty, createMomentComment
 	}
 )(Moment);
 

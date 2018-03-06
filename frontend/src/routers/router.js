@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Bundle from './Bundle';
 import '../styles/general.css';
+import Header from './Header';
 
 import Home from 'bundle-loader?lazy&name=home!../pages/Home';
 import Pet from 'bundle-loader?lazy&name=pet!../pages/Pet';
@@ -20,18 +21,7 @@ const createComponent = (component) => (props) => (
 const getRouter = () => (
   <Router>
     <div>
-      <header id="header">
-				<a href="/">
-					<img id="header-logo" src="/public/logo.png" alt="logo" />
-				</a>
-				<h5 id="header-desc">Homepage for pets</h5>
-				<a className="header-navi" href="/explore">
-					<h5>Explore</h5>
-				</a>
-				<a className="header-navi" href="/">
-					<h5>Public</h5>
-				</a>
-			</header>
+      <Header />
       <Switch>
         <Route exact path="/" component={ createComponent(Home) } />
 				<Route exact path="/pet/:id" component={ createComponent(Pet) } />

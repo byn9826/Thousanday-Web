@@ -7,6 +7,7 @@ export const facebookClientId = '447688265576125';
 
 export const readAccountFacebookApi = '/account/facebook';
 export const readAccountGoogleApi = '/account/google';
+export const deleteAccountTokenApi = '/account/logout';
 
 export const readHomeMomentsApi = '/index/read';
 

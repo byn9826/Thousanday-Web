@@ -119,19 +119,24 @@ class AccountController extends ControllerBase
 
   //* logout remove token in database
   public function logoutAction() {
-      $data = $this->request->getJsonRawBody( true );
-      $id = ( int ) $data[ 'id' ];
-      $token = $data[ 'token' ];
-      try {
-          $db = DbConnection::getConnection();
-          $Token = new Token( $db );
-          $db->beginTransaction();
-          $delete = $Token->deleteUserToken( $id, $token );
-          $db->commit();
-          return $this->response->setStatusCode( 201, 'Success' );
-      } catch ( Exception $e ) {
-          return $this->response->setStatusCode( 500, 'Internal Server Error' );
-      }
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
+    $data = $this->request->getJsonRawBody( true );
+    $id = ( int ) $data[ 'id' ];
+    $token = $data[ 'token' ];
+    try {
+        $db = DbConnection::getConnection();
+        $Token = new Token( $db );
+        $db->beginTransaction();
+        $delete = $Token->deleteUserToken( $id, $token );
+        $db->commit();
+        return $this->response->setStatusCode( 201, 'Success' );
+    } catch ( Exception $e ) {
+        return $this->response->setStatusCode( 500, 'Internal Server Error' );
+    }
   }
 
 }

@@ -1,4 +1,4 @@
-import { CHANGE_ACCOUNT_DATA } from '../actions/account';
+import { CHANGE_ACCOUNT_DATA, CLEAR_ACCOUNT_DATA } from '../actions/account';
 
 const initState = {
 	id: null,
@@ -17,6 +17,13 @@ export default function reducer(state = initState, action) {
 					token: action.data[2]
 				};	
 			}
+		case CLEAR_ACCOUNT_DATA:
+			return {
+				...state,
+				id: null,
+				name: null,
+				token: null
+			};
 		default:
 			return state;
 	}

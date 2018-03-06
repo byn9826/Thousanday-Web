@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { readHomeMoments } from '../redux/actions/home';
-import { changeAccountData, readAccountData } from '../redux/actions/account';
+import { readAccountData } from '../redux/actions/account';
 import { 
 	domainUrl, androidStoreUrl, googleClientId, facebookClientId 
 } from '../helpers/config';
@@ -11,15 +11,6 @@ import Facebooklogin from '../components/Facebooklogin';
 import '../styles/public.css';
 
 class Home extends Component {
-	componentWillMount() {
-		this.props.changeAccountData(
-			[
-				localStorage.getItem('id'), 
-				localStorage.getItem('name'),
-				localStorage.getItem('token')
-			]
-		);
-	}
   componentDidMount() {
     this.props.readHomeMoments(this.props.home.load);
   }
@@ -112,5 +103,5 @@ class Home extends Component {
 
 export default connect(
   (state) => ({ home: state.home, account: state.account }),
-  { readHomeMoments, readAccountData, changeAccountData }
+  { readHomeMoments, readAccountData }
 )(Home);
