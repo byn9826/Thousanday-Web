@@ -26,9 +26,8 @@ class Home extends Component {
 			this.props.readAccountData('facebook', token);
 		}
 	}
- 	//load more moment
   loadMore() {
-    this.props.readHomeMoments(this.props.home.load);
+    //this.props.readHomeMoments(this.props.home.load);
   }
   render() {
 		//login board

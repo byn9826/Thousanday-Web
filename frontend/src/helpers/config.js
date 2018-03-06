@@ -11,6 +11,8 @@ export const deleteAccountTokenApi = '/account/logout';
 
 export const readHomeMomentsApi = '/index/read';
 
+export const readExploreMomentsApi = '/explore/read';
+
 export const readPetPageApi = '/pet/read';
 export const updatePetWatchApi = '/pet/watch';
 export const createPetMomentApi = '/upload/moment';

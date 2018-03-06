@@ -4,11 +4,13 @@ import home from './reducers/home';
 import pet from './reducers/pet';
 import user from './reducers/user';
 import moment from './reducers/moment';
+import explore from './reducers/explore';
 
 export default combineReducers({
 	account,
 	home,
 	moment,
 	pet,
-	user
+	user,
+	explore
 });

@@ -50,11 +50,6 @@ class User extends Component {
 				<h6 className="aside-no">Not moments yet ...</h6>
 			);
 		}
-		const galleryBoard = <Waterfall 
-			column={ window.innerWidth > 900 ? "3" : "2" }
-			image={ this.props.user.momentData } 
-			fontFamily="'Rubik', sans-serif" 
-		/>
 		let loadButton;
 		if (!this.props.user.locker) {
 			loadButton = (
@@ -90,7 +85,11 @@ class User extends Component {
 					<h4>Moments</h4>
 				</div>
 				{ emptyMessage }
-				{ galleryBoard }
+				<Waterfall 
+					column={ window.innerWidth > 900 ? "3" : "2" }
+					image={ this.props.user.momentData } 
+					fontFamily="'Rubik', sans-serif" 
+				/>
 				{ loadButton }
 			</aside>
     ]);

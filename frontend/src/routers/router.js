@@ -5,6 +5,7 @@ import '../styles/general.css';
 import Header from './Header';
 
 import Home from 'bundle-loader?lazy&name=home!../pages/Home';
+import Explore from 'bundle-loader?lazy&name=explore!../pages/Explore';
 import Pet from 'bundle-loader?lazy&name=pet!../pages/Pet';
 import User from 'bundle-loader?lazy&name=user!../pages/User';
 import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
@@ -24,6 +25,7 @@ const getRouter = () => (
       <Header />
       <Switch>
         <Route exact path="/" component={ createComponent(Home) } />
+				<Route exact path="/explore" component={ createComponent(Explore) } />
 				<Route exact path="/pet/:id" component={ createComponent(Pet) } />
 				<Route exact path="/user/:id" component={ createComponent(User) } />
 				<Route exact path="/moment/:id" component={ createComponent(Moment) } />

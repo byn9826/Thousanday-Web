@@ -22,6 +22,10 @@ class ExploreController extends ControllerBase {
 
   //* return moments based on filter
   public function readAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $load = (int) $this->request->get('load');
     $type = (int) $this->request->get('type');
     $nature = (int) $this->request->get('nature');

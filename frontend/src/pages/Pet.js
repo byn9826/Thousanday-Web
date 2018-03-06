@@ -101,11 +101,6 @@ class Pet extends Component {
 				</span>
 			</div>
 		);
-		const momentGallery = <Waterfall 
-			column={ window.innerWidth > 900 ? 3 : 2 } 
-			image={ this.props.pet.galleryData } 
-			fontFamily="'Rubik', sans-serif" 
-		/>
 		let loadButton;
 		if (!this.props.pet.locker) {
 			loadButton = (
@@ -168,7 +163,11 @@ class Pet extends Component {
 					<img alt="moments" src="/public/icon/glyphicons-moment.png" / >
 					<h4>Moments</h4>
 				</div>
-				{ momentGallery }
+				<Waterfall 
+					column={ window.innerWidth > 900 ? 3 : 2 } 
+					image={ this.props.pet.galleryData } 
+					fontFamily="'Rubik', sans-serif" 
+				/>
 				{ loadButton }
 			</aside>
     ]);
