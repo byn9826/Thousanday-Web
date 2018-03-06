@@ -15,6 +15,9 @@ export const updatePetWatchApi = '/pet/watch';
 export const createPetMomentApi = '/upload/moment';
 export const readPetMomentsApi = '/pet/load';
 
+export const readUserPageApi = '/user/read';
+export const readUserMomentsApi = '/user/load';
+
 export const readMomentPageApi = '/moment/read';
 export const deleteMomentPageApi = '/moment/delete';
 export const updateMomentLikeApi = '/moment/like';

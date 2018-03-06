@@ -1,0 +1,142 @@
+#main{
+    display: inline-block;
+    width: 20%;
+    margin-left: 10%;
+    margin-top: 100px;
+    vertical-align: top;
+    min-height: 650px;
+}
+#main-profile{
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border-radius: 50%;
+}
+.main-name{
+    display: block;
+    width: 90%;
+    margin: 10px 5%;
+    text-align: center;
+}
+#main-relative{
+    border-top: 1px solid #e5e5e5;
+    padding-top: 15px;
+    display: block;
+    width: 90%;
+    margin-left: 5%;
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
+}
+
+#main-family{
+    display: block;
+    width: 90%;
+    margin: 10px 5%;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-left: 3%;
+    padding-right: 3%;
+    background-color: #f7d7b4
+}
+#main-family img{
+    display: inline-block;
+    width: 20%;
+    margin-right: 5%;
+    border-radius: 50%;
+    vertical-align: "middle";
+    margin-bottom: 10px;
+}
+
+#aside{
+    display: inline-block;
+    width: 55%;
+    margin-left: 5%;
+    margin-top: 100px;
+    vertical-align: top;
+}
+
+.aside-header{
+    display: block;
+    width: 94%;
+    padding: 10px 3%;
+    box-shadow: 2px 2px 1px #e5e5e5;
+    margin-bottom: 25px;
+}
+.aside-header img{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5%;
+}
+.aside-header h4{
+    display: inline-block;
+    vertical-align: middle;
+    font-weight: bold;
+}
+
+#aside-header-add{
+    float: right;
+    color: #ef8513;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.aside-pet{
+    display: inline-block;
+    vertical-align: middle;
+    width: 17%;
+    margin-right: 3%;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.aside-pet img{
+    display: block;
+    width: 100%;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.aside-pet h5{
+    text-align: center;
+    display: block;
+    margin-top: 5px;
+    font-weight: bold;
+}
+.aside-pet-info{
+    display: block;
+    text-align: center;
+    margin-bottom: 8px;
+}
+.aside-pet-info>:first-child{
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.aside-pet-info>:nth-child(2){
+    display: inline-block;
+    vertical-align: middle;
+    border-bottom: 1px solid #ef8513;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+.aside-pet-edit{
+    display: block;
+    background-color: #ef8513;
+    color: white;
+    text-align: center;
+    width: 100%;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    cursor: pointer;
+    padding: 5px 0;
+}
+
+.aside-no{
+    display: block;
+    margin-bottom: 30px;
+    background-color: #f7f9fc;
+    border-radius: 5px;
+    padding: 5px 50px;
+}

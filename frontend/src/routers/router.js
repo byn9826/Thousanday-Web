@@ -5,6 +5,7 @@ import '../styles/general.css';
 
 import Home from 'bundle-loader?lazy&name=home!../pages/Home';
 import Pet from 'bundle-loader?lazy&name=pet!../pages/Pet';
+import User from 'bundle-loader?lazy&name=user!../pages/User';
 import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 
@@ -34,6 +35,7 @@ const getRouter = () => (
       <Switch>
         <Route exact path="/" component={ createComponent(Home) } />
 				<Route exact path="/pet/:id" component={ createComponent(Pet) } />
+				<Route exact path="/user/:id" component={ createComponent(User) } />
 				<Route exact path="/moment/:id" component={ createComponent(Moment) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
       </Switch>

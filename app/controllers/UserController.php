@@ -25,6 +25,10 @@ class UserController extends ControllerBase {
   //* provide data for user page
   //* return user's info, pets' info belong to user, moments' info from pets list and pets' id list
   public function readAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $id = $this->request->get( 'id' );
     try {
       $db = DbConnection::getConnection();
@@ -49,6 +53,11 @@ class UserController extends ControllerBase {
 
   //* load more moments based on user's pets list
   public function loadAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody( true );
     $load = $data[ 'load' ];
     $belong = $data[ 'belong' ];
