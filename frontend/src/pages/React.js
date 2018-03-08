@@ -1,37 +1,33 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import Header from '../general/Header';
-import Footer from '../general/Footer';
-import RandomEG from './RandomEG';
-import RateEG from './RateEG';
-import WaterfallEG from './WaterfallEG';
-import InputboxEG from './InputboxEG';
-import InputareaEG from './InputareaEG';
-import LikeEG from './LikeEG';
-import GloginEG from './GoogleloginEG';
-import FacebookloginEG from './FacebookloginEG';
-import ProgressEG from './ProgressEG';
-import UpdateprofileEG from './UpdateprofileEG';
-import GetlocationEG from './GetlocationEG';
-import DelmemberEG from './DelmemberEG';
-import PostimgEG from './PostimgEG';
-import ConfirmdelEG from './ConfirmdelEG';
-import SelectboxEG from './SelectboxEG';
-import UrltoprofileEG from './UrltoprofileEG';
-import DroplistEG from './DroplistEG';
-import PickgenderEG from './PickgenderEG';
-import CommentlistEG from './CommentlistEG';
-class Reactui extends Component {
-	constructor() {
-		super();
-	}
+
+import RandomEG from '../components/react/RandomEG';
+import RateEG from '../components/react/RateEG';
+import WaterfallEG from '../components/react/WaterfallEG';
+import InputboxEG from '../components/react/InputboxEG';
+import InputareaEG from '../components/react/InputareaEG';
+import LikeEG from '../components/react/LikeEG';
+import GloginEG from '../components/react/GoogleloginEG';
+import FacebookloginEG from '../components/react/FacebookloginEG';
+import ProgressEG from '../components/react/ProgressEG';
+import UpdateprofileEG from '../components/react/UpdateprofileEG';
+import GetlocationEG from '../components/react/GetlocationEG';
+import DelmemberEG from '../components/react/DelmemberEG';
+import PostimgEG from '../components/react/PostimgEG';
+import ConfirmdelEG from '../components/react/ConfirmdelEG';
+import SelectboxEG from '../components/react/SelectboxEG';
+import UrltoprofileEG from '../components/react/UrltoprofileEG';
+import DroplistEG from '../components/react/DroplistEG';
+import PickgenderEG from '../components/react/PickgenderEG';
+import CommentlistEG from '../components/react/CommentlistEG';
+import '../styles/react.css';
+
+export default class ReactUI extends Component {
 	render() {
 		let webpackConfig = {
 			color: "black"
 		};
 		return (
 			<div id = "container">
-				<Header restrict={true} />
 				<main id = "main">
 					<h1>Thousanday-React</h1>
 					<h2>A list of React UI components</h2>
@@ -89,9 +85,7 @@ class Reactui extends Component {
 					<RandomEG />
 					<DroplistEG />
 				</section>
-				<Footer />
 			</div>
 		)
 	}
 };
-ReactDOM.render(<Reactui />, document.getElementById('root'));

@@ -7,12 +7,12 @@ class SelectboxEG extends Component {
             first: "",
             second: "",
             options: [
-                ["member0", "/img/example/6.png", "I'm member 0"],
-                ["member1", "/img/example/6.png", "I'm member 1"],
-                ["member2", "/img/example/6.png", "I'm member 2"],
-                ["member3", "/img/example/6.png", "I'm member 3"],
-                ["member4", "/img/example/6.png", "I'm member 4"],
-                ["member5", "/img/example/6.png", "I'm member 5"]
+                ["member0", "/public/reactUI/6.png", "I'm member 0"],
+                ["member1", "/public/reactUI/6.png", "I'm member 1"],
+                ["member2", "/public/reactUI/6.png", "I'm member 2"],
+                ["member3", "/public/reactUI/6.png", "I'm member 3"],
+                ["member4", "/public/reactUI/6.png", "I'm member 4"],
+                ["member5", "/public/reactUI/6.png", "I'm member 5"]
             ]
 		};
 	}

@@ -12,6 +12,7 @@ import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
 import Watch from 'bundle-loader?lazy&name=watch!../pages/Watch';
 import Request from 'bundle-loader?lazy&name=request!../pages/Request';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
+import ReactUI from 'bundle-loader?lazy&name=react!../pages/React';
 
 const createComponent = (component) => (props) => (
   <Bundle load={ component }>
@@ -34,6 +35,7 @@ const getRouter = () => (
 				<Route exact path="/watch" component={ createComponent(Watch) } />
 				<Route exact path="/request" component={ createComponent(Request) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
+				<Route exact path="/react" component={ createComponent(ReactUI) } />
       </Switch>
       <footer id="footer">
         <h6>© 2017-2018 Smilings.me</h6>

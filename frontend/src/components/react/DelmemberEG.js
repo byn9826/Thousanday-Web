@@ -30,8 +30,8 @@ class DelmemberEG extends Component {
                     <b>Demo:</b><br/>
                     You deleted the profile with index: {this.state.index}
                 </h4>
-                <Delmember profile={"/img/example/6.png"} index={0} clickDel={this.clickDel.bind(this)} width="80" height="80" fontFamily="'Rubik', sans-serif" />
-                <Delmember profile={"/img/example/7.jpg"} index={1} clickDel={this.clickDel.bind(this)} width="80" height="80" fontFamily="'Rubik', sans-serif" />
+                <Delmember profile={"/public/reactUI/6.png"} index={0} clickDel={this.clickDel.bind(this)} width="80" height="80" fontFamily="'Rubik', sans-serif" />
+                <Delmember profile={"/public/reactUI/7.jpg"} index={1} clickDel={this.clickDel.bind(this)} width="80" height="80" fontFamily="'Rubik', sans-serif" />
                 <h4>
                     <a href="https://github.com/byn9826/Thousanday-React#random" target="__blank">Check docs</a>
                 </h4>

@@ -26,7 +26,7 @@ class UpdateprofileEG extends Component {
                 <h4>
                     <b>Demo:</b><br/>
                 </h4>
-                <Updateprofile src="/img/example/7.jpg" width="200" saveProfile={this.saveProfile.bind(this)}  fontFamily="'Rubik', sans-serif" />
+                <Updateprofile src="/public/reactUI/7.jpg" width="200" saveProfile={this.saveProfile.bind(this)}  fontFamily="'Rubik', sans-serif" />
                 <h4>
                     <a href="https://github.com/byn9826/Thousanday-React#updateprofile" target="__blank">Check docs</a>
                 </h4>

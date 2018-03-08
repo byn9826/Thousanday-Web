@@ -5,9 +5,9 @@ class CommentlistEG extends Component {
         super(props);
 		this.state = {
             comments: [
-                ["This is first comment", "/img/example/6.png", "/user/1", "2017-01-01"],
-                ["This is second comment", "/img/example/6.png", "/user/1", "2017-01-01"],
-                ["This is third comment", "/img/example/6.png", "/user/1", "2017-01-01"]
+                ["This is first comment", "/public/reactUI/6.png", "/user/1", "2017-01-01"],
+                ["This is second comment", "/public/reactUI/6.png", "/user/1", "2017-01-01"],
+                ["This is third comment", "/public/reactUI/6.png", "/user/1", "2017-01-01"]
             ],
             locker: "off"
 		};
