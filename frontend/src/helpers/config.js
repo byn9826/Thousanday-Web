@@ -10,7 +10,6 @@ export const readAccountGoogleApi = '/account/google';
 export const deleteAccountTokenApi = '/account/logout';
 
 export const readHomeMomentsApi = '/index/read';
-
 export const readExploreMomentsApi = '/explore/read';
 
 export const readPetPageApi = '/pet/read';
@@ -26,3 +25,8 @@ export const deleteMomentPageApi = '/moment/delete';
 export const updateMomentLikeApi = '/moment/like';
 export const readMomentCommentsApi = '/moment/load';
 export const createMomentCommentApi = '/moment/comment';
+
+export const readWatchPageApi = '/watch/read';
+export const createWatchPetApi = '/watch/add';
+export const deleteWatchPetApi = '/watch/remove';
+export const readWatchMomentsApi = '/watch/load';

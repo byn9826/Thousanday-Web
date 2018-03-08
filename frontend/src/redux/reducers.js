@@ -5,6 +5,7 @@ import pet from './reducers/pet';
 import user from './reducers/user';
 import moment from './reducers/moment';
 import explore from './reducers/explore';
+import watch from './reducers/watch';
 
 export default combineReducers({
 	account,
@@ -12,5 +13,6 @@ export default combineReducers({
 	moment,
 	pet,
 	user,
-	explore
+	explore,
+	watch
 });

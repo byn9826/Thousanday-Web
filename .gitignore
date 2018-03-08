@@ -9,3 +9,4 @@ app/library/DbConnection.php
 
 app/.ssr/*
 .phalcon
+.todo

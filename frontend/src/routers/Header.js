@@ -63,7 +63,7 @@ class Header extends Component {
 		if (this.state.showDrop && this.props.account.id !== null) {
 			logoutBoard = (
 				<section className="header-drop">
-					<a href={ "/user/" + this.props.userId }><h5>Home</h5></a>
+					<a href={ "/user/" + this.props.account.id }><h5>Home</h5></a>
 					<a href={ "/watch" }><h5>Watch List</h5></a>
 					<a href={ "/request" }><h5>Requests</h5></a>
 					<a href={ "/setting" }><h5>Setting</h5></a>
