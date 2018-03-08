@@ -30,3 +30,7 @@ export const readWatchPageApi = '/watch/read';
 export const createWatchPetApi = '/watch/add';
 export const deleteWatchPetApi = '/watch/remove';
 export const readWatchMomentsApi = '/watch/load';
+
+export const readRequestPageApi = '/request/read';
+export const createRequestUserApi = '/request/accept';
+export const deleteRequestUserApi = '/request/delete';

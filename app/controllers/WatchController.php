@@ -17,9 +17,9 @@ class WatchController extends ControllerBase {
     //* return pets' id list, moments list, pets' name list
     public function readAction() {
       $this->response
-      ->setHeader('Access-Control-Allow-Origin', '*')
-      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
-      ->sendHeaders();
+        ->setHeader('Access-Control-Allow-Origin', '*')
+        ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+        ->sendHeaders();
       $id = $this->request->get( 'id' );
       try {
         $db = DbConnection::getConnection();

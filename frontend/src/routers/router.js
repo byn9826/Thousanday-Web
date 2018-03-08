@@ -10,6 +10,7 @@ import Pet from 'bundle-loader?lazy&name=pet!../pages/Pet';
 import User from 'bundle-loader?lazy&name=user!../pages/User';
 import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
 import Watch from 'bundle-loader?lazy&name=watch!../pages/Watch';
+import Request from 'bundle-loader?lazy&name=request!../pages/Request';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 
 const createComponent = (component) => (props) => (
@@ -31,6 +32,7 @@ const getRouter = () => (
 				<Route exact path="/user/:id" component={ createComponent(User) } />
 				<Route exact path="/moment/:id" component={ createComponent(Moment) } />
 				<Route exact path="/watch" component={ createComponent(Watch) } />
+				<Route exact path="/request" component={ createComponent(Request) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
       </Switch>
       <footer id="footer">
