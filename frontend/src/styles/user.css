@@ -1,3 +1,4 @@
+/*pet page*/
 #main{
     display: inline-block;
     width: 20%;
@@ -139,4 +140,47 @@
     background-color: #f7f9fc;
     border-radius: 5px;
     padding: 5px 50px;
+}
+
+@media only screen and (max-width: 900px) {
+    #main{
+        width: 25%;
+        margin-left: 5%;
+    }
+
+    #aside{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    #main{
+        display: block;
+        margin-top: 0;
+        padding-top: 100px;
+        width: 90%;
+        min-height: 0;
+    }
+
+    #main-profile{
+        display: block;
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    #aside{
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .aside-pet{
+        width: 22%;
+    }
+
+}
+
+@media only screen and (max-width: 420px) {
+    .aside-pet{
+        width: 30%;
+    }
 }

@@ -1,34 +1,32 @@
+/*general-header*/
 #header{
-	position: fixed;
-	width: 100%;
-	height: 50px;
-	line-height: 50px;
-	border-bottom: 1px solid white;
-	background-color: #ef8513;
-	color: white;
-	z-index: 999;
-	vertical-align: middle;
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px solid white;
+    background-color: #ef8513;
+    color: white;
+    z-index: 999;
+    vertical-align: middle;
 }
-
 #header-desc{
-	display: inline-block;
-	vertical-align: middle;
-	color: white;
-	margin-left: 2%;
+    display: inline-block;
+    vertical-align: middle;
+    color: white;
+    margin-left: 2%;
 }
-
 .header-navi{
-	color: white;
-	float: right;
-	margin-right: 5%;
-	cursor: pointer;
+    color: white;
+    float: right;
+    margin-right: 5%;
+    cursor: pointer;
 }
-
 #header-logo{
-	float: left;
-	margin-left: 10%;
-	height: 40px;
-	margin-top: 5px;
+    float: left;
+    margin-left: 10%;
+    height: 40px;
+    margin-top: 5px;
 }
 
 #header-login{
@@ -125,12 +123,9 @@
     font-weight: bold;
 }
 
-
-
-
-
+/*Footer style*/
 #footer{
-  display: block;
+    display: block;
 	width: 80%;
 	background-color: black;
 	padding: 5px 10%;
@@ -139,8 +134,31 @@
 }
 
 #footer h6{
-  display: inline-block;
+    display: inline-block;
 	vertical-align: middle;
 	margin-right: 3%;
 	color: white;
+}
+
+@media only screen and (max-width: 948px) {
+    #header-logo{
+        margin-left: 5%;
+    }
+
+    #footer{
+        width: 90%;
+        padding: 5px 5%;
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    #header-desc{
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    #header-logo{
+        display: none;
+    }
 }

@@ -66,6 +66,11 @@ class UploadController extends ControllerBase
 
   //* update user's avatar
   public function userAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With') 
+      ->setHeader("Content-Type", 'multipart/form-data')
+      ->sendHeaders();
     if ($this->request->hasFiles() && $this->request->isPost()) {
       $files = $this->request->getUploadedFiles();
       $fileType = $files[0]->getRealType();

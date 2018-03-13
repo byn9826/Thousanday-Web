@@ -7,6 +7,7 @@ import moment from './reducers/moment';
 import explore from './reducers/explore';
 import watch from './reducers/watch';
 import request from './reducers/request';
+import setting from './reducers/setting';
 
 export default combineReducers({
 	account,
@@ -16,5 +17,6 @@ export default combineReducers({
 	user,
 	explore,
 	watch,
-	request
+	request,
+	setting
 });

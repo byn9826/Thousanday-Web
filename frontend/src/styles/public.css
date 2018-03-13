@@ -1,3 +1,4 @@
+/*public page - main*/
 #main{
     display: inline-block;
     vertical-align: top;
@@ -77,10 +78,7 @@
     margin-left: 25%;
 }
 
-
-
-
-
+/*public page - aside*/
 #aside{
     display: inline-block;
     vertical-align: top;
@@ -97,4 +95,32 @@
     border-radius: 5px;
     margin-top: 20px;
     border: 1px solid #ef8513;
+}
+
+@media only screen and (max-width: 1040px) {
+    #main{
+        width: 31%;
+        margin-left: 5%;
+    }
+
+    #aside{
+        width: 54%;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    #main{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 0;
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    #aside{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+    }
 }

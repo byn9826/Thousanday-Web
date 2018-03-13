@@ -11,6 +11,7 @@ import User from 'bundle-loader?lazy&name=user!../pages/User';
 import Moment from 'bundle-loader?lazy&name=moment!../pages/Moment';
 import Watch from 'bundle-loader?lazy&name=watch!../pages/Watch';
 import Request from 'bundle-loader?lazy&name=request!../pages/Request';
+import Setting from 'bundle-loader?lazy&name=setting!../pages/Setting';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 import ReactUI from 'bundle-loader?lazy&name=react!../pages/React';
 
@@ -34,6 +35,7 @@ const getRouter = () => (
 				<Route exact path="/moment/:id" component={ createComponent(Moment) } />
 				<Route exact path="/watch" component={ createComponent(Watch) } />
 				<Route exact path="/request" component={ createComponent(Request) } />
+				<Route exact path="/setting" component={ createComponent(Setting) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
 				<Route exact path="/react" component={ createComponent(ReactUI) } />
       </Switch>

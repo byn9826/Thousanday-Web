@@ -1,4 +1,5 @@
 import { CHANGE_ACCOUNT_DATA, CLEAR_ACCOUNT_DATA } from '../actions/account';
+import { CHANGE_ACCOUNT_NAME } from '../actions/setting';
 
 const initState = {
 	id: null,
@@ -23,6 +24,11 @@ export default function reducer(state = initState, action) {
 				id: null,
 				name: null,
 				token: null
+			};
+		case CHANGE_ACCOUNT_NAME:
+			return {
+				...state,
+				name: action.data
 			};
 		default:
 			return state;

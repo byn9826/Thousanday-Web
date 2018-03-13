@@ -34,3 +34,8 @@ export const readWatchMomentsApi = '/watch/load';
 export const readRequestPageApi = '/request/read';
 export const createRequestUserApi = '/request/accept';
 export const deleteRequestUserApi = '/request/delete';
+
+export const readSettingPageApi = '/setting/read';
+export const updateSettingAboutApi = '/setting/about';
+export const updateSettingNameApi = '/setting/name';
+export const createSettingProfileApi = '/upload/user';

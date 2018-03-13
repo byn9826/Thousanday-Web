@@ -1,3 +1,4 @@
+/*pet page*/
 #main{
     display: inline-block;
     width: 20%;
@@ -189,4 +190,46 @@
     border-bottom: 1px solid #ef8513;
     border-radius: 50%;
     text-align: center;
+}
+
+@media only screen and (max-width: 900px) {
+    #main{
+        width: 25%;
+        margin-left: 5%;
+    }
+
+    #aside{
+        width: 60%;
+    }
+}
+
+@media only screen and (max-width: 710px) {
+    #main{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+        margin-top: 0;
+        padding-top: 100px;
+        text-align: center;
+    }
+
+    #main-profile{
+        width: 60%;
+        margin-left: 20%;
+    }
+
+    #main-watch{
+        width: 80%;
+        margin-left: 10%;
+    }
+
+    .main-owner{
+        width: 20%;
+    }
+
+    #aside{
+        display: block;
+        width: 80%;
+        margin-left: 10%;
+    }
 }
