@@ -18,7 +18,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(15);
 
-var _home = __webpack_require__(64);
+var _home = __webpack_require__(65);
 
 var _account = __webpack_require__(36);
 
@@ -28,11 +28,11 @@ var _Waterfall = __webpack_require__(188);
 
 var _Waterfall2 = _interopRequireDefault(_Waterfall);
 
-var _Googlelogin = __webpack_require__(62);
+var _Googlelogin = __webpack_require__(63);
 
 var _Googlelogin2 = _interopRequireDefault(_Googlelogin);
 
-var _Facebooklogin = __webpack_require__(61);
+var _Facebooklogin = __webpack_require__(62);
 
 var _Facebooklogin2 = _interopRequireDefault(_Facebooklogin);
 
@@ -340,7 +340,7 @@ exports.default = Waterfall;
 /***/ 375:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(55)(false);
+exports = module.exports = __webpack_require__(56)(false);
 // imports
 
 
@@ -370,7 +370,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(56)(content, options);
+var update = __webpack_require__(57)(content, options);
 
 if(content.locals) module.exports = content.locals;
 

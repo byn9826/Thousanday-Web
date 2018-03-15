@@ -18,9 +18,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(15);
 
-var _pet = __webpack_require__(66);
+var _pet = __webpack_require__(67);
 
-var _noToInfo = __webpack_require__(57);
+var _noToInfo = __webpack_require__(58);
 
 var _config = __webpack_require__(3);
 
@@ -813,7 +813,7 @@ exports.default = Progress;
 /***/ 374:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(55)(false);
+exports = module.exports = __webpack_require__(56)(false);
 // imports
 
 
@@ -843,7 +843,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(56)(content, options);
+var update = __webpack_require__(57)(content, options);
 
 if(content.locals) module.exports = content.locals;
 

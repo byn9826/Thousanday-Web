@@ -39,3 +39,5 @@ export const readSettingPageApi = '/setting/read';
 export const updateSettingAboutApi = '/setting/about';
 export const updateSettingNameApi = '/setting/name';
 export const createSettingProfileApi = '/upload/user';
+
+export const createAddPetApi = '/upload/add';

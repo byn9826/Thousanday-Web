@@ -14,13 +14,19 @@
     margin-left: 20px;
 }
 
+#main-update{
+  display: inline-block;
+  color: red;
+  font-weight: bold;
+  margin-top: 30px;
+  vertical-align: middle;
+  margin-left: 30px;
+}
+
 #main h6{
-    display: inline-block;
-    vertical-align: middle;
-    margin-top: 30px;
-    margin-left: 20px;
-    color: red;
-    font-weight: bold;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
 }
 
 #main-contain{
@@ -44,11 +50,6 @@
     color: #052456;
     font-size: 14px;
     font-weight: bold;
-}
-.main-contain-holder h7{
-    display: block;
-    text-align: center;
-    margin-bottom: 10px;
 }
 
 .main-contain-holder-lable{
@@ -95,7 +96,7 @@
         width: 90%;
     }
 
-    .main-contain-holder h7{
+    #main h6{
         text-align: left;
     }
 }

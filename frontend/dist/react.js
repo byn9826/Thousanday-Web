@@ -6685,7 +6685,7 @@ module.exports = ReactElement;
 // Therefore we re-export development-only version with all the PropTypes checks here.
 // However if one is migrating to the `prop-types` npm library, they will go through the
 // `index.js` entry point, and it will branch depending on the environment.
-var factory = __webpack_require__(60);
+var factory = __webpack_require__(61);
 module.exports = function(isValidElement) {
   // It is still allowed in 15.5.
   var throwOnDirectAccess = false;
@@ -11634,9 +11634,9 @@ var CSSProperty = __webpack_require__(215);
 var ExecutionEnvironment = __webpack_require__(30);
 var ReactInstrumentation = __webpack_require__(171);
 
-var camelizeStyleName = __webpack_require__(58);
+var camelizeStyleName = __webpack_require__(59);
 var dangerousStyleValue = __webpack_require__(315);
-var hyphenateStyleName = __webpack_require__(59);
+var hyphenateStyleName = __webpack_require__(60);
 var memoizeStringOnly = __webpack_require__(249);
 var warning = __webpack_require__(13);
 
@@ -24728,7 +24728,7 @@ exports.default = WaterfallEG;
 /* 376 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(55)(false);
+exports = module.exports = __webpack_require__(56)(false);
 // imports
 
 
@@ -25844,7 +25844,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(56)(content, options);
+var update = __webpack_require__(57)(content, options);
 
 if(content.locals) module.exports = content.locals;
 

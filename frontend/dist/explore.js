@@ -18,7 +18,7 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactRedux = __webpack_require__(15);
 
-var _explore = __webpack_require__(63);
+var _explore = __webpack_require__(64);
 
 var _Typepicker = __webpack_require__(351);
 
@@ -389,7 +389,7 @@ exports.default = Typepicker;
 /***/ 372:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(55)(false);
+exports = module.exports = __webpack_require__(56)(false);
 // imports
 
 
@@ -419,7 +419,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(56)(content, options);
+var update = __webpack_require__(57)(content, options);
 
 if(content.locals) module.exports = content.locals;
 

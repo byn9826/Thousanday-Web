@@ -20,7 +20,7 @@ var _reactRouterDom = __webpack_require__(25);
 
 var _reactRedux = __webpack_require__(15);
 
-var _moment = __webpack_require__(65);
+var _moment = __webpack_require__(66);
 
 var _config = __webpack_require__(3);
 
@@ -647,7 +647,7 @@ exports.default = Like;
 /***/ 373:
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(55)(false);
+exports = module.exports = __webpack_require__(56)(false);
 // imports
 
 
@@ -677,7 +677,7 @@ var options = {"hmr":true}
 options.transform = transform
 options.insertInto = undefined;
 
-var update = __webpack_require__(56)(content, options);
+var update = __webpack_require__(57)(content, options);
 
 if(content.locals) module.exports = content.locals;
 
