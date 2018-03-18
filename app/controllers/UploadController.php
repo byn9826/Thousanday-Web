@@ -104,6 +104,11 @@ class UploadController extends ControllerBase
 
   //* upload pet's avatar
   public function petAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With') 
+      ->setHeader("Content-Type", 'multipart/form-data')
+      ->sendHeaders();
     if ($this->request->hasFiles() && $this->request->isPost()) {
       $files = $this->request->getUploadedFiles();
       $fileType = $files[0]->getRealType();

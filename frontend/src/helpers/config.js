@@ -41,3 +41,11 @@ export const updateSettingNameApi = '/setting/name';
 export const createSettingProfileApi = '/upload/user';
 
 export const createAddPetApi = '/upload/add';
+export const readEditPageApi = '/edit/read';
+export const updateEditNameApi = '/edit/name';
+export const updateEditProfileApi = '/upload/pet';
+export const deleteEditRelativeApi = '/edit/remove';
+export const readEditSearchApi = '/edit/search';
+export const createEditRelativeApi = '/edit/add';
+export const updateEditTransferApi = '/edit/transfer';
+export const updateEditRelationApi = '/edit/end';

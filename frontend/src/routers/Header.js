@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { 
 	changeAccountData, deleteAccountToken, readAccountData
 } from '../redux/actions/account';
@@ -12,6 +13,7 @@ class Header extends Component {
 		super(props);
 		this.state = {
 			showDrop: false,
+			redirectHome: false
 		};
 	}
 	componentWillMount() {
@@ -22,6 +24,11 @@ class Header extends Component {
 				localStorage.getItem('token')
 			]
 		);
+	}
+	componentDidUpdate() {
+		if (this.state.redirectHome) {
+			this.setState({ redirectHome: false });
+		}
 	}
 	gLogin(detail) {
 		if (this.props.account.id === null) {
@@ -48,8 +55,12 @@ class Header extends Component {
 			this.props.account.id,
 			this.props.account.token
 		);
+		this.setState({ redirectHome: true });
 	}
   render() {
+		if (this.state.redirectHome) {
+      return <Redirect to={ '/' } />;
+    }
 		const loginStyle = this.state.showDrop ? "header-drop" : "header-drop-hide";
 		const userInfo = (
 			<div id="header-login" onClick={ this.showDrop.bind(this) }>

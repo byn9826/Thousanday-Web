@@ -9,6 +9,7 @@ import watch from './reducers/watch';
 import request from './reducers/request';
 import setting from './reducers/setting';
 import add from './reducers/add';
+import edit from './reducers/edit';
 
 export default combineReducers({
 	account,
@@ -20,5 +21,6 @@ export default combineReducers({
 	watch,
 	request,
 	setting,
-	add
+	add,
+	edit
 });

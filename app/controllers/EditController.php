@@ -15,6 +15,10 @@ class EditController extends ControllerBase {
 
   //* read pet data
   public function readAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $pet = (int) $this->request->get('pet');
     $user = (int) $this->request->get('user');
     try {
@@ -35,6 +39,11 @@ class EditController extends ControllerBase {
 
   //* update pet name
   public function nameAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $user = (int) $data['user'];
@@ -71,6 +80,11 @@ class EditController extends ControllerBase {
 
   //* end relationship of one pet
   public function endAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $user = (int) $data['user'];
@@ -105,6 +119,10 @@ class EditController extends ControllerBase {
 
   //* search user name by id
   public function searchAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')  
+      ->sendHeaders();
     $id = (int) $this->request->get('id');
     try {
       $db = DbConnection::getConnection();
@@ -118,6 +136,11 @@ class EditController extends ControllerBase {
 
   //* add relative for one pet
   public function addAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $user = (int) $data['user'];
@@ -154,6 +177,11 @@ class EditController extends ControllerBase {
 
   //* remove relative for one pet
   public function removeAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $user = (int) $data['user'];
@@ -188,6 +216,11 @@ class EditController extends ControllerBase {
 
   //* transfer ownership to relative
   public function transferAction() {
+    $this->response
+      ->setHeader('Access-Control-Allow-Origin', '*')
+      ->setHeader('Access-Control-Allow-Headers', 'X-Requested-With')
+      ->setHeader("Content-Type", 'text/plain')
+      ->sendHeaders();
     $data = $this->request->getJsonRawBody(true);
     $token = $data['token'];
     $user = (int) $data['user'];
