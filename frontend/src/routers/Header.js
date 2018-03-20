@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import { connect } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import { 
-	changeAccountData, deleteAccountToken, readAccountData
+	changeAccountData, deleteAccountToken, readAccountData, clearAccountSignup
 } from '../redux/actions/account';
 import { googleClientId, facebookClientId } from '../helpers/config';
 import Googlelogin from '../components/Googlelogin';
@@ -28,16 +28,18 @@ class Header extends Component {
 	componentDidUpdate() {
 		if (this.state.redirectHome) {
 			this.setState({ redirectHome: false });
+		} else if (this.props.account.redirectSignup) {
+			this.props.clearAccountSignup();
 		}
 	}
 	gLogin(detail) {
 		if (this.props.account.id === null) {
-			this.props.readAccountData('google', detail.token);
+			this.props.readAccountData('google', detail);
 		}
 	}
 	fLogin(response, token) {
 		if (this.props.account.id === null) {
-			this.props.readAccountData('facebook', token);
+			this.props.readAccountData('facebook', { response, token });
 		}
 	}
 	showDrop() {
@@ -60,7 +62,9 @@ class Header extends Component {
   render() {
 		if (this.state.redirectHome) {
       return <Redirect to={ '/' } />;
-    }
+    } else if (this.props.account.redirectSignup) {
+			return <Redirect to={ '/signup' } />;
+		}
 		const loginStyle = this.state.showDrop ? "header-drop" : "header-drop-hide";
 		const userInfo = (
 			<div id="header-login" onClick={ this.showDrop.bind(this) }>
@@ -116,5 +120,5 @@ class Header extends Component {
 
 export default connect(
   (state) => ({ account: state.account }),
-  { changeAccountData, deleteAccountToken, readAccountData }
+  { changeAccountData, deleteAccountToken, readAccountData, clearAccountSignup }
 )(Header);

@@ -4,6 +4,8 @@ import {
 
 export const CHANGE_ACCOUNT_DATA = "account/CHANGE_ACCOUNT_DATA";
 export const CLEAR_ACCOUNT_DATA = "account/CLEAR_ACCOUNT_DATA";
+export const REDIRECT_TO_SIGNUP = "account/REDIRECT_TO_SIGNUP";
+export const CLEAR_ACCOUNT_SIGNUP = "account/CLEAR_ACCOUNT_SIGNUP";
 
 export function changeAccountData(data) {
 	return {
@@ -12,7 +14,13 @@ export function changeAccountData(data) {
 	}
 }
 
-export function readAccountData(portal, token) {
+function redirectToSignup() {
+	return {
+		type: REDIRECT_TO_SIGNUP
+	}
+}
+
+export function readAccountData(portal, detail) {
 	const apiUrl = portal === 'facebook' ? readAccountFacebookApi : readAccountGoogleApi;
 	return function (dispatch) {
 		return fetch(domainUrl + apiUrl, {
@@ -22,7 +30,7 @@ export function readAccountData(portal, token) {
 				Accept: 'application/json'
 			},
 			body: JSON.stringify({
-				"token": token, 
+				"token": detail.token, 
 				"platform": "website"
 			})
 		})
@@ -30,10 +38,24 @@ export function readAccountData(portal, token) {
 				return response.json();
 			}))
 			.then((json) => {
-				localStorage.setItem("id", json[0]);
-				localStorage.setItem("name", json[1]);
-				localStorage.setItem("token", json[2]);
-				dispatch(changeAccountData(json));
+				if (json.id) {
+					localStorage.setItem("newId", json.id);
+					localStorage.setItem("newToken", detail.token);
+					localStorage.setItem("newPlatform", portal);
+					if (portal === 'facebook') {
+						localStorage.setItem("newName", detail.response.name);
+						localStorage.setItem("newAvatar", null);
+					} else {
+						localStorage.setItem("newName", detail.name);
+						localStorage.setItem("newAvatar", detail.imageUrl);
+					}
+					dispatch(redirectToSignup());
+				} else {
+					localStorage.setItem("id", json[0]);
+					localStorage.setItem("name", json[1]);
+					localStorage.setItem("token", json[2]);
+					dispatch(changeAccountData(json));
+				}
 			}).catch(() => {
 				//error
 			});
@@ -70,6 +92,12 @@ export function deleteAccountToken(id, token) {
 			}).catch(() => {
 				//error
 			});
+	}
+}
+
+export function clearAccountSignup() {
+	return {
+		type: CLEAR_ACCOUNT_SIGNUP
 	}
 }
 

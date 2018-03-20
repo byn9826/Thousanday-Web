@@ -14,6 +14,7 @@ import Request from 'bundle-loader?lazy&name=request!../pages/Request';
 import Setting from 'bundle-loader?lazy&name=setting!../pages/Setting';
 import Edit from 'bundle-loader?lazy&name=setting!../pages/Edit';
 import Add from 'bundle-loader?lazy&name=setting!../pages/Add';
+import Signup from 'bundle-loader?lazy&name=setting!../pages/Signup';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 import ReactUI from 'bundle-loader?lazy&name=react!../pages/React';
 
@@ -40,6 +41,7 @@ const getRouter = () => (
 				<Route exact path="/setting" component={ createComponent(Setting) } />
 				<Route exact path="/edit/:id" component={ createComponent(Edit) } />
 				<Route exact path="/add" component={ createComponent(Add) } />
+				<Route exact path="/signup" component={ createComponent(Signup) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
 				<Route exact path="/react" component={ createComponent(ReactUI) } />
       </Switch>
