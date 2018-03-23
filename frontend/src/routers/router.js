@@ -17,6 +17,9 @@ import Add from 'bundle-loader?lazy&name=setting!../pages/Add';
 import Signup from 'bundle-loader?lazy&name=setting!../pages/Signup';
 import Terms from 'bundle-loader?lazy&name=terms!../pages/Terms';
 import ReactUI from 'bundle-loader?lazy&name=react!../pages/React';
+import PageNotFound from 'bundle-loader?lazy&name=react!../pages/PageNotFound';
+import InternalServerError from 'bundle-loader?lazy&name=react!../pages/InternalServerError';
+import Forbidden from 'bundle-loader?lazy&name=react!../pages/Forbidden';
 
 const createComponent = (component) => (props) => (
   <Bundle load={ component }>
@@ -44,6 +47,9 @@ const getRouter = () => (
 				<Route exact path="/signup" component={ createComponent(Signup) } />
         <Route exact path="/terms" component={ createComponent(Terms) } />
 				<Route exact path="/react" component={ createComponent(ReactUI) } />
+				<Route exact path="/500" component={ createComponent(InternalServerError) } />
+				<Route exact path="/403" component={ createComponent(Forbidden) } />
+				<Route component={ createComponent(PageNotFound) } />
       </Switch>
       <footer id="footer">
         <h6>© 2017-2018 Smilings.me</h6>

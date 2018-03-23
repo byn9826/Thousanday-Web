@@ -29,6 +29,10 @@
 
 #main-section a{
     font-style: italic;
+    background-color: black;
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
 }
 
 #main img{

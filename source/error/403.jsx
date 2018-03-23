@@ -85,8 +85,8 @@ class NeedLogin extends Component {
 					<section id="main-section">
 						<h2>Forbidden !</h2>
 						<h4>
-							We can't verify your privilege ! <br />
-							<a href="/">Please login again</a>
+							We can't verify your privilege<br />
+							Please login again!
 						</h4>
 						<Googlelogin gLogin={this.gLogin.bind(this)} clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" width="200px" />
 						<Facebooklogin fLogin={this.fLogin.bind(this)} clientId="447688265576125" width="194px" />

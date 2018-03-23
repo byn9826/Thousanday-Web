@@ -16,14 +16,12 @@ class Home extends Component {
   }
 	gLogin(detail) {
 		if (this.props.account.id === null) {
-			//verify google login user
-			this.props.readAccountData('google', detail.token);
+			this.props.readAccountData('google', detail);
 		}
 	}
 	fLogin(response, token) {
 		if (this.props.account.id === null) {
-			//verify facebook login user
-			this.props.readAccountData('facebook', token);
+			this.props.readAccountData('facebook', { response, token });
 		}
 	}
   loadMore() {

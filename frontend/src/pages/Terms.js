@@ -1,4 +1,4 @@
-import React, {Component} from "react"
+import React, { Component } from "react"
 import '../styles/terms.css';
 
 export default class Terms extends Component {
