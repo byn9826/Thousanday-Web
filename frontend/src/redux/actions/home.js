@@ -1,4 +1,5 @@
 import { domainUrl, readHomeMomentsApi } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const CHANGE_HOME_MOMENTS = "home/CHANGE_HOME_MOMENTS";
 
@@ -12,13 +13,14 @@ function changeHomeMoments(data) {
 export function readHomeMoments(load) {
 	return function (dispatch) {
 		return fetch(domainUrl + readHomeMomentsApi + '?load=' + load)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(changeHomeMoments(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }

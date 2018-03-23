@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { 
 	readSettingPage, updateSettingAbout, updateSettingName, createSettingProfile
 } from '../redux/actions/setting';
@@ -40,6 +41,9 @@ class Setting extends Component {
 		}
 	}
 	render() {
+		if (this.props.account.id === null) {
+			return <Redirect to={ '/403' } />;
+		}
 		let profileBoard;
 		if (this.props.setting.userData.user_id) {
 			profileBoard = <Updateprofile 

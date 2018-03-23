@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { 
 	readRequestPage, updateRequestUser
 } from '../redux/actions/request';
@@ -29,6 +30,9 @@ class Request extends Component {
 		);
 	}
   render() {
+		if (this.props.account.id === null) {
+			return <Redirect to={ '/403' } />;
+		}
 		const requestsInfo = this.props.request.requestData.map((request, index) =>
 			<div key={ "requestlist" + index } className="main-contain">
 				<a href={ "/user/" + request.sender_id } target="_blank">

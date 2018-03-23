@@ -3,6 +3,7 @@ import {
 	deleteEditRelativeApi, readEditSearchApi, createEditRelativeApi, updateEditTransferApi,
 	updateEditRelationApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_EDIT_PAGE = 'edit/BUILD_EDIT_PAGE';
 export const CHANGE_EDIT_UPDATE = 'edit/CHANGE_EDIT_UPDATE';
@@ -28,13 +29,14 @@ function buildEditPage(data) {
 export function readEditPage(petId, userId) {
 	return function (dispatch) {
 		return fetch(domainUrl + readEditPageApi + '?pet=' + petId + '&user=' + userId)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(buildEditPage(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -68,15 +70,14 @@ export function updateEditName(userId, userToken, petId, petName) {
 				"name": petName
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changeEditName(petName));
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -101,6 +102,7 @@ export function updateEditProfile(userId, userToken, petId, file) {
 				if (response.ok) {
 					return true;
 				}
+				processError(response.status);
 			})
 			.then(() => {
 				dispatch(changeEditUpdate('Avatar updated successfully!'));
@@ -134,15 +136,14 @@ export function deleteEditRelative(userId, userToken, petId) {
 				"pet": petId
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(removeEditRelative());
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -171,13 +172,14 @@ function changeEditSearch(searchId, searchData) {
 export function readEditSearch(searchId) {
 	return function (dispatch) {
 		return fetch(domainUrl + readEditSearchApi + '?id=' + searchId)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(changeEditSearch(searchId, json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -207,11 +209,10 @@ export function createEditRelative(userId, userToken, petId, searchId) {
 				if (response.ok) {
           return true;
         }
+				processError(response.status);
 			}))
 			.then(() => {
 				dispatch(addEditRelative());
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -247,11 +248,10 @@ export function updateEditTransfer(userId, userToken, petId, relativeId) {
 				if (response.ok) {
           return true;
         }
+				processError(response.status);
 			}))
 			.then(() => {
 				dispatch(changeEditTransfer());
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -286,11 +286,10 @@ export function updateEditRelation(userId, userToken, petId) {
 				if (response.ok) {
           return true;
         }
+				processError(response.status);
 			}))
 			.then(() => {
 				dispatch(redirectToHome());
-			}).catch(() => {
-				//error
 			});
 	}
 }

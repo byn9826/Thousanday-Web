@@ -1,5 +1,5 @@
 import { domainUrl, createAddPetApi } from '../../helpers/config';
-
+import processError from '../../helpers/processError';
 export const CHANGE_ADD_DETAIL = 'add/CHANGE_ADD_DETAIL';
 export const CHANGE_ADD_UPDATE = 'add/CHANGE_ADD_UPDATE';
 export const REDIRECT_TO_USER = 'add/REDIRECT_TO_USER';
@@ -51,6 +51,7 @@ export function createAddPet(
 				if (response.ok) {
 					return true;
 				}
+				processError(response.status);
 			})
 			.then(() => {
 				dispatch(redirectToUser());

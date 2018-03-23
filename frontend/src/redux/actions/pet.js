@@ -2,6 +2,7 @@ import {
 	domainUrl, readPetPageApi, updatePetWatchApi, createPetMomentApi,
 	readPetMomentsApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_PET_PAGE = "pet/BUILD_PET_PAGE";
 export const SHOW_ACCOUNT_REQUIRED = "pet/SHOW_ACCOUNT_REQUIRED";
@@ -19,13 +20,14 @@ function buildPetPage(data) {
 export function readPetPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readPetPageApi + '?id=' + id)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(buildPetPage(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -60,15 +62,14 @@ export function updatePetWatch(userId, userToken, petId, action) {
 				'action': action
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changePetWatch(action, userId));
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -106,8 +107,9 @@ export function createPetMoment(userId, userToken, petId, image, message) {
 				if (response.ok) {
 					return response.json();
 				}
+				processError(response.status);
 			})
-			.then((result) => {
+			.then(result => {
 				dispatch(addPetMoment(result, petId, message));
 			});
 	}
@@ -124,13 +126,14 @@ export function readPetMoments(petId, load, add) {
 	return function (dispatch) {
 		const params = '?add=' + add + '&load=' + load + '&pet=' + petId;
 		return fetch(domainUrl + readPetMomentsApi + params)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(changePetMoments(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }

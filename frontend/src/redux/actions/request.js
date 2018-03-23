@@ -1,6 +1,7 @@
 import { 
 	domainUrl, readRequestPageApi, deleteRequestUserApi, createRequestUserApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_REQUEST_PAGE = "request/BUILD_REQUEST_PAGE";
 export const CHANGE_REQUEST_USER = "request/CHANGE_REQUEST_USER";
@@ -15,13 +16,13 @@ function buildRequestPage(data) {
 export function readRequestPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readRequestPageApi + '?id=' + id)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
-				dispatch(buildRequestPage(json))
-			}).catch(() => {
-				//error
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+			})
+			.then(json => {
+				dispatch(buildRequestPage(json));
 			});
 	}
 }
@@ -48,15 +49,14 @@ export function updateRequestUser(petId, index, userId, userToken, action) {
 				'pet': petId
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changeRequestUser(index));
-			}).catch(() => {
-				//error
 			});
 	}
 }

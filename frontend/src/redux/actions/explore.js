@@ -1,6 +1,7 @@
 import { 
 	domainUrl, readExploreMomentsApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const CHANGE_EXPLORE_TYPE = "explore/CHANGE_EXPLORE_TYPE";
 export const CHANGE_EXPLORE_NATURE = "explore/CHANGE_EXPLORE_NATURE";
@@ -19,13 +20,14 @@ export function readExploreMoments(type, nature, load) {
 	return function (dispatch) {
 		const apiParams = '?load=' + load + '&nature=' + nature + '&type=' + type;
 		return fetch(domainUrl + readExploreMomentsApi + apiParams)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(changeExploreMoments(json, type, nature, load))
-			}).catch(() => {
-				//error
 			});
 	}
 }

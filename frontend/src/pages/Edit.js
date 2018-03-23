@@ -95,7 +95,9 @@ class Edit extends Component {
 		);
 	}
 	render() {
-		if (this.props.edit.redirectHome) {
+		if (this.props.account.id === null) {
+			return <Redirect to={ '/403' } />;
+		} else if (this.props.edit.redirectHome) {
       return <Redirect to={ '/' } />;
     }
 		let nameInput;

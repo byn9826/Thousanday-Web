@@ -2,6 +2,7 @@ import {
 	domainUrl, readSettingPageApi, updateSettingAboutApi, updateSettingNameApi,
 	createSettingProfileApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_SETTING_PAGE = 'setting/BUILD_SETTING_PAGE';
 export const CHANGE_SETTING_ABOUT = 'setting/CHANGE_SETTING_ABOUT';
@@ -19,13 +20,13 @@ function buildSettingPage(data) {
 export function readSettingPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readSettingPageApi + '?id=' + id)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+			})
+			.then(json => {
 				dispatch(buildSettingPage(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -51,15 +52,14 @@ export function updateSettingAbout(id, token, about) {
 				'about': about
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changeSettingAbout(about));
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -97,17 +97,16 @@ export function updateSettingName(id, token, name) {
 				'name': name
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
 					return true;
 				}
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				localStorage.setItem("name", name);
 				dispatch(changeAccountName(name));
 				dispatch(changeSettingName());
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -131,6 +130,7 @@ export function createSettingProfile(id, token, file) {
 				if (response.ok) {
 					return true;
 				}
+				processError(response.status);
 			})
 			.then(() => {
 				dispatch(changeSettingProfile());

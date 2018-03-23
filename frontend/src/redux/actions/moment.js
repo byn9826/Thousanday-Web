@@ -2,6 +2,7 @@ import {
 	domainUrl, readMomentPageApi, deleteMomentPageApi, updateMomentLikeApi, 
 	readMomentCommentsApi, createMomentCommentApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_MOMENT_PAGE = "moment/BUILD_MOMENT_PAGE";
 export const SHOW_MOMENT_DELETE = "moment/SHOW_MOMENT_DELETE";
@@ -22,12 +23,13 @@ export function readMomentPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readMomentPageApi + '?id=' + id)
 			.then((response => {
-				return response.json();
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
 			}))
 			.then((json) => {
 				dispatch(buildMomentPage(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -59,15 +61,14 @@ export function deleteMomentPage(userId, userToken, momentId, petId) {
 				'pet': petId
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(redirctUserPage());
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -96,15 +97,14 @@ export function updateMomentLike(userId, userToken, momentId, action) {
 				'action': action
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changeMomentLike(action, userId));
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -120,13 +120,14 @@ export function readMomentComments(momentId, commentLoad, commentAdded) {
 	return function (dispatch) {
 		const apiParams = '?id=' + momentId + '&load=' + commentLoad + '&add=' + commentAdded;
 		return fetch(domainUrl + readMomentCommentsApi + apiParams)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(changeMomentComments(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -165,15 +166,14 @@ export function createMomentComment(userId, userToken, momentId, content) {
 				'content': content
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(addMomentComment(userId, content));
-			}).catch(() => {
-				//error
 			});
 	}
 }

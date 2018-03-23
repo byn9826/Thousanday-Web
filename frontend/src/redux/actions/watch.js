@@ -2,6 +2,7 @@ import {
 	domainUrl, readWatchPageApi, deleteWatchPetApi, createWatchPetApi,
 	readWatchMomentsApi
 } from '../../helpers/config';
+import processError from '../../helpers/processError';
 
 export const BUILD_WATCH_PAGE = "watch/BUILD_WATCH_PAGE";
 export const CHANGE_WATCH_PET = "watch/CHANGE_WATCH_PET";
@@ -18,13 +19,14 @@ function buildWatchPage(data) {
 export function readWatchPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readWatchPageApi + '?id=' + id)
-			.then((response => {
-				return response.json();
-			}))
-			.then((json) => {
+			.then(response => {
+				if (response.ok) {
+					return response.json();
+				}
+				processError(response.status);
+			})
+			.then(json => {
 				dispatch(buildWatchPage(json))
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -53,15 +55,14 @@ export function updateWatchPet(userId, userToken, petId, action) {
 				'pet': petId
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
           return true;
         }
-			}))
+				processError(response.status);
+			})
 			.then(() => {
 				dispatch(changeWatchPet(action, petId));
-			}).catch(() => {
-				//error
 			});
 	}
 }
@@ -90,15 +91,14 @@ export function readWatchMoments(lists, load, loadList, userId) {
 				'user': userId
 			})
 		})
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
 					return response.json();
 				}
-			}))
+				processError(response.status);
+			})
 			.then(json => {
 				dispatch(changeWatchMoments(json, load, loadList));
-			}).catch(() => {
-				//error
 			});
 	}
 }

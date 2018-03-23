@@ -1,5 +1,6 @@
 import React, {Component} from "react"
 import { connect } from 'react-redux';
+import { Redirect } from "react-router-dom";
 import { 
 	readWatchPage, updateWatchPet, readWatchMoments, changePetsLoad
 } from '../redux/actions/watch';
@@ -39,6 +40,9 @@ class Watch extends Component {
 		);
 	}
 	render() {
+		if (this.props.account.id === null) {
+			return <Redirect to={ '/403' } />;
+		}
 		let watchPets = [], totalPets, loadPets;
 		if (this.props.watch.loadPets * 5 >= this.props.watch.petsList.length) {
 			totalPets = this.props.watch.petsList.length;

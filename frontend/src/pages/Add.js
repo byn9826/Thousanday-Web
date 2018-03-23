@@ -53,7 +53,9 @@ class Add extends Component {
 		}
 	}
 	render() {
-		if (this.props.add.redirectUser) {
+		if (this.props.account.id === null) {
+			return <Redirect to={ '/403' } />;
+		} else if (this.props.add.redirectUser) {
       return <Redirect to={ '/user/' + this.props.account.id } />;
     }
 		return (
