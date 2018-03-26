@@ -44,7 +44,10 @@ export function readAccountData(portal, detail) {
 					localStorage.setItem("newPlatform", portal);
 					if (portal === 'facebook') {
 						localStorage.setItem("newName", detail.response.name);
-						localStorage.setItem("newAvatar", null);
+						localStorage.setItem(
+							"newAvatar", 
+							"http://graph.facebook.com/" + json.id + "/picture?type=square&width=720&height=720"
+						);
 					} else {
 						localStorage.setItem("newName", detail.name);
 						localStorage.setItem("newAvatar", detail.imageUrl);
