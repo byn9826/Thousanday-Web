@@ -28,7 +28,7 @@ export default class Waterfall extends Component {
 			width: "100%",
 			verticalAlign: "top",
 			padding: "0",
-			margin: "0"
+			marginBottom: "50px"
 		};
 		let containerStyle = {
 			display: "inline-block",

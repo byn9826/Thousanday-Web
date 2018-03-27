@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css?family=Rubik');
-
 h1{
 	font-family: 'Rubik', sans-serif;
 	font-size: 28px;
@@ -48,6 +47,14 @@ h6{
 	padding: 0;
 }
 
+h7{
+	font-family: 'Rubik', sans-serif;
+	font-size: 10px;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+}
+
 a{
 	text-decoration: none;
 	color: inherit;
@@ -78,7 +85,7 @@ input{
 	color: black;
 	padding: 5px 0;
 	border-radius: 5px;
-	margin-top: 20px;
+	margin-bottom: 100px;
 	border: 1px solid #ef8513;
 	cursor: pointer;
 }

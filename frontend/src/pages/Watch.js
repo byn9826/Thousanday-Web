@@ -110,7 +110,7 @@ class Watch extends Component {
 						onClick={ this.changeList.bind(this, "love") } 
 						className="main-header-section" 
 						style={{
-							backgroundColor: this.props.watch.loadList === "watch" ? "#ef8513" : "#e5e5e5"
+							backgroundColor: this.props.watch.loadList === "love" ? "#ef8513" : "#e5e5e5"
 						}}
 					>
 						<img alt="Love" src="/public/icon/glyphicons-watch.png" />
@@ -120,7 +120,7 @@ class Watch extends Component {
 						onClick={ this.changeList.bind(this, "comment") } 
 						className="main-header-section" 
 						style={{
-							backgroundColor: this.props.watch.loadList === "watch" ? "#ef8513" : "#e5e5e5"
+							backgroundColor: this.props.watch.loadList === "comment" ? "#ef8513" : "#e5e5e5"
 						}}
 					>
 						<img alt="Comment" src="/public/icon/glyphicons-comment.png" />

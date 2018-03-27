@@ -25,7 +25,7 @@ class Home extends Component {
 		}
 	}
   loadMore() {
-    //this.props.readHomeMoments(this.props.home.load);
+    this.props.readHomeMoments(this.props.home.load);
   }
   render() {
 		//login board

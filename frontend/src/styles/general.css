@@ -8,7 +8,8 @@
     background-color: #ef8513;
     color: white;
     z-index: 999;
-    vertical-align: middle;
+		top: 0;
+		left: 0;
 }
 #header-desc{
     display: inline-block;
@@ -125,16 +126,21 @@
 
 /*Footer style*/
 #footer{
-    display: block;
+  position: fixed;
 	width: 80%;
 	background-color: black;
 	padding: 5px 10%;
 	margin-top: 70px;
 	clear: both;
+	height: 25px;
+	line-height: 25px;
+	z-index: 999;
+	bottom: 0;
+	left: 0;
 }
 
 #footer h6{
-    display: inline-block;
+  display: inline-block;
 	vertical-align: middle;
 	margin-right: 3%;
 	color: white;
