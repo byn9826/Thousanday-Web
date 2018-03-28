@@ -7,7 +7,7 @@ server {
 
 	ssl on;
 	ssl_certificate /var/www/smilings.crt;
-	ssl_certificate_key /var/www/smile.key;
+	ssl_certificate_key /var/www/smilings.key;
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_prefer_server_ciphers on;
 
@@ -33,19 +33,39 @@ server {
 }
 
 server {
-    listen 80;
-    server_name www.smilings.me smilings.me;
-    rewrite ^/(.*) https://smilings.me/$1 permanent;
+	listen 80;
+	server_name smilings.me www.smilings.me;
+	rewrite ^/(.*) https://smilings.me/$1 permanent;
 }
 
 server {
 	listen 80;
 	server_name resource.smilings.me;
 	root /var/www/smilings.me/frontend;
-	index index.html;
-
+	index index.html index.php;
+	charset utf-8;
+	
+	location ^~ /api/ {
+		try_files $uri $uri/ /index.php?_url=$uri&$args;
+		client_max_body_size 5M;
+	}
+	
 	location / {
 		try_files $uri $uri/ /index.html;
 	}
 
+	location ~ \.php {
+		fastcgi_pass  unix:/run/php/php7.1-fpm.sock;
+		fastcgi_index /index.php;
+		include fastcgi_params;
+		fastcgi_split_path_info       ^(.+\.php)(/.+)$;
+		fastcgi_param PATH_INFO       $fastcgi_path_info;
+		#fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+	}
+
+	location ~ /\.ht {
+		deny all;
+	}
+	
 }

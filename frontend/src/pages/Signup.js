@@ -2,6 +2,8 @@ import React, {Component} from "react"
 import Inputbox from '../components/Inputbox';
 import Updateprofile from '../components/Updateprofile';
 import Urltoprofile from '../components/Urltoprofile';
+import { domainUrl, createNewUserApi } from '../helpers/config';
+import processError from '../helpers/processError';
 import '../styles/signup.css';
 
 export default class Signup extends Component {
@@ -36,7 +38,7 @@ export default class Signup extends Component {
 			const avatar = localStorage.getItem("newAvatar");
 			this.setState({ id, name, token, platform, avatar });
 		} else {
-			//window.location.replace("/403");
+			window.location.replace("/403");
 		}
 	}
 	saveProfile(newAvatar) {
@@ -66,25 +68,29 @@ export default class Signup extends Component {
 			fileData.append("token", this.state.token);
 			fileData.append("platform", this.state.platform);
 			fileData.append("method", "website");
-// 			reqwest({
-// 				url: "/upload/create",
-// 				method: "POST",
-// 				data: fileData,
-// 				contentType: false,
-// 				processData: false,
-// 				success: function(result) {
-// 					result = JSON.parse(result);
-// 					localStorage.clear();
-// 					localStorage.setItem("id", result[0]);
-// 					localStorage.setItem("name", name);
-// 					localStorage.setItem("token", result[1]);
-// 					//login success, go to homepage
-// 					window.location.replace("/user/" + result[0]);
-// 				}.bind(this),
-// 				error: function (err) {
-// 					processError(err);
-// 				}
-// 			});
+			fetch(domainUrl + createNewUserApi, {
+				method: 'POST',
+				mode: 'cors',
+				headers: {
+					Accept: 'application/json'
+				},
+				processData: false,
+				body: fileData
+			})
+				.then(response => {
+					if (response.ok) {
+						return response.json();
+					}
+					processError(response.status);
+				})
+				.then(result => {
+					localStorage.clear();
+					localStorage.setItem("id", result[0]);
+					localStorage.setItem("name", name);
+					localStorage.setItem("token", result[1]);
+					//login success, go to homepage
+					window.location.replace("/user/" + result[0]);
+				});
 		}
 	}
 	render() {

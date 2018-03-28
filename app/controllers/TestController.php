@@ -13,8 +13,4 @@ class TestController extends ControllerBase {
 
   }
 
-  public function readAction() {
-
-  }
-
 }

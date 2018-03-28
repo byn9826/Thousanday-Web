@@ -2,7 +2,7 @@
 
 class LearnController extends ControllerBase {
   
-  //* read oen pet's skills
+  //* read one pet's skills
   public function readAction() {
     $pet = (int) $this->request->get('pet');
     try {

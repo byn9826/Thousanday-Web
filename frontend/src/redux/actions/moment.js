@@ -22,13 +22,13 @@ function buildMomentPage(data) {
 export function readMomentPage(id) {
 	return function (dispatch) {
 		return fetch(domainUrl + readMomentPageApi + '?id=' + id)
-			.then((response => {
+			.then(response => {
 				if (response.ok) {
 					return response.json();
 				}
 				processError(response.status);
-			}))
-			.then((json) => {
+			})
+			.then(json => {
 				dispatch(buildMomentPage(json))
 			});
 	}
