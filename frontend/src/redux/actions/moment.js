@@ -141,7 +141,7 @@ export function showCommentEmpty() {
 function addMomentComment(userId, content) {
 	const data = [
 		content,
-		domainUrl + '/img/user/' + userId + '.jpg',
+		domainUrl + '/public/user/' + userId + '.jpg',
 		'/user/' + userId,
 		new Date().toISOString().substring(0, 10)
 	];

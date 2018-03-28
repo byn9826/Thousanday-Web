@@ -59,7 +59,7 @@ class Pet extends Component {
 		const familiesBoard = this.props.pet.familyData.map((family, index) =>
 			<div key={ "petfamily" + index } className="main-owner">
 				<a href={ "/user/" + family.user_id}>
-					<img src = { domainUrl + "/img/user/" + family.user_id + ".jpg" } />
+					<img src = { domainUrl + "/public/user/" + family.user_id + ".jpg" } />
 					<h5>{ family.user_name }</h5>
 				</a>
 			</div>
@@ -67,7 +67,7 @@ class Pet extends Component {
     const friendsBoard = this.props.pet.friendData.map((friend, index) =>
 			<div key={"petfriend" + index} className="main-friend">
 				<a href={"/pet/" + friend.pet_id}>
-					<img src = { domainUrl + "/img/pet/" + friend.pet_id + "/0.png" }  />
+					<img src = { domainUrl + "/public/pet/" + friend.pet_id + "/0.png" }  />
 					<h6>{friend.pet_name}</h6>
 				</a>
 			</div>
@@ -114,7 +114,7 @@ class Pet extends Component {
 				<img 
 					id="main-profile" 
 					alt={ this.props.pet.petData.pet_name } 
-					src={ domainUrl + "/img/pet/" + this.props.pet.petData.pet_id + "/0.png" } 
+					src={ domainUrl + "/public/pet/" + this.props.pet.petData.pet_id + "/0.png" } 
 				/>
 				<div id="main-name">
 						<h1>{ this.props.pet.petData.pet_name }</h1>

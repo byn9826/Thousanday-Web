@@ -86,7 +86,11 @@ $router->notFound(["controller" => "error", "action" => "page404"]);
 
 
 
-
+$router->addGet("/api/learn/read", ["controller" => "learn", "action" => "read"]);
+$router->addPost("/api/learn/update", ["controller" => "learn", "action" => "update"]);
+$router->addGet("/api/skill/read", ["controller" => "skill", "action" => "read"]);
+$router->addPost("/api/skill/build", ["controller" => "skill", "action" => "build"]);
+$router->addPost("/api/upload/skill", ["controller" => "upload", "action" => "skill"]);
 
 $router->addPost("/api/account/google", ["controller" => "account", "action" => "google"]);
 $router->addPost("/api/account/facebook", ["controller" => "account", "action" => "facebook"]);
@@ -133,6 +137,6 @@ $router->addPost("/api/edit/remove", ["controller" => "edit", "action" => "remov
 $router->addPost("/api/edit/transfer", ["controller" => "edit", "action" => "transfer"]);
 $router->addPost("/api/edit/end", ["controller" => "edit", "action" => "end"]);
 
-$router->addPost("/upload/create", ["controller" => "upload", "action" => "create"]);
+$router->addPost("/api/upload/create", ["controller" => "upload", "action" => "create"]);
 
 $router->handle();

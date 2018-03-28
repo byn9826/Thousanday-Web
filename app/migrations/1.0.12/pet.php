@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PetMigration_106
+ * Class PetMigration_112
  */
-class PetMigration_106 extends Migration
+class PetMigration_112 extends Migration
 {
     /**
      * Define the table structure
@@ -173,7 +173,7 @@ class PetMigration_106 extends Migration
                         ]
                     ),
                     new Column(
-                        'skill0_index',
+                        'skill3_index',
                         [
                             'type' => Column::TYPE_CHAR,
                             'size' => 2,
@@ -181,12 +181,11 @@ class PetMigration_106 extends Migration
                         ]
                     ),
                     new Column(
-                        'skill0_name',
+                        'skill2_index',
                         [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "No Name",
-                            'size' => 10,
-                            'after' => 'skill0_index'
+                            'type' => Column::TYPE_CHAR,
+                            'size' => 2,
+                            'after' => 'skill3_index'
                         ]
                     ),
                     new Column(
@@ -194,68 +193,27 @@ class PetMigration_106 extends Migration
                         [
                             'type' => Column::TYPE_CHAR,
                             'size' => 2,
-                            'after' => 'skill0_image'
-                        ]
-                    ),
-                    new Column(
-                        'skill1_name',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "No Name",
-                            'size' => 10,
-                            'after' => 'skill1_index'
-                        ]
-                    ),
-                    new Column(
-                        'skill2_index',
-                        [
-                            'type' => Column::TYPE_CHAR,
-                            'size' => 2,
-                            'after' => 'skill1_image'
-                        ]
-                    ),
-                    new Column(
-                        'skill2_name',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "No Name",
-                            'size' => 10,
                             'after' => 'skill2_index'
                         ]
                     ),
                     new Column(
-                        'skill3_index',
+                        'skill0_index',
                         [
                             'type' => Column::TYPE_CHAR,
                             'size' => 2,
-                            'after' => 'skill2_image'
-                        ]
-                    ),
-                    new Column(
-                        'skill3_name',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'default' => "No Name",
-                            'size' => 10,
-                            'after' => 'skill3_index'
-                        ]
-                    ),
-                    new Column(
-                        'monster_progress',
-                        [
-                            'type' => Column::TYPE_CHAR,
-                            'default' => "0",
-                            'size' => 3,
-                            'after' => 'skill3_image'
+                            'after' => 'skill1_index'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['pet_id'], 'PRIMARY')
+                    new Index('PRIMARY', ['pet_id'], 'PRIMARY'),
+                    new Index('type_nature', ['pet_type', 'pet_nature'], null),
+                    new Index('owner_id', ['owner_id'], null),
+                    new Index('relative_id', ['relative_id'], null)
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '15',
+                    'AUTO_INCREMENT' => '18',
                     'ENGINE' => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_general_ci'
                 ],

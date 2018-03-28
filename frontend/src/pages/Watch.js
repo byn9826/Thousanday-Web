@@ -70,7 +70,7 @@ class Watch extends Component {
 					<a href={ "/pet/" + this.props.watch.petsList[i].pet_id }>
 						<img 
 							alt={ this.props.watch.petsList[i].pet_name } 
-							src={ domainUrl + "/img/pet/" + this.props.watch.petsList[i].pet_id + "/0.png" } 
+							src={ domainUrl + "/public/pet/" + this.props.watch.petsList[i].pet_id + "/0.png" } 
 						/>
 						<h5>{ this.props.watch.petsList[i].pet_name }</h5>
 					</a>

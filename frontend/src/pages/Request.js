@@ -36,11 +36,11 @@ class Request extends Component {
 		const requestsInfo = this.props.request.requestData.map((request, index) =>
 			<div key={ "requestlist" + index } className="main-contain">
 				<a href={ "/user/" + request.sender_id } target="_blank">
-					<img alt="Sender" src={ domainUrl + "/img/user/" + request.sender_id + ".jpg" } />
+					<img alt="Sender" src={ domainUrl + "/public/user/" + request.sender_id + ".jpg" } />
 				</a>
 				<h5>wants to add you as</h5>
 				<a href={"/pet/" + request.pet_id} target="_blank">
-					<img alt="Sender" src={ domainUrl + "/img/pet/" + request.pet_id + "/0.png" } />
+					<img alt="Sender" src={ domainUrl + "/public/pet/" + request.pet_id + "/0.png" } />
 				</a>
 				<h5>'s relative.</h5>
 				<input 

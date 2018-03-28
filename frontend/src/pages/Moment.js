@@ -117,7 +117,7 @@ class Moment extends Component {
 				<img 
 					alt="Moment Image" 
 					src={
-						domainUrl + "/img/pet/" + this.props.moment.momentData.pet_id + 
+						domainUrl + "/public/pet/" + this.props.moment.momentData.pet_id + 
 						"/moment/" + this.props.moment.momentData.image_name
 					} 
 				/>
@@ -136,7 +136,7 @@ class Moment extends Component {
 					<a href={"/pet/" + this.props.moment.momentData.pet_id}>
 						<img 
 							alt="Pet" 
-							src={ domainUrl + "/img/pet/" + this.props.moment.momentData.pet_id + "/0.png" } 
+							src={ domainUrl + "/public/pet/" + this.props.moment.momentData.pet_id + "/0.png" } 
 						/>
 					</a>
 					<h4>{ this.props.moment.momentData.moment_message }</h4>

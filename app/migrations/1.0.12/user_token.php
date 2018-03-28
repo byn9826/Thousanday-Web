@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class PetWatchMigration_103
+ * Class UserTokenMigration_112
  */
-class PetWatchMigration_103 extends Migration
+class UserTokenMigration_112 extends Migration
 {
     /**
      * Define the table structure
@@ -17,31 +17,39 @@ class PetWatchMigration_103 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('pet_watch', [
+        $this->morphTable('user_token', [
                 'columns' => [
                     new Column(
-                        'pet_id',
+                        'user_id',
                         [
                             'type' => Column::TYPE_BIGINTEGER,
-                            'unsigned' => true,
                             'notNull' => true,
                             'size' => 20,
                             'first' => true
                         ]
                     ),
                     new Column(
-                        'user_id',
+                        'user_token',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
-                            'unsigned' => true,
+                            'type' => Column::TYPE_CHAR,
                             'notNull' => true,
-                            'size' => 20,
-                            'after' => 'pet_id'
+                            'size' => 128,
+                            'after' => 'user_id'
+                        ]
+                    ),
+                    new Column(
+                        'keep',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'default' => "1",
+                            'notNull' => true,
+                            'size' => 1,
+                            'after' => 'user_token'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['pet_id', 'user_id'], 'PRIMARY')
+                    new Index('PRIMARY', ['user_id', 'keep'], 'PRIMARY')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',

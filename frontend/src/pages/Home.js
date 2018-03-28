@@ -56,7 +56,7 @@ class Home extends Component {
 					<a href={"/user/" + this.props.account.id}>
 						<img 
 							alt="User Avatar" 
-							src={domainUrl + "/img/user/" + this.props.account.id + ".jpg"} 
+							src={domainUrl + "/public/user/" + this.props.account.id + ".jpg"} 
 						/>
 					</a>
 					<h4>Welcome back! {this.props.account.name}</h4>

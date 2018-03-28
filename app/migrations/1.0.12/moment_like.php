@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class MomentCommentMigration_103
+ * Class MomentLikeMigration_112
  */
-class MomentCommentMigration_103 extends Migration
+class MomentLikeMigration_112 extends Migration
 {
     /**
      * Define the table structure
@@ -17,26 +17,16 @@ class MomentCommentMigration_103 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('moment_comment', [
+        $this->morphTable('moment_like', [
                 'columns' => [
                     new Column(
-                        'comment_id',
+                        'user_id',
                         [
                             'type' => Column::TYPE_BIGINTEGER,
                             'unsigned' => true,
                             'notNull' => true,
-                            'autoIncrement' => true,
                             'size' => 20,
                             'first' => true
-                        ]
-                    ),
-                    new Column(
-                        'comment_content',
-                        [
-                            'type' => Column::TYPE_VARCHAR,
-                            'notNull' => true,
-                            'size' => 150,
-                            'after' => 'comment_id'
                         ]
                     ),
                     new Column(
@@ -46,34 +36,16 @@ class MomentCommentMigration_103 extends Migration
                             'unsigned' => true,
                             'notNull' => true,
                             'size' => 20,
-                            'after' => 'comment_content'
-                        ]
-                    ),
-                    new Column(
-                        'user_id',
-                        [
-                            'type' => Column::TYPE_BIGINTEGER,
-                            'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 20,
-                            'after' => 'moment_id'
-                        ]
-                    ),
-                    new Column(
-                        'comment_time',
-                        [
-                            'type' => Column::TYPE_DATE,
-                            'size' => 1,
                             'after' => 'user_id'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['comment_id'], 'PRIMARY')
+                    new Index('PRIMARY', ['user_id', 'moment_id'], 'PRIMARY')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '20',
+                    'AUTO_INCREMENT' => '',
                     'ENGINE' => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_general_ci'
                 ],

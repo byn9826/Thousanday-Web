@@ -16,7 +16,7 @@ class User extends Component {
   render() {
 		const relativeBoard = this.props.user.relativeData.map((relative, index) =>
 			<a href={ "/user/" + relative }  key={ "userRelative" + index }>
-				<img src={ domainUrl + "/img/user/" + relative + ".jpg" } />
+				<img src={ domainUrl + "/public/user/" + relative + ".jpg" } />
 			</a>
 		);
 		let addButton;
@@ -30,7 +30,7 @@ class User extends Component {
 		const petsList = this.props.user.petsData.map((pet, index) =>
 			<div key={ "userPet" + index } className="aside-pet">
 				<a href={ "/pet/" + pet.pet_id }>
-					<img alt={ pet.pet_name } src={ domainUrl + "/img/pet/" + pet.pet_id + "/0.png" } />
+					<img alt={ pet.pet_name } src={ domainUrl + "/public/pet/" + pet.pet_id + "/0.png" } />
 				</a>
 				<h5>{ pet.pet_name }</h5>
 				<div className="aside-pet-info">
@@ -63,7 +63,7 @@ class User extends Component {
 				<img 
 					id="main-profile" 
 					alt={ this.props.user.userData.user_name} 
-					src={ domainUrl + "/img/user/" + this.props.user.userData.user_id + ".jpg" } 
+					src={ domainUrl + "/public/user/" + this.props.user.userData.user_id + ".jpg" } 
 				/>
 				<h1 className="main-name">{ this.props.user.userData.user_name }</h1>
 				<h5 className="main-name">{ this.props.user.userData.user_about }</h5>

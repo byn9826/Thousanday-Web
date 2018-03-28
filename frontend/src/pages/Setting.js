@@ -48,7 +48,7 @@ class Setting extends Component {
 		if (this.props.setting.userData.user_id) {
 			profileBoard = <Updateprofile 
 				alt="User Profile" 
-				src={ domainUrl + "/img/user/" + this.props.setting.userData.user_id + ".jpg" } 
+				src={ domainUrl + "/public/user/" + this.props.setting.userData.user_id + ".jpg" } 
 				width="200" 
 				saveProfile={ this.saveProfile.bind(this) } 
 				indicate="Update Avatar" 

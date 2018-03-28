@@ -172,7 +172,7 @@ class Edit extends Component {
 							<div id="pop-action-show">
 								<img 
 									alt="user" 
-									src={ domainUrl + "/img/user/" + this.props.edit.searchData.user_id + ".jpg" } 
+									src={ domainUrl + "/public/user/" + this.props.edit.searchData.user_id + ".jpg" } 
 								/>
 								<h5>{ this.props.edit.searchData.user_name }</h5>
 								<h6 onClick={ this.confirmAdd.bind(this) }>Send Request</h6>
@@ -221,7 +221,7 @@ class Edit extends Component {
 				<section id="main-contain">
 					<Updateprofile 
 						alt="Pet Profile" 
-						src={ domainUrl + '/img/pet/' + this.props.match.params.id + '/0.png' } 
+						src={ domainUrl + '/public/pet/' + this.props.match.params.id + '/0.png' } 
 						width="200" 
 						saveProfile={ this.saveProfile.bind(this) } 
 						indicate="Update Avatar" 

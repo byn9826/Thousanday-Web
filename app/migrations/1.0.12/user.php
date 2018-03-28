@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class MomentCommentMigration_102
+ * Class UserMigration_112
  */
-class MomentCommentMigration_102 extends Migration
+class UserMigration_112 extends Migration
 {
     /**
      * Define the table structure
@@ -17,10 +17,10 @@ class MomentCommentMigration_102 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('moment_comment', [
+        $this->morphTable('user', [
                 'columns' => [
                     new Column(
-                        'comment_id',
+                        'user_id',
                         [
                             'type' => Column::TYPE_BIGINTEGER,
                             'unsigned' => true,
@@ -31,49 +31,67 @@ class MomentCommentMigration_102 extends Migration
                         ]
                     ),
                     new Column(
-                        'comment_content',
+                        'google_id',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 25,
+                            'after' => 'user_id'
+                        ]
+                    ),
+                    new Column(
+                        'facebook_id',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 25,
+                            'after' => 'google_id'
+                        ]
+                    ),
+                    new Column(
+                        'user_name',
                         [
                             'type' => Column::TYPE_VARCHAR,
                             'notNull' => true,
-                            'size' => 150,
-                            'after' => 'comment_id'
+                            'size' => 10,
+                            'after' => 'facebook_id'
                         ]
                     ),
                     new Column(
-                        'moment_id',
+                        'user_about',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
+                            'type' => Column::TYPE_VARCHAR,
+                            'size' => 30,
+                            'after' => 'user_name'
+                        ]
+                    ),
+                    new Column(
+                        'user_term',
+                        [
+                            'type' => Column::TYPE_INTEGER,
                             'unsigned' => true,
                             'notNull' => true,
-                            'size' => 20,
-                            'after' => 'comment_content'
-                        ]
-                    ),
-                    new Column(
-                        'user_id',
-                        [
-                            'type' => Column::TYPE_BIGINTEGER,
-                            'unsigned' => true,
-                            'notNull' => true,
-                            'size' => 20,
-                            'after' => 'moment_id'
-                        ]
-                    ),
-                    new Column(
-                        'comment_time',
-                        [
-                            'type' => Column::TYPE_DATE,
                             'size' => 1,
-                            'after' => 'user_id'
+                            'after' => 'user_about'
+                        ]
+                    ),
+                    new Column(
+                        'user_type',
+                        [
+                            'type' => Column::TYPE_CHAR,
+                            'default' => "0",
+                            'notNull' => true,
+                            'size' => 1,
+                            'after' => 'user_term'
                         ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['comment_id'], 'PRIMARY')
+                    new Index('PRIMARY', ['user_id'], 'PRIMARY'),
+                    new Index('google_id', ['google_id'], 'UNIQUE'),
+                    new Index('facebook_id', ['facebook_id'], 'UNIQUE')
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '20',
+                    'AUTO_INCREMENT' => '27',
                     'ENGINE' => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_general_ci'
                 ],

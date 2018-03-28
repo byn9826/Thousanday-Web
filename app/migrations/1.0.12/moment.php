@@ -6,9 +6,9 @@ use Phalcon\Db\Reference;
 use Phalcon\Mvc\Model\Migration;
 
 /**
- * Class RequestMigration_103
+ * Class MomentMigration_112
  */
-class RequestMigration_103 extends Migration
+class MomentMigration_112 extends Migration
 {
     /**
      * Define the table structure
@@ -17,26 +17,35 @@ class RequestMigration_103 extends Migration
      */
     public function morph()
     {
-        $this->morphTable('request', [
+        $this->morphTable('moment', [
                 'columns' => [
                     new Column(
-                        'sender_id',
+                        'moment_id',
                         [
                             'type' => Column::TYPE_BIGINTEGER,
                             'unsigned' => true,
                             'notNull' => true,
+                            'autoIncrement' => true,
                             'size' => 20,
                             'first' => true
                         ]
                     ),
                     new Column(
-                        'receiver_id',
+                        'image_name',
                         [
-                            'type' => Column::TYPE_BIGINTEGER,
-                            'unsigned' => true,
+                            'type' => Column::TYPE_VARCHAR,
                             'notNull' => true,
-                            'size' => 20,
-                            'after' => 'sender_id'
+                            'size' => 50,
+                            'after' => 'moment_id'
+                        ]
+                    ),
+                    new Column(
+                        'moment_message',
+                        [
+                            'type' => Column::TYPE_VARCHAR,
+                            'notNull' => true,
+                            'size' => 120,
+                            'after' => 'image_name'
                         ]
                     ),
                     new Column(
@@ -46,24 +55,36 @@ class RequestMigration_103 extends Migration
                             'unsigned' => true,
                             'notNull' => true,
                             'size' => 20,
-                            'after' => 'receiver_id'
+                            'after' => 'moment_message'
                         ]
                     ),
                     new Column(
-                        'request_time',
+                        'moment_date',
                         [
                             'type' => Column::TYPE_DATE,
                             'size' => 1,
                             'after' => 'pet_id'
                         ]
+                    ),
+                    new Column(
+                        'display',
+                        [
+                            'type' => Column::TYPE_INTEGER,
+                            'default' => "1",
+                            'unsigned' => true,
+                            'notNull' => true,
+                            'size' => 1,
+                            'after' => 'moment_date'
+                        ]
                     )
                 ],
                 'indexes' => [
-                    new Index('PRIMARY', ['sender_id', 'receiver_id', 'pet_id'], 'PRIMARY')
+                    new Index('PRIMARY', ['moment_id'], 'PRIMARY'),
+                    new Index('pet_id', ['pet_id'], null)
                 ],
                 'options' => [
                     'TABLE_TYPE' => 'BASE TABLE',
-                    'AUTO_INCREMENT' => '',
+                    'AUTO_INCREMENT' => '64',
                     'ENGINE' => 'InnoDB',
                     'TABLE_COLLATION' => 'utf8_general_ci'
                 ],
