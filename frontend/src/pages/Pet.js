@@ -121,7 +121,7 @@ class Pet extends Component {
 						<h4>{ noGetGender(this.props.pet.petData.pet_gender) }</h4>
 				</div>
 				<h5 id="main-watch" onClick={ this.watchPet.bind(this) }>{ watchInfo }</h5>
-				<h5 id="main-nature">Nature: { noGetNature(this.props.pet.petData.pet_nature) }</h5>
+				<h5 className="main-title">Nature: { noGetNature(this.props.pet.petData.pet_nature) }</h5>
 				<h5 className="main-title">Type: { noGetType(this.props.pet.petData.pet_type) }</h5>
 				<h5 className="main-title">
 					Reg in hub:  

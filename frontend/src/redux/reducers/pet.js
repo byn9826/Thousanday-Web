@@ -61,7 +61,7 @@ export default function reducer(state = initState, action) {
 			};
 		case ADD_PET_MOMENT:
 			const newMoment = [
-				domainUrl + "/img/pet/" + action.data.petId + "/moment/" + action.data.info[1],
+				domainUrl + "/public/pet/" + action.data.petId + "/moment/" + action.data.info[1],
 				action.data.message,
 				"/moment/" + action.data.info[0]
 			];

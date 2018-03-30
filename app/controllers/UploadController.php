@@ -35,7 +35,7 @@ class UploadController extends ControllerBase
           if ($user == $family['owner_id'] || $user == $family['relative_id']) {
             $time = time();
             $image = $time . $files[0]->getName();
-            $upload = __DIR__ . '/../../public/img/pet/' . $pet . '/moment/';
+            $upload = __DIR__ . '/../../frontend/public/pet/' . $pet . '/moment/';
             if (!is_dir($upload)) {
               mkdir($upload, 0755);
             }
@@ -88,7 +88,7 @@ class UploadController extends ControllerBase
           return $this->response->setStatusCode(403, 'Forbidden');
         }
         $image = $user . '.jpg';
-        $upload = __DIR__ . '/../../public/img/user/';
+        $upload = __DIR__ . '/../../frontend/public/user/';
         if (!is_dir($upload)) {
           mkdir($upload, 0755);
         }
@@ -132,7 +132,7 @@ class UploadController extends ControllerBase
           return $this->response->setStatusCode(404, 'Not Found');
         } else if ($user === (int) $data['owner_id'] || $user === (int) $data['relative_id']) {
           $image = '0.png';
-          $upload = __DIR__ . '/../../public/img/pet/' . $pet . '/';
+          $upload = __DIR__ . '/../../frontend/public/pet/' . $pet . '/';
           if (!is_dir($upload)) {
               mkdir($upload, 0755);
           }
@@ -176,7 +176,7 @@ class UploadController extends ControllerBase
           return $this->response->setStatusCode(404, 'Not Found');
         } else if ($user === (int) $data['owner_id'] || $user === (int) $data['relative_id']) {
           $image = ($index + 1) . '.png';
-          $upload = __DIR__ . '/../../public/img/pet/' . $pet . '/';
+          $upload = __DIR__ . '/../../frontend/public/pet/' . $pet . '/';
           $files[0]->moveTo($upload . $image);
           $db->beginTransaction();
           $Pet->updatePetSkill($index, $skill, $pet);
@@ -228,7 +228,7 @@ class UploadController extends ControllerBase
       } catch (Exception $e) {
         return $this->response->setStatusCode(500, 'Internal Server Error');
       }
-      $upload = __DIR__ . '/../../public/img/pet/' . $create . '/';
+      $upload = __DIR__ . '/../../frontend/public/pet/' . $create . '/';
       if (!is_dir($upload)) {
         mkdir($upload, 0755);
       }
@@ -333,7 +333,7 @@ class UploadController extends ControllerBase
           return $this->response->setStatusCode(500, 'Internal Server Error');
         }
       }
-      $upload = __DIR__ . '/../../public/img/user/';
+      $upload = __DIR__ . '/../../frontend/public/user/';
       if (!is_dir($upload)) {
         mkdir($upload, 0755);
       }

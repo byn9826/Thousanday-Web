@@ -1,4 +1,4 @@
-export const domainUrl = 'http://resource.smilings.me';
+export const domainUrl = 'https://smilings.me';
 
 export const androidStoreUrl = 'https://play.google.com/store/apps/details?id=com.thousanday';
 
