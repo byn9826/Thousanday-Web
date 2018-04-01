@@ -6,9 +6,7 @@ public/img/user/*
 frontend/public/pet/*
 frontend/public/user/*
 
-
 app/library/Secret.php
 app/library/DbConnection.php
 
-app/.ssr/*
 .phalcon

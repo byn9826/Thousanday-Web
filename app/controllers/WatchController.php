@@ -1,17 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
 
 class WatchController extends ControllerBase {
-
-    public function indexAction() {
-        $this->assets->collection( 'header' )
-            ->setTargetPath( '../public/production/watch.css' )
-            ->addCss( '../public/css/globe.css' )
-            ->addCss( '../public/css/general.css' )
-            ->addCss( '../public/css/watch.css' )
-            ->setTargetUri( '/../production/watch.css' )
-            ->join( true )->addFilter( new Cssmin() );
-    }
 
     //* provide data for watch page
     //* return pets' id list, moments list, pets' name list

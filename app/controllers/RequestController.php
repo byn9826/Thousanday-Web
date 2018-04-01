@@ -1,17 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
 
 class RequestController extends ControllerBase {
-
-  public function indexAction() {
-      $this->assets->collection( 'header' )
-          ->setTargetPath( '../public/production/request.css' )
-          ->addCss( '../public/css/globe.css' )
-          ->addCss( '../public/css/general.css' )
-          ->addCss( '../public/css/request.css' )
-          ->setTargetUri( '/../production/request.css' )
-          ->join( true )->addFilter( new Cssmin() );
-  }
 
   //* read data for request page
   public function readAction() {

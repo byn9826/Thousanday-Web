@@ -9,8 +9,7 @@
   "require": {
     "google/apiclient": "^2.0",
     "firebase/php-jwt": "4.0",
-    "predis/predis": "1.1.1",
-    "byn9826/fake-ssr": "dev-master"
+    "predis/predis": "1.1.1"
   },
   "require-dev": {
     "phalcon/devtools": "dev-master"

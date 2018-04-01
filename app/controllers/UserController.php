@@ -1,26 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
-use byn9826\FakeSSR\FakeSSR;
 
 class UserController extends ControllerBase {
-
-  public function indexAction() {
-
-    $id = $this->dispatcher->getParams('params')[0];
-    FakeSSR::detect(
-      'https://smilings.me/user/' . $id,
-      dirname(__dir__) . '/.ssr',
-      false
-    );
-
-    $this->assets->collection( 'header' )
-      ->setTargetPath( '../public/production/user.css' )
-      ->addCss( '../public/css/globe.css' )
-      ->addCss( '../public/css/general.css' )
-      ->addCss( '../public/css/user.css' )
-      ->setTargetUri( '/../production/user.css' )
-      ->join( true )->addFilter( new Cssmin() );
-  }
 
   //* provide data for user page
   //* return user's info, pets' info belong to user, moments' info from pets list and pets' id list

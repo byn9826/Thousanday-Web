@@ -1,26 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
-use byn9826\FakeSSR\FakeSSR;
 
 class PetController extends ControllerBase {
-
-  public function indexAction() {
-    
-    $id = $this->dispatcher->getParams('params')[0];
-    FakeSSR::detect(
-      'https://smilings.me/pet/' . $id,
-      dirname(__dir__) . '/.ssr',
-      false
-    );
-    
-    $this->assets->collection('header')
-      ->setTargetPath('../public/production/pet.css')
-      ->addCss('../public/css/globe.css')
-      ->addCss('../public/css/general.css')
-      ->addCss('../public/css/pet.css')
-      ->setTargetUri('/../production/pet.css')
-      ->join(true)->addFilter(new Cssmin());
-  }
 
   //* read information for one pet
   public function readAction() {

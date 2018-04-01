@@ -1,24 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
-use byn9826\FakeSSR\FakeSSR;
 
 class ExploreController extends ControllerBase {
-
-  public function indexAction() {
-
-    FakeSSR::detect(
-      'https://smilings.me/explore',
-      dirname(__dir__) . '/.ssr',
-      false
-    );
-
-    $this->assets->collection('header')
-      ->setTargetPath('../public/production/explore.css' )
-      ->addCss('../public/css/globe.css')->addCss('../public/css/general.css')
-      ->addCss('../public/css/explore.css')
-      ->setTargetUri('/../production/explore.css')
-      ->join(true)->addFilter(new Cssmin());
-  }
 
   //* return moments based on filter
   public function readAction() {

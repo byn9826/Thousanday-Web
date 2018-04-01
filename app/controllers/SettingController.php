@@ -1,17 +1,6 @@
 <?php
-use Phalcon\Assets\Filters\Cssmin;
 
 class SettingController extends ControllerBase {
-
-  public function indexAction() {
-      $this->assets->collection( 'header' )
-          ->setTargetPath( '../public/production/setting.css' )
-          ->addCss( '../public/css/globe.css' )
-          ->addCss( '../public/css/general.css' )
-          ->addCss( '../public/css/setting.css' )
-          ->setTargetUri( '/../production/setting.css' )
-          ->join( true )->addFilter( new Cssmin() );
-  }
 
   //* read information for one user
   public function readAction() {
