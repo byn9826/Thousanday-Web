@@ -1,15 +1,15 @@
 # Smilings-Web
-Web app for pets by React & Phalcon. Please test with real pets images, thanks!  
+Web app for pets by React, Redux & Phalcon. Please test with real pets images, thanks!  
   
 [Live Site](https://smilings.me)  
   
 Project Scope:  
 --
 1. Homepage for pets   
-2. Pets' photo sharing  
+2. Pets' photos sharing  
 3. Gaming (Doing)  
   
-App Stacks:
+Tech Stacks:  
 --
 1. Frontend: React, React Router, Redux  
 2. Backend: Phalcon, PDO    
@@ -21,13 +21,13 @@ Server Setup
 --
 sudo service redis-server start  
 sudo service mysql start  
-sudo service nginx start  
 npm install  
 composer update  
-webpack --watch  
+cd frontend & npm run build   
 vendor/phalcon/devtools/phalcon.php migration   
-php app/cli.php main backup   
-php app/cli.php api   
+php app/cli.php main nginx  
+sudo service nginx stop  
+sudo service nginx start  
    
 Screen Shots
 --
@@ -40,12 +40,6 @@ Screen Shots
 Other  
 --
 [Smilings Mobile by React Native](https://github.com/byn9826/Thousanday-Mobile)  
-  
-[A list of reusable React UI components](https://github.com/byn9826/Thousanday-React)  
-  
-Author  
---
-Baozier  
   
 License  
 --
