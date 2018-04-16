@@ -2,7 +2,7 @@ server {
 	listen 443 ssl;
 	server_name smilings.me;
 	root        /var/www/smilings.me/frontend;
-	index       index.html index.php;
+	index       index.php;
 	charset     utf-8;
 
 	ssl on;
@@ -11,13 +11,18 @@ server {
 	ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
 	ssl_prefer_server_ciphers on;
 
-	location ^~ /api/ {
-		try_files $uri $uri/ /index.php?_url=$uri&$args;
-		client_max_body_size 5M;
-	}
+	#location ^~ /api/ {
+	#	try_files $uri $uri/ /index.php?_url=$uri&$args;
+	#	client_max_body_size 5M;
+	#}
+	
+	#location / {
+	#	try_files $uri $uri/ /index.html;
+	#}
 	
 	location / {
-		try_files $uri $uri/ /index.html;
+		try_files $uri $uri/ /index.php?_url=$uri&$args;
+		client_max_body_size 5M;
 	}
 
 	location ~ \.php {
@@ -49,13 +54,9 @@ server {
 	index index.html index.php;
 	charset utf-8;
 	
-	location ^~ /api/ {
+	location / {
 		try_files $uri $uri/ /index.php?_url=$uri&$args;
 		client_max_body_size 5M;
-	}
-	
-	location / {
-		try_files $uri $uri/ /index.html;
 	}
 
 	location ~ \.php {
