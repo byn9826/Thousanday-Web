@@ -1,15 +1,14 @@
-# Smilings-Web
+# Web-for-Pet
 Web app for pets by React, Redux & Phalcon. Please test with real pets images, thanks!  
   
-[Live Site](https://smilings.me)  
+[Live Site](pet.nextvisioner.com)  
   
 Project Scope:  
 --
 1. Homepage for pets   
 2. Pets' photos sharing  
-3. Gaming (Doing)  
   
-Tech Stacks:  
+Stacks:  
 --
 1. Frontend: React, React Router, Redux  
 2. Backend: Phalcon, PDO    
@@ -39,7 +38,7 @@ Screen Shots
    
 Other  
 --
-[Smilings Mobile by React Native](https://github.com/byn9826/Thousanday-Mobile)  
+[Mobile for Pet by React Native](https://github.com/byn9826/Thousanday-Mobile)  
   
 License  
 --

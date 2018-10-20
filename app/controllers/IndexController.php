@@ -19,7 +19,7 @@ class IndexController extends ControllerBase {
     $load = (int) $this->request->get('load');
     try {
       $db = DbConnection::getConnection();
-      $Moment = new Moment($db);  
+      $Moment = new Moment($db); 
       return json_encode($Moment->readPublicMoments($load));
     } catch (Exception $e) {
       return $this->response->setStatusCode(500, 'Internal Server Error');
