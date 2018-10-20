@@ -1,7 +1,7 @@
 # Web-for-Pet
 Web app for pets by React, Redux & Phalcon. Please test with real pets images, thanks!  
   
-[Live Site](pet.nextvisioner.com)  
+[Live Site](http://pet.nextvisioner.com)  
   
 Project Scope:  
 --
