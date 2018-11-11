@@ -1,12 +1,8 @@
 # Web-for-Pet
-Web app for pets by React, Redux & Phalcon. Please test with real pets images, thanks!  
+Web App for Pets by React, Redux & Phalcon.   
   
-[Live Site](pet.nextvisioner.com)  
-  
-Project Scope:  
---
-1. Homepage for pets   
-2. Pets' photos sharing  
+[Live Site](http://pet.nextvisioner.com)  
+[Mobile App for Pet](https://github.com/byn9826/Thousanday-Mobile) 
   
 Stacks:  
 --
@@ -23,7 +19,7 @@ sudo service mysql start
 npm install  
 composer update  
 cd frontend & npm run build   
-vendor/phalcon/devtools/phalcon.php migration   
+vendor/phalcon/devtools/phalcon.php migration --action=run   
 php app/cli.php main nginx  
 sudo service nginx stop  
 sudo service nginx start  
@@ -35,12 +31,7 @@ Screen Shots
 
 <b>Pet's Homepage</b>  
 ![pet](https://raw.githubusercontent.com/byn9826/Thousand-Day/master/~legend/pet.png)  
-   
-Other  
---
-[Mobile for Pet by React Native](https://github.com/byn9826/Thousanday-Mobile)  
   
-License  
+Resources
 --
-BSD-3   
 Icons from glyphicons.com
