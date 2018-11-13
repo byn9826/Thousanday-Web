@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { readAccountData } from '../redux/actions/account';
 import Googlelogin from '../components/Googlelogin';
 import Facebooklogin from '../components/Facebooklogin';
+import { googleClientId } from '../helpers/config';
 import '../styles/error.css';
 
 class Forbidden extends Component {
@@ -29,7 +30,7 @@ class Forbidden extends Component {
 					</h4>
 					<Googlelogin 
 						gLogin={ this.gLogin.bind(this) } 
-						clientId="168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com" 
+						clientId={ googleClientId }
 						width="200px" 
 					/>
 					<Facebooklogin 

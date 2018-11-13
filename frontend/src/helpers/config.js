@@ -2,7 +2,7 @@ export const domainUrl = 'http://pet.nextvisioner.com';
 
 export const androidStoreUrl = 'https://play.google.com/store/apps/details?id=com.thousanday';
 
-export const googleClientId = '168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com';
+export const googleClientId = '824184598797-1opuf1ck1g57h6m3diec8hdoitglip70.apps.googleusercontent.com';
 export const facebookClientId = '447688265576125';
 
 export const readAccountFacebookApi = '/api/account/facebook';

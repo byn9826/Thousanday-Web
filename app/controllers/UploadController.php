@@ -262,7 +262,7 @@ class UploadController extends ControllerBase
       if ($platform === 'google') {
         if ($method === 'website') {
           $client = new Google_Client([
-            'client_id' => '168098850234-fsq84pk4cae97mlj0k464joc21cgqjvv.apps.googleusercontent.com'
+            'client_id' => '824184598797-1opuf1ck1g57h6m3diec8hdoitglip70.apps.googleusercontent.com'
           ]);
         } else {
           $client = new Google_Client([
