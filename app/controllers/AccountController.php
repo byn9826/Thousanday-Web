@@ -17,11 +17,7 @@ class AccountController extends ControllerBase
         ]);
       } else if ( $platform === 'mobile' ) {
         $client = new Google_Client([
-          'client_id' => '835652983909-6if3h222alkttk9oas3hr3tl15sq1u7m.apps.googleusercontent.com'
-        ]);
-      } else {
-        $client = new Google_Client([
-          'client_id' => '835652983909-gf89tn5ttgcbkdacintdi0kiqem0968t.apps.googleusercontent.com'
+          'client_id' => '824184598797-r7187jnt2pkd7i0nukks3id5f9onpqvd.apps.googleusercontent.com'
         ]);
       }
       $payload = $client->verifyIdToken( $googleToken );
