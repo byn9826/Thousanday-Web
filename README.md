@@ -1,8 +1,7 @@
 # Web-for-Pet
 Web App for Pets by React, Redux & Phalcon.   
   
-[Live Site](http://pet.nextvisioner.com)  
-[Mobile App for Pet](https://github.com/byn9826/Thousanday-Mobile) 
+(No longer maintained)  
   
 Stacks:  
 --
